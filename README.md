@@ -1,0 +1,1 @@
+# Wagtail Legacy Hallo Editor
