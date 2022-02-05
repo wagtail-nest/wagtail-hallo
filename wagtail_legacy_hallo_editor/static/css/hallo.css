@@ -1,5 +1,4 @@
 /* Main Hallo Editor Styles */
-
 .halloeditor {
   font-family: Roboto Slab, Georgia, serif;
   padding-top: 4em;
@@ -7,35 +6,44 @@
   overflow: hidden;
   line-height: 1.5em;
 }
+
 .halloeditor h1 {
   text-transform: none;
 }
+
 .halloeditor h2 {
   text-transform: none;
   display: block;
 }
+
 .halloeditor h1 span {
   font-weight: normal;
   color: inherit;
 }
+
 .halloeditor *::before,
 .halloeditor *::after {
   display: none;
 }
+
 .halloeditor ol,
 .halloeditor ul {
   margin: 1em 0;
   padding: 0 0 0 40px;
 }
+
 .halloeditor li {
   display: list-item;
 }
+
 .halloeditor ul li {
   list-style-type: disc;
 }
+
 .halloeditor ol li {
   list-style-type: decimal;
 }
+
 .halloeditor h1,
 .halloeditor h2,
 .halloeditor h3,
@@ -44,32 +52,39 @@
 .halloeditor h6 {
   font-family: inherit;
 }
+
 .halloeditor h2 {
   font-size: 2em;
   line-height: 1.2em;
   clear: both;
 }
+
 .halloeditor h3 {
   font-size: 1.7em;
   line-height: 1.194em;
 }
+
 .halloeditor h4 {
   font-size: 1.5em;
   line-height: 1.267em;
 }
+
 .halloeditor h5 {
   font-size: 1.2em;
   line-height: 1.27em;
 }
+
 .halloeditor hr {
   border-bottom: 1px solid #ccc;
   border-top: 0;
   border-left: 0;
 }
+
 .field-small .halloeditor {
   border-radius: 3px;
   padding: 0.4em 1em;
 }
+
 .halloeditor {
   appearance: none;
   box-sizing: border-box;
@@ -83,13 +98,16 @@
   font-size: 1.2em;
   font-weight: 300;
 }
+
 .halloeditor:hover {
   background-color: #fff;
 }
+
 .halloeditor:focus {
   background-color: var(--color-input-focus);
   border-color: var(--color-input-focus-border);
 }
+
 .halloeditor:disabled,
 .halloeditor[disabled],
 .halloeditor:disabled:hover,
@@ -100,47 +118,51 @@
 }
 
 /* Icons */
-.hallotoolbar [class^='icon-'], .hallotoolbar [class*=' icon-']:before, .hallotoolbar [class^='icon-']:before {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: wagtail;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    speak: none;
-    text-decoration: none;
-    width: 1.3em;
-    line-height: 1em;
-    text-align: left;
-    vertical-align: middle;
-    margin-right: 0.2em;
+.hallotoolbar [class^='icon-'],
+.hallotoolbar [class*=' icon-']:before,
+.hallotoolbar [class^='icon-']:before {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: wagtail;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  speak: none;
+  text-decoration: none;
+  width: 1.3em;
+  line-height: 1em;
+  text-align: left;
+  vertical-align: middle;
+  margin-right: 0.2em;
 }
 
-.hallotoolbar [class^="icon-"]:after,
-.hallotoolbar [class^="icon-"]:after {
+.hallotoolbar [class^='icon-']:after,
+.hallotoolbar [class^='icon-']:after {
   text-align: right;
 }
-.hallotoolbar [class^="icon-"],
-.hallotoolbar [class*=" icon-"]:before,
-.hallotoolbar [class*=" icon-"]:before,
-.hallotoolbar [class^="icon-"]:before {
+
+.hallotoolbar [class^='icon-'],
+.hallotoolbar [class*=' icon-']:before,
+.hallotoolbar [class*=' icon-']:before,
+.hallotoolbar [class^='icon-']:before {
   vertical-align: -10%;
   margin-right: 0;
 }
 
 /* Hallo Toolbar */
-
 .hallotoolbar {
   position: absolute;
   z-index: 5;
   margin-top: 4em;
   margin-left: 1.2em;
 }
+
 .hallotoolbar.affixed {
   position: fixed;
   margin-top: 0;
 }
+
 .hallotoolbar.full {
   margin-left: 20px;
 }
@@ -149,28 +171,32 @@
     margin-left: 50px;
   }
 }
+
 .hallotoolbar button {
   border-radius: 0;
   height: 2.4em;
 }
 
 /* Hallo Embed */
-
 .halloembed {
   position: relative;
 }
+
 .halloembed__delete {
   position: absolute;
   display: none;
   right: 0;
   cursor: pointer;
 }
+
 .halloembed__delete::before {
   background-color: rgba(255, 255, 255, 0.8);
 }
+
 .halloembed__delete:hover::before {
   background-color: #fff;
 }
+
 .inEditMode .halloembed__delete {
   display: block;
 }
@@ -180,7 +206,7 @@
   so that images displayed in the rich text field receive more or less the same
   styling that they would receive on the site front-end.
 
-  Wagtail installations that define their own image formats (in a myapp.image_formats module)
+  Wagtail installations that define their own image formats (in a myApp.image_formats module)
   should ideally use the insert_editor_css hook to pass in their own custom CSS to have those
   images render within the rich text area in the same styles that would appear on the front-end.
   close as possible to match line-height space above p
@@ -189,13 +215,16 @@
 .richtext-image {
   margin-top: 3px;
 }
+
 .richtext-image.small {
   max-width: 45%;
 }
+
 .richtext-image.left {
   float: left;
   margin-right: 16px;
 }
+
 .richtext-image.right {
   float: right;
   margin-left: 16px;
@@ -206,36 +235,39 @@
   padding-top: 1em;
   padding-bottom: 1em;
 }
+
 .object .halloeditor.expanded {
   padding-top: 5em;
   padding-bottom: 2em;
 }
+
 .object.full .halloeditor {
   padding-top: 3em;
   padding-bottom: 3em;
 }
+
 .object.full .halloeditor.expanded {
   padding-top: 5em;
   padding-bottom: 5em;
 }
+
 .object.full .error .halloeditor {
   background-color: #ffe6e6;
 }
+
 .full .halloeditor {
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 0;
-  padding-top: 1.5em;
-  padding-bottom: 1.5em;
+  padding: 1.5em 20px;
   font-size: 1.2em;
   line-height: 1.6em;
 }
+
 @media screen and (min-width: breakpoint-min(sm)) {
   .full .halloeditor {
     padding-left: 50px;
     padding-right: 50px;
   }
 }
+
 .title .halloeditor {
   font-size: 2em;
   font-family: Roboto Slab, Georgia, serif;

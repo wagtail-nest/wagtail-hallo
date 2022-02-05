@@ -1,8 +1,10 @@
+'use strict';
+
 (function () {
   // hallow-wagtailembeds
-  $.widget("IKS.hallowagtailembeds", {
+  $.widget('IKS.hallowagtailembeds', {
     options: {
-      uuid: "",
+      uuid: '',
       editable: null,
     },
     populateToolbar: function (toolbar) {
@@ -14,20 +16,20 @@
       button.hallobutton({
         uuid: this.options.uuid,
         editable: this.options.editable,
-        label: "Embed",
-        icon: "icon-media",
+        label: 'Embed',
+        icon: 'icon-media',
         command: null,
       });
 
       toolbar.append(button);
 
-      return button.on("click", function (event) {
+      return button.on('click', function (event) {
         var insertionPoint;
         var lastSelection;
 
         lastSelection = widget.options.editable.getSelection();
         insertionPoint = $(lastSelection.endContainer)
-          .parentsUntil("[data-hallo-editor]")
+          .parentsUntil('[data-hallo-editor]')
           .last();
 
         return ModalWorkflow({
@@ -39,11 +41,11 @@
 
               elem = $(embedData).get(0);
               lastSelection.insertNode(elem);
-              if (elem.getAttribute("contenteditable") === "false") {
+              if (elem.getAttribute('contenteditable') === 'false') {
                 insertRichTextDeleteControl(elem);
               }
 
-              return widget.options.editable.element.trigger("change");
+              return widget.options.editable.element.trigger('change');
             },
           },
         });

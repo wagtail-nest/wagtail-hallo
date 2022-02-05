@@ -1,19 +1,20 @@
-"use strict";
+'use strict';
 
 function _typeof(obj) {
-  "@babel/helpers - typeof";
+  '@babel/helpers - typeof';
+
   return (
     (_typeof =
-      "function" == typeof Symbol && "symbol" == typeof Symbol.iterator
+      typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol'
         ? function (obj) {
             return typeof obj;
           }
         : function (obj) {
             return obj &&
-              "function" == typeof Symbol &&
+              typeof Symbol === 'function' &&
               obj.constructor === Symbol &&
               obj !== Symbol.prototype
-              ? "symbol"
+              ? 'symbol'
               : typeof obj;
           }),
     _typeof(obj)
@@ -21,13 +22,13 @@ function _typeof(obj) {
 }
 
 function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
+  if (typeof superClass !== 'function' && superClass !== null) {
+    throw new TypeError('Super expression must either be null or a function');
   }
   subClass.prototype = Object.create(superClass && superClass.prototype, {
     constructor: { value: subClass, writable: true, configurable: true },
   });
-  Object.defineProperty(subClass, "prototype", { writable: false });
+  Object.defineProperty(subClass, 'prototype', { writable: false });
   if (superClass) _setPrototypeOf(subClass, superClass);
 }
 
@@ -44,8 +45,8 @@ function _setPrototypeOf(o, p) {
 function _createSuper(Derived) {
   var hasNativeReflectConstruct = _isNativeReflectConstruct();
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf(Derived),
-      result;
+    var Super = _getPrototypeOf(Derived);
+    var result;
     if (hasNativeReflectConstruct) {
       var NewTarget = _getPrototypeOf(this).constructor;
       result = Reflect.construct(Super, arguments, NewTarget);
@@ -57,11 +58,11 @@ function _createSuper(Derived) {
 }
 
 function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+  if (call && (_typeof(call) === 'object' || typeof call === 'function')) {
     return call;
   } else if (call !== void 0) {
     throw new TypeError(
-      "Derived constructors may only return object or undefined"
+      'Derived constructors may only return object or undefined',
     );
   }
   return _assertThisInitialized(self);
@@ -70,19 +71,19 @@ function _possibleConstructorReturn(self, call) {
 function _assertThisInitialized(self) {
   if (self === void 0) {
     throw new ReferenceError(
-      "this hasn't been initialised - super() hasn't been called"
+      "this hasn't been initialised - super() hasn't been called",
     );
   }
   return self;
 }
 
 function _isNativeReflectConstruct() {
-  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (typeof Reflect === 'undefined' || !Reflect.construct) return false;
   if (Reflect.construct.sham) return false;
-  if (typeof Proxy === "function") return true;
+  if (typeof Proxy === 'function') return true;
   try {
     Boolean.prototype.valueOf.call(
-      Reflect.construct(Boolean, [], function () {})
+      Reflect.construct(Boolean, [], function () {}),
     );
     return true;
   } catch (e) {
@@ -115,7 +116,7 @@ function _defineProperty(obj, key, value) {
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
+    throw new TypeError('Cannot call a class as a function');
   }
 }
 
@@ -124,7 +125,7 @@ function _defineProperties(target, props) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
     descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
+    if ('value' in descriptor) descriptor.writable = true;
     Object.defineProperty(target, descriptor.key, descriptor);
   }
 }
@@ -132,11 +133,11 @@ function _defineProperties(target, props) {
 function _createClass(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties(Constructor, staticProps);
-  Object.defineProperty(Constructor, "prototype", { writable: false });
+  Object.defineProperty(Constructor, 'prototype', { writable: false });
   return Constructor;
 }
 
-var BoundWidget = /*#__PURE__*/ (function () {
+var BoundWidget = /* #__PURE__ */ (function () {
   function BoundWidget(element, name, idForLabel, initialState) {
     _classCallCheck(this, BoundWidget);
 
@@ -149,39 +150,39 @@ var BoundWidget = /*#__PURE__*/ (function () {
 
   _createClass(BoundWidget, [
     {
-      key: "getValue",
+      key: 'getValue',
       value: function getValue() {
         return this.input.val();
       },
     },
     {
-      key: "getState",
+      key: 'getState',
       value: function getState() {
         return this.input.val();
       },
     },
     {
-      key: "setState",
+      key: 'setState',
       value: function setState(state) {
         this.input.val(state);
       },
     },
     {
-      key: "getTextLabel",
+      key: 'getTextLabel',
       value: function getTextLabel(opts) {
         var val = this.getValue();
-        if (typeof val !== "string") return null;
+        if (typeof val !== 'string') return null;
         var maxLength = opts && opts.maxLength;
 
         if (maxLength && val.length > maxLength) {
-          return val.substring(0, maxLength - 1) + "…";
+          return val.substring(0, maxLength - 1) + '…';
         }
 
         return val;
       },
     },
     {
-      key: "focus",
+      key: 'focus',
       value: function focus() {
         this.input.focus();
       },
@@ -191,11 +192,11 @@ var BoundWidget = /*#__PURE__*/ (function () {
   return BoundWidget;
 })();
 
-var Widget = /*#__PURE__*/ (function () {
+var Widget = /* #__PURE__ */ (function () {
   function Widget(html, idPattern) {
     _classCallCheck(this, Widget);
 
-    _defineProperty(this, "boundWidgetClass", BoundWidget);
+    _defineProperty(this, 'boundWidgetClass', BoundWidget);
 
     this.html = html;
     this.idPattern = idPattern;
@@ -203,7 +204,7 @@ var Widget = /*#__PURE__*/ (function () {
 
   _createClass(Widget, [
     {
-      key: "render",
+      key: 'render',
       value: function render(placeholder, name, id, initialState) {
         var html = this.html.replace(/__NAME__/g, name).replace(/__ID__/g, id);
         var idForLabel = this.idPattern.replace(/__ID__/g, id);
@@ -218,7 +219,7 @@ var Widget = /*#__PURE__*/ (function () {
   return Widget;
 })();
 
-var BoundHalloRichTextArea = /*#__PURE__*/ (function (_BoundWidget) {
+var BoundHalloRichTextArea = /* #__PURE__ */ (function (_BoundWidget) {
   _inherits(BoundHalloRichTextArea, _BoundWidget);
 
   var _super = _createSuper(BoundHalloRichTextArea);
@@ -231,14 +232,14 @@ var BoundHalloRichTextArea = /*#__PURE__*/ (function (_BoundWidget) {
 
   _createClass(BoundHalloRichTextArea, [
     {
-      key: "setState",
+      key: 'setState',
       value: function setState(state) {
         this.input.val(state);
-        this.input.siblings("[data-hallo-editor]").html(state);
+        this.input.siblings('[data-hallo-editor]').html(state);
       },
     },
     {
-      key: "focus",
+      key: 'focus',
       value: function focus() {
         /* not implemented (leave blank so we don't try to focus the hidden field) */
       },
@@ -248,7 +249,7 @@ var BoundHalloRichTextArea = /*#__PURE__*/ (function (_BoundWidget) {
   return BoundHalloRichTextArea;
 })(BoundWidget);
 
-var HalloRichTextArea = /*#__PURE__*/ (function (_Widget) {
+var HalloRichTextArea = /* #__PURE__ */ (function (_Widget) {
   _inherits(HalloRichTextArea, _Widget);
 
   var _super2 = _createSuper(HalloRichTextArea);
@@ -270,8 +271,8 @@ var HalloRichTextArea = /*#__PURE__*/ (function (_Widget) {
 
     _defineProperty(
       _assertThisInitialized(_this),
-      "boundWidgetClass",
-      BoundHalloRichTextArea
+      'boundWidgetClass',
+      BoundHalloRichTextArea,
     );
 
     return _this;
@@ -281,6 +282,6 @@ var HalloRichTextArea = /*#__PURE__*/ (function (_Widget) {
 })(Widget);
 
 window.telepath.register(
-  "wagtail.widgets.HalloRichTextArea",
-  HalloRichTextArea
+  'wagtail.widgets.HalloRichTextArea',
+  HalloRichTextArea,
 );

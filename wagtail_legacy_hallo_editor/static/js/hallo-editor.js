@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 (function () {
   window.halloPlugins = {};
@@ -11,47 +11,62 @@
 
   window.registerHalloPlugin = registerHalloPlugin;
 
+  function setupLinkTooltips(elem) {
+    elem.tooltip({
+      animation: false,
+      title: function title() {
+        return $(this).attr('href');
+      },
+      trigger: 'hover',
+      placement: 'bottom',
+      selector: 'a',
+    });
+  }
+
+  window.setupLinkTooltips = setupLinkTooltips;
+
   function makeHalloRichTextEditable(id, plugins) {
-    var input = $("#" + id);
+    var removeStylingPending = false;
+    var input = $('#' + id);
     var editor = $('<div class="halloeditor" data-hallo-editor></div>').html(
-      input.val()
+      input.val(),
     );
+    var closestObj = input.closest('.object');
+
     editor.insertBefore(input);
     input.hide();
-    var removeStylingPending = false;
 
     function removeStyling() {
       /* Strip the 'style' attribute from spans that have no other attributes.
       (we don't remove the span entirely as that messes with the cursor position,
       and spans will be removed anyway by our whitelisting)
       */
-      $("span[style]", editor)
+      $('span[style]', editor)
         .filter(function () {
           return this.attributes.length === 1;
         })
-        .removeAttr("style");
+        .removeAttr('style');
       removeStylingPending = false;
     }
     /* Workaround for faulty change-detection in hallo */
 
     function setModified() {
-      var hallo = editor.data("IKS-hallo");
+      var hallo = editor.data('IKS-hallo');
 
       if (hallo) {
         hallo.setModified();
       }
     }
 
-    var closestObj = input.closest(".object");
     editor
       .hallo({
-        toolbar: "halloToolbarFixed",
-        toolbarCssClass: closestObj.hasClass("full") ? "full" : "",
+        toolbar: 'halloToolbarFixed',
+        toolbarCssClass: closestObj.hasClass('full') ? 'full' : '',
 
         /* use the passed-in plugins arg */
         plugins: plugins,
       })
-      .on("hallomodified", function (event, data) {
+      .on('hallomodified', function (event, data) {
         input.val(data.content);
 
         if (!removeStylingPending) {
@@ -59,24 +74,24 @@
           removeStylingPending = true;
         }
       })
-      .on("paste drop", function () {
+      .on('paste drop', function () {
         setTimeout(function () {
           removeStyling();
           setModified();
         }, 1);
         /* Animate the fields open when you click into them. */
       })
-      .on("halloactivated", function (event) {
-        $(event.target).addClass("expanded", 200, function () {
+      .on('halloactivated', function (event) {
+        $(event.target).addClass('expanded', 200, function () {
           /* Hallo's toolbar will reposition itself on the scroll event.
         This is useful since animating the fields can cause it to be
         positioned badly initially. */
-          $(window).trigger("scroll");
+          $(window).trigger('scroll');
         });
       })
-      .on("hallodeactivated", function (event) {
-        $(event.target).removeClass("expanded", 200, function () {
-          $(window).trigger("scroll");
+      .on('hallodeactivated', function (event) {
+        $(event.target).removeClass('expanded', 200, function () {
+          $(window).trigger('scroll');
         });
       });
     setupLinkTooltips(editor);
@@ -84,32 +99,18 @@
 
   window.makeHalloRichTextEditable = makeHalloRichTextEditable;
 
-  function setupLinkTooltips(elem) {
-    elem.tooltip({
-      animation: false,
-      title: function title() {
-        return $(this).attr("href");
-      },
-      trigger: "hover",
-      placement: "bottom",
-      selector: "a",
-    });
-  }
-
-  window.setupLinkTooltips = setupLinkTooltips;
-
   function insertRichTextDeleteControl(elem) {
     var anchor = $(
-      '<a class="icon icon-cross text-replace halloembed__delete">Delete</a>'
+      '<a class="icon icon-cross text-replace halloembed__delete">Delete</a>',
     );
-    $(elem).addClass("halloembed").prepend(anchor);
-    anchor.on("click", function () {
-      var widget = $(elem).parent("[data-hallo-editor]").data("IKS-hallo");
+    $(elem).addClass('halloembed').prepend(anchor);
+    anchor.on('click', function () {
+      var widget = $(elem).parent('[data-hallo-editor]').data('IKS-hallo');
       $(elem).fadeOut(function () {
         $(elem).remove();
 
         if (widget !== undefined && widget.options.editable) {
-          widget.element.trigger("change");
+          widget.element.trigger('change');
         }
       });
     });

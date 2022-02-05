@@ -1,35 +1,35 @@
+'use strict';
+
 (function () {
   // hallo-wagtaillink
 
-  $.widget("IKS.hallowagtaillink", {
+  $.widget('IKS.hallowagtaillink', {
     options: {
-      uuid: "",
+      uuid: '',
       editable: null,
     },
     populateToolbar(toolbar) {
-      // eslint-disable-next-line @typescript-eslint/no-this-alias
       const widget = this;
-      // eslint-disable-next-line func-names
       const getEnclosingLink = function () {
         const node =
           widget.options.editable.getSelection().commonAncestorContainer;
-        return $(node).parents("a").get(0);
+        return $(node).parents('a').get(0);
       };
 
       const buttonSet = $('<span class="' + this.widgetName + '"></span>');
 
-      let addButton = $("<span></span>");
+      let addButton = $('<span></span>');
       addButton = addButton.hallobutton({
         uuid: widget.options.uuid,
         editable: widget.options.editable,
-        label: "Add/Edit Link",
-        icon: "icon-link",
+        label: 'Add/Edit Link',
+        icon: 'icon-link',
         command: null,
         queryState() {
-          return addButton.hallobutton("checked", !!getEnclosingLink());
+          return addButton.hallobutton('checked', !!getEnclosingLink());
         },
       });
-      addButton.on("click", () => {
+      addButton.on('click', () => {
         let href;
         let linkType;
         let parentPageId;
@@ -47,26 +47,26 @@
         const lastSelection = widget.options.editable.getSelection();
 
         if (enclosingLink) {
-          href = enclosingLink.getAttribute("href");
-          parentPageId = enclosingLink.getAttribute("data-parent-id");
-          linkType = enclosingLink.getAttribute("data-linktype");
+          href = enclosingLink.getAttribute('href');
+          parentPageId = enclosingLink.getAttribute('data-parent-id');
+          linkType = enclosingLink.getAttribute('data-linktype');
 
           urlParams.link_text = enclosingLink.innerText;
 
-          if (linkType === "page" && parentPageId) {
+          if (linkType === 'page' && parentPageId) {
             url =
-              window.chooserUrls.pageChooser + parentPageId.toString() + "/";
-          } else if (href.startsWith("mailto:")) {
+              window.chooserUrls.pageChooser + parentPageId.toString() + '/';
+          } else if (href.startsWith('mailto:')) {
             url = window.chooserUrls.emailLinkChooser;
-            href = href.replace("mailto:", "");
+            href = href.replace('mailto:', '');
             urlParams.link_url = href;
-          } else if (href.startsWith("tel:")) {
+          } else if (href.startsWith('tel:')) {
             url = window.chooserUrls.phoneLinkChooser;
-            href = href.replace("tel:", "");
+            href = href.replace('tel:', '');
             urlParams.link_url = href;
-          } else if (href.startsWith("#")) {
+          } else if (href.startsWith('#')) {
             url = window.chooserUrls.anchorLinkChooser;
-            href = href.replace("#", "");
+            href = href.replace('#', '');
             urlParams.link_url = href;
           } else if (!linkType) {
             /* external link */
@@ -95,13 +95,13 @@
               } else if (!lastSelection.collapsed) {
                 // Turning a selection into a link
 
-                anchor = document.createElement("a");
+                anchor = document.createElement('a');
                 lastSelection.surroundContents(anchor);
 
                 // unlink all previously existing links in the selection,
                 // now nested within 'a'
                 // eslint-disable-next-line func-names
-                $("a[href]", anchor).each(function () {
+                $('a[href]', anchor).each(function () {
                   const parent = this.parentNode;
                   while (this.firstChild)
                     parent.insertBefore(this.firstChild, this);
@@ -111,21 +111,21 @@
                 linkHasExistingContent = true;
               } else {
                 // Inserting a new link at the cursor position
-                anchor = document.createElement("a");
+                anchor = document.createElement('a');
                 lastSelection.insertNode(anchor);
                 linkHasExistingContent = false;
               }
 
               // Set link attributes
-              anchor.setAttribute("href", pageData.url);
+              anchor.setAttribute('href', pageData.url);
               if (pageData.id) {
-                anchor.setAttribute("data-id", pageData.id);
-                anchor.setAttribute("data-parent-id", pageData.parentId);
-                anchor.setAttribute("data-linktype", "page");
+                anchor.setAttribute('data-id', pageData.id);
+                anchor.setAttribute('data-parent-id', pageData.parentId);
+                anchor.setAttribute('data-linktype', 'page');
               } else {
-                anchor.removeAttribute("data-id");
-                anchor.removeAttribute("data-parent-id");
-                anchor.removeAttribute("data-linktype");
+                anchor.removeAttribute('data-id');
+                anchor.removeAttribute('data-parent-id');
+                anchor.removeAttribute('data-linktype');
               }
 
               if (
@@ -136,28 +136,28 @@
                 anchor.innerText = pageData.title;
               }
 
-              return widget.options.editable.element.trigger("change");
+              return widget.options.editable.element.trigger('change');
             },
           },
         });
       });
       buttonSet.append(addButton);
 
-      let cancelButton = $("<span></span>");
+      let cancelButton = $('<span></span>');
       cancelButton = cancelButton.hallobutton({
         uuid: widget.options.uuid,
         editable: widget.options.editable,
-        label: "Remove Link",
-        icon: "icon-chain-broken",
+        label: 'Remove Link',
+        icon: 'icon-chain-broken',
         command: null,
         queryState() {
           if (!!getEnclosingLink()) {
-            return cancelButton.hallobutton("enable");
+            return cancelButton.hallobutton('enable');
           }
-          return cancelButton.hallobutton("disable");
+          return cancelButton.hallobutton('disable');
         },
       });
-      cancelButton.on("click", () => {
+      cancelButton.on('click', () => {
         var enclosingLink;
         var sel;
         var range;
@@ -173,8 +173,8 @@
 
           sel.setSingleRange(range, false);
 
-          document.execCommand("unlink");
-          widget.options.editable.element.trigger("change");
+          document.execCommand('unlink');
+          widget.options.editable.element.trigger('change');
         }
       });
       buttonSet.append(cancelButton);

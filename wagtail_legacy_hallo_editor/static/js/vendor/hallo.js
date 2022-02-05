@@ -3,25 +3,25 @@
  * See http://hallojs.org for more information
  */ (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.hallo", {
+    return jQuery.widget('IKS.hallo', {
       toolbar: null,
       bound: false,
-      originalContent: "",
-      previousContent: "",
-      uuid: "",
+      originalContent: '',
+      previousContent: '',
+      uuid: '',
       selection: null,
       _keepActivated: false,
       originalHref: null,
       options: {
         editable: true,
         plugins: {},
-        toolbar: "halloToolbarContextual",
-        parentElement: "body",
+        toolbar: 'halloToolbarContextual',
+        parentElement: 'body',
         buttonCssClass: null,
         toolbarCssClass: null,
         toolbarPositionAbove: false,
         toolbarOptions: {},
-        placeholder: "",
+        placeholder: '',
         forceStructured: true,
         checkTouch: true,
         touchScreen: null,
@@ -48,7 +48,7 @@
           });
           jQuery(this.element)[plugin](options);
         }
-        this.element.one("halloactivated", function () {
+        this.element.one('halloactivated', function () {
           return _this._prepareToolbar();
         });
         return (this.originalContent = this.getContents());
@@ -65,80 +65,80 @@
         this.disable();
         if (this.toolbar) {
           this.toolbar.remove();
-          this.element[this.options.toolbar]("destroy");
+          this.element[this.options.toolbar]('destroy');
         }
         _ref = this.options.plugins;
         for (plugin in _ref) {
           options = _ref[plugin];
-          jQuery(this.element)[plugin]("destroy");
+          jQuery(this.element)[plugin]('destroy');
         }
         return jQuery.Widget.prototype.destroy.call(this);
       },
       disable: function () {
         var _this = this;
-        this.element.attr("contentEditable", false);
-        this.element.off("focus", this._activated);
-        this.element.off("blur", this._deactivated);
-        this.element.off("keyup paste change", this._checkModified);
-        this.element.off("keyup", this._keys);
-        this.element.off("keyup mouseup", this._checkSelection);
+        this.element.attr('contentEditable', false);
+        this.element.off('focus', this._activated);
+        this.element.off('blur', this._deactivated);
+        this.element.off('keyup paste change', this._checkModified);
+        this.element.off('keyup', this._keys);
+        this.element.off('keyup mouseup', this._checkSelection);
         this.bound = false;
-        jQuery(this.element).removeClass("isModified");
-        jQuery(this.element).removeClass("inEditMode");
+        jQuery(this.element).removeClass('isModified');
+        jQuery(this.element).removeClass('inEditMode');
         this.element
-          .parents("a")
+          .parents('a')
           .addBack()
           .each(function (idx, elem) {
             var element;
             element = jQuery(elem);
-            if (!element.is("a")) {
+            if (!element.is('a')) {
               return;
             }
             if (!_this.originalHref) {
               return;
             }
-            return element.attr("href", _this.originalHref);
+            return element.attr('href', _this.originalHref);
           });
-        return this._trigger("disabled", null);
+        return this._trigger('disabled', null);
       },
       enable: function () {
         var _this = this;
         this.element
-          .parents("a[href]")
+          .parents('a[href]')
           .addBack()
           .each(function (idx, elem) {
             var element;
             element = jQuery(elem);
-            if (!element.is("a[href]")) {
+            if (!element.is('a[href]')) {
               return;
             }
-            _this.originalHref = element.attr("href");
-            return element.removeAttr("href");
+            _this.originalHref = element.attr('href');
+            return element.removeAttr('href');
           });
-        this.element.attr("contentEditable", true);
+        this.element.attr('contentEditable', true);
         if (!jQuery.parseHTML(this.element.html())) {
           this.element.html(this.options.placeholder);
-          jQuery(this.element).addClass("inPlaceholderMode");
+          jQuery(this.element).addClass('inPlaceholderMode');
           this.element.css({
-            "min-width": this.element.innerWidth(),
-            "min-height": this.element.innerHeight(),
+            'min-width': this.element.innerWidth(),
+            'min-height': this.element.innerHeight(),
           });
         }
         if (!this.bound) {
-          this.element.on("focus", this, this._activated);
-          this.element.on("blur", this, this._deactivated);
-          this.element.on("keyup paste change", this, this._checkModified);
-          this.element.on("keyup", this, this._keys);
-          this.element.on("keyup mouseup", this, this._checkSelection);
+          this.element.on('focus', this, this._activated);
+          this.element.on('blur', this, this._deactivated);
+          this.element.on('keyup paste change', this, this._checkModified);
+          this.element.on('keyup', this, this._keys);
+          this.element.on('keyup mouseup', this, this._checkSelection);
           this.bound = true;
         }
         if (this.options.forceStructured) {
           this._forceStructured();
         }
-        return this._trigger("enabled", null);
+        return this._trigger('enabled', null);
       },
       activate: function () {
-        return this.element.trigger("focus");
+        return this.element.trigger('focus');
       },
       containsSelection: function () {
         var range;
@@ -163,7 +163,7 @@
       },
       replaceSelection: function (cb) {
         var newTextNode, r, range, sel, t;
-        if (navigator.appName === "Microsoft Internet Explorer") {
+        if (navigator.appName === 'Microsoft Internet Explorer') {
           t = document.selection.createRange().text;
           r = document.selection.createRange();
           return r.pasteHTML(cb(t));
@@ -178,7 +178,7 @@
         }
       },
       removeAllSelections: function () {
-        if (navigator.appName === "Microsoft Internet Explorer") {
+        if (navigator.appName === 'Microsoft Internet Explorer') {
           return range.empty();
         } else {
           return window.getSelection().removeAllRanges();
@@ -186,7 +186,7 @@
       },
       getPluginInstance: function (plugin) {
         var instance;
-        instance = jQuery(this.element).data("IKS-" + plugin);
+        instance = jQuery(this.element).data('IKS-' + plugin);
         if (instance) {
           return instance;
         }
@@ -194,7 +194,7 @@
         if (instance) {
           return instance;
         }
-        throw new Error("Plugin " + plugin + " not found");
+        throw new Error('Plugin ' + plugin + ' not found');
       },
       getContents: function () {
         var cleanup, instance, plugin;
@@ -207,7 +207,7 @@
           if (!jQuery.isFunction(cleanup)) {
             continue;
           }
-          jQuery(this.element)[plugin]("cleanupContentClone", this.element);
+          jQuery(this.element)[plugin]('cleanupContentClone', this.element);
         }
         return this.element.html();
       },
@@ -221,12 +221,12 @@
         return this.previousContent !== this.getContents();
       },
       setUnmodified: function () {
-        jQuery(this.element).removeClass("isModified");
+        jQuery(this.element).removeClass('isModified');
         return (this.previousContent = this.getContents());
       },
       setModified: function () {
-        jQuery(this.element).addClass("isModified");
-        return this._trigger("modified", null, {
+        jQuery(this.element).addClass('isModified');
+        return this._trigger('modified', null, {
           editable: this,
           content: this.getContents(),
         });
@@ -236,12 +236,12 @@
       },
       execute: function (command, value) {
         if (document.execCommand(command, false, value)) {
-          return this.element.trigger("change");
+          return this.element.trigger('change');
         }
       },
       protectFocusFrom: function (el) {
         var _this = this;
-        return el.on("mousedown", function (event) {
+        return el.on('mousedown', function (event) {
           event.preventDefault();
           _this._protectToolbarFocus = true;
           return setTimeout(function () {
@@ -260,16 +260,16 @@
             .substring(1);
         };
         return (
-          "" +
+          '' +
           S4() +
           S4() +
-          "-" +
+          '-' +
           S4() +
-          "-" +
+          '-' +
           S4() +
-          "-" +
+          '-' +
           S4() +
-          "-" +
+          '-' +
           S4() +
           S4() +
           S4()
@@ -290,7 +290,7 @@
         toolbarOptions = jQuery.extend(
           {},
           defaults,
-          this.options.toolbarOptions
+          this.options.toolbarOptions,
         );
         this.element[this.options.toolbar](toolbarOptions);
         for (plugin in this.options.plugins) {
@@ -302,9 +302,9 @@
           if (!jQuery.isFunction(populate)) {
             continue;
           }
-          this.element[plugin]("populateToolbar", this.toolbar);
+          this.element[plugin]('populateToolbar', this.toolbar);
         }
-        this.element[this.options.toolbar]("setPosition");
+        this.element[this.options.toolbar]('setPosition');
         return this.protectFocusFrom(this.toolbar);
       },
       changeToolbar: function (element, toolbar, hide) {
@@ -320,7 +320,7 @@
         if (!this.toolbar) {
           return;
         }
-        this.element[originalToolbar]("destroy");
+        this.element[originalToolbar]('destroy');
         this.toolbar.remove();
         this._prepareToolbar();
         if (hide) {
@@ -365,7 +365,7 @@
           if (widget._isEmptySelection(sel) || widget._isEmptyRange(sel)) {
             if (widget.selection) {
               widget.selection = null;
-              widget._trigger("unselected", null, {
+              widget._trigger('unselected', null, {
                 editable: widget,
                 originalEvent: event,
               });
@@ -377,7 +377,7 @@
             !widget._rangesEqual(sel, widget.selection)
           ) {
             widget.selection = sel.cloneRange();
-            return widget._trigger("selected", null, {
+            return widget._trigger('selected', null, {
               editable: widget,
               selection: widget.selection,
               ranges: [widget.selection],
@@ -387,7 +387,7 @@
         }, 0);
       },
       _isEmptySelection: function (selection) {
-        if (selection.type === "Caret") {
+        if (selection.type === 'Caret') {
           return true;
         }
         return false;
@@ -397,7 +397,7 @@
           return true;
         }
         if (range.isCollapsed) {
-          if (typeof range.isCollapsed === "function") {
+          if (typeof range.isCollapsed === 'function') {
             return range.isCollapsed();
           }
           return range.isCollapsed;
@@ -406,17 +406,17 @@
       },
       turnOn: function () {
         if (this.getContents() === this.options.placeholder) {
-          this.setContents("");
+          this.setContents('');
         }
-        jQuery(this.element).removeClass("inPlaceholderMode");
-        jQuery(this.element).addClass("inEditMode");
-        return this._trigger("activated", null, this);
+        jQuery(this.element).removeClass('inPlaceholderMode');
+        jQuery(this.element).addClass('inEditMode');
+        return this._trigger('activated', null, this);
       },
       turnOff: function () {
-        jQuery(this.element).removeClass("inEditMode");
-        this._trigger("deactivated", null, this);
+        jQuery(this.element).removeClass('inEditMode');
+        this._trigger('deactivated', null, this);
         if (!this.getContents()) {
-          jQuery(this.element).addClass("inPlaceholderMode");
+          jQuery(this.element).addClass('inPlaceholderMode');
           return this.setContents(this.options.placeholder);
         }
       },
@@ -431,22 +431,22 @@
           return event.data.turnOff();
         } else {
           return setTimeout(function () {
-            return jQuery(event.data.element).trigger("focus");
+            return jQuery(event.data.element).trigger('focus');
           }, 300);
         }
       },
       _forceStructured: function (event) {
         var e;
         try {
-          return document.execCommand("styleWithCSS", 0, false);
+          return document.execCommand('styleWithCSS', 0, false);
         } catch (_error) {
           e = _error;
           try {
-            return document.execCommand("useCSS", 0, true);
+            return document.execCommand('useCSS', 0, true);
           } catch (_error) {
             e = _error;
             try {
-              return document.execCommand("styleWithCSS", false, false);
+              return document.execCommand('styleWithCSS', false, false);
             } catch (_error) {
               e = _error;
             }
@@ -454,7 +454,7 @@
         }
       },
       checkTouch: function () {
-        return (this.options.touchScreen = !!("createTouch" in document));
+        return (this.options.touchScreen = !!('createTouch' in document));
       },
     });
   })(jQuery);
@@ -469,16 +469,16 @@
       z.use(
         new z.StanbolService({
           proxyDisabled: true,
-          url: "http://dev.iks-project.eu:8081",
-        })
+          url: 'http://dev.iks-project.eu:8081',
+        }),
       );
     }
-    return jQuery.widget("IKS.halloannotate", {
+    return jQuery.widget('IKS.halloannotate', {
       options: {
         vie: z,
         editable: null,
         toolbar: null,
-        uuid: "",
+        uuid: '',
         select: function () {},
         decline: function () {},
         remove: function () {},
@@ -488,41 +488,41 @@
         var editableElement, turnOffAnnotate, widget;
         widget = this;
         if (this.options.vie === void 0) {
-          throw new Error("The halloannotate plugin requires VIE");
+          throw new Error('The halloannotate plugin requires VIE');
           return;
         }
-        if (typeof this.element.annotate !== "function") {
-          throw new Error("The halloannotate plugin requires annotate.js");
+        if (typeof this.element.annotate !== 'function') {
+          throw new Error('The halloannotate plugin requires annotate.js');
           return;
         }
-        this.state = "off";
+        this.state = 'off';
         this.instantiate();
         turnOffAnnotate = function () {
           var editable;
           editable = this;
-          return jQuery(editable).halloannotate("turnOff");
+          return jQuery(editable).halloannotate('turnOff');
         };
         editableElement = this.options.editable.element;
-        return editableElement.on("hallodisabled", turnOffAnnotate);
+        return editableElement.on('hallodisabled', turnOffAnnotate);
       },
       populateToolbar: function (toolbar) {
         var buttonHolder,
           _this = this;
         buttonHolder = jQuery('<span class="' + this.widgetName + '"></span>');
         this.button = buttonHolder.hallobutton({
-          label: "Annotate",
-          icon: "icon-tags",
+          label: 'Annotate',
+          icon: 'icon-tags',
           editable: this.options.editable,
           command: null,
           uuid: this.options.uuid,
           cssClass: this.options.buttonCssClass,
           queryState: false,
         });
-        buttonHolder.on("change", function (event) {
-          if (_this.state === "pending") {
+        buttonHolder.on('change', function (event) {
+          if (_this.state === 'pending') {
             return;
           }
-          if (_this.state === "off") {
+          if (_this.state === 'off') {
             return _this.turnOn();
           }
           return _this.turnOff();
@@ -531,8 +531,8 @@
         return toolbar.append(this.button);
       },
       cleanupContentClone: function (el) {
-        if (this.state === "on") {
-          return el.find(".entity:not([about])").each(function () {
+        if (this.state === 'on') {
+          return el.find('.entity:not([about])').each(function () {
             return jQuery(this).replaceWith(jQuery(this).html());
           });
         }
@@ -550,17 +550,17 @@
             success: this.options.success,
             error: this.options.error,
           })
-          .on("annotateselect", function (event, data) {
+          .on('annotateselect', function (event, data) {
             return widget.options.editable.setModified();
           })
-          .on("annotateremove", function () {
+          .on('annotateremove', function () {
             return jQuery.noop();
           });
       },
       turnPending: function () {
-        this.state = "pending";
-        this.button.hallobutton("checked", false);
-        return this.button.hallobutton("disable");
+        this.state = 'pending';
+        this.button.hallobutton('checked', false);
+        return this.button.hallobutton('disable');
       },
       turnOn: function () {
         var e,
@@ -570,15 +570,15 @@
         widget = this;
         try {
           return this.options.editable.element.annotate(
-            "enable",
+            'enable',
             function (success) {
               if (!success) {
                 return;
               }
-              _this.state = "on";
-              _this.button.hallobutton("checked", true);
-              return _this.button.hallobutton("enable");
-            }
+              _this.state = 'on';
+              _this.button.hallobutton('checked', true);
+              return _this.button.hallobutton('enable');
+            },
           );
         } catch (_error) {
           e = _error;
@@ -586,14 +586,14 @@
         }
       },
       turnOff: function () {
-        this.options.editable.element.annotate("disable");
-        this.state = "off";
+        this.options.editable.element.annotate('disable');
+        this.state = 'off';
         if (!this.button) {
           return;
         }
-        this.button.attr("checked", false);
-        this.button.find("label").removeClass("ui-state-clicked");
-        return this.button.button("refresh");
+        this.button.attr('checked', false);
+        this.button.find('label').removeClass('ui-state-clicked');
+        return this.button.button('refresh');
       },
     });
   })(jQuery);
@@ -601,13 +601,13 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.halloblacklist", {
+    return jQuery.widget('IKS.halloblacklist', {
       options: {
         tags: [],
       },
       _init: function () {
-        if (this.options.tags.indexOf("br") !== -1) {
-          return this.element.on("keydown", function (event) {
+        if (this.options.tags.indexOf('br') !== -1) {
+          return this.element.on('keydown', function (event) {
             if (event.originalEvent.keyCode === 13) {
               return event.preventDefault();
             }
@@ -630,18 +630,18 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.halloblock", {
+    return jQuery.widget('IKS.halloblock', {
       options: {
         editable: null,
         toolbar: null,
-        uuid: "",
-        elements: ["h1", "h2", "h3", "p", "pre", "blockquote"],
+        uuid: '',
+        elements: ['h1', 'h2', 'h3', 'p', 'pre', 'blockquote'],
         buttonCssClass: null,
       },
       populateToolbar: function (toolbar) {
         var buttonset, contentId, target;
         buttonset = jQuery('<span class="' + this.widgetName + '"></span>');
-        contentId = "" + this.options.uuid + "-" + this.widgetName + "-data";
+        contentId = '' + this.options.uuid + '-' + this.widgetName + '-data';
         target = this._prepareDropdown(contentId);
         toolbar.append(buttonset);
         buttonset.hallobuttonset();
@@ -668,46 +668,46 @@
               element +
               ' class="menu-item">' +
               element +
-              "</" +
+              '</' +
               element +
-              ">        </button>"
+              '>        </button>',
           );
           if (containingElement === element) {
-            el.addClass("selected");
+            el.addClass('selected');
           }
-          if (containingElement !== "div") {
-            el.addClass("disabled");
+          if (containingElement !== 'div') {
+            el.addClass('disabled');
           }
-          el.on("click", function () {
+          el.on('click', function () {
             var tagName;
             tagName = element.toUpperCase();
-            if (el.hasClass("disabled")) {
+            if (el.hasClass('disabled')) {
               return;
             }
-            if (navigator.appName === "Microsoft Internet Explorer") {
+            if (navigator.appName === 'Microsoft Internet Explorer') {
               _this.options.editable.execute(
-                "FormatBlock",
-                "<" + tagName + ">"
+                'FormatBlock',
+                '<' + tagName + '>',
               );
               return;
             }
-            return _this.options.editable.execute("formatBlock", tagName);
+            return _this.options.editable.execute('formatBlock', tagName);
           });
           queryState = function (event) {
             var block;
-            block = document.queryCommandValue("formatBlock");
+            block = document.queryCommandValue('formatBlock');
             if (block.toLowerCase() === element) {
-              el.addClass("selected");
+              el.addClass('selected');
               return;
             }
-            return el.removeClass("selected");
+            return el.removeClass('selected');
           };
-          events = "keyup paste change mouseup";
+          events = 'keyup paste change mouseup';
           _this.options.editable.element.on(events, queryState);
-          _this.options.editable.element.on("halloenabled", function () {
+          _this.options.editable.element.on('halloenabled', function () {
             return _this.options.editable.element.on(events, queryState);
           });
-          _this.options.editable.element.on("hallodisabled", function () {
+          _this.options.editable.element.on('hallodisabled', function () {
             return _this.options.editable.element.off(events, queryState);
           });
           return el;
@@ -721,12 +721,12 @@
       },
       _prepareButton: function (target) {
         var buttonElement;
-        buttonElement = jQuery("<span></span>");
+        buttonElement = jQuery('<span></span>');
         buttonElement.hallodropdownbutton({
           uuid: this.options.uuid,
           editable: this.options.editable,
-          label: "block",
-          icon: "icon-text-height",
+          label: 'block',
+          icon: 'icon-text-height',
           target: target,
           cssClass: this.options.buttonCssClass,
         });
@@ -740,20 +740,20 @@
   (function (jQuery) {
     var rangyMessage;
     rangyMessage =
-      "The hallocleanhtml plugin requires the selection save and\
-        restore module from Rangy";
-    return jQuery.widget("IKS.hallocleanhtml", {
+      'The hallocleanhtml plugin requires the selection save and\
+        restore module from Rangy';
+    return jQuery.widget('IKS.hallocleanhtml', {
       _create: function () {
         var editor,
           _this = this;
         if (jQuery.htmlClean === void 0) {
           throw new Error(
-            "The hallocleanhtml plugin requires jQuery.htmlClean"
+            'The hallocleanhtml plugin requires jQuery.htmlClean',
           );
           return;
         }
         editor = this.element;
-        return editor.bind("paste", this, function (event) {
+        return editor.bind('paste', this, function (event) {
           var lastContent, lastRange, widget;
           if (rangy.saveSelection === void 0) {
             throw new Error(rangyMessage);
@@ -763,21 +763,21 @@
           widget.options.editable.getSelection().deleteContents();
           lastRange = rangy.saveSelection();
           lastContent = editor.html();
-          editor.html("");
+          editor.html('');
           return setTimeout(function () {
             var cleanPasted, error, pasted, range;
             pasted = editor.html();
             cleanPasted = jQuery.htmlClean(pasted, _this.options);
             editor.html(lastContent);
             rangy.restoreSelection(lastRange);
-            if (cleanPasted !== "") {
+            if (cleanPasted !== '') {
               try {
-                return document.execCommand("insertHTML", false, cleanPasted);
+                return document.execCommand('insertHTML', false, cleanPasted);
               } catch (_error) {
                 error = _error;
                 range = widget.options.editable.getSelection();
                 return range.insertNode(
-                  range.createContextualFragment(cleanPasted)
+                  range.createContextualFragment(cleanPasted),
                 );
               }
             }
@@ -790,10 +790,10 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.halloformat", {
+    return jQuery.widget('IKS.halloformat', {
       options: {
         editable: null,
-        uuid: "",
+        uuid: '',
         formattings: {
           bold: true,
           italic: true,
@@ -814,7 +814,7 @@
         buttonset = jQuery('<span class="' + widget.widgetName + '"></span>');
         buttonize = function (format) {
           var buttonHolder;
-          buttonHolder = jQuery("<span></span>");
+          buttonHolder = jQuery('<span></span>');
           buttonHolder.hallobutton({
             label: format,
             editable: _this.options.editable,
@@ -841,11 +841,11 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.halloheadings", {
+    return jQuery.widget('IKS.halloheadings', {
       options: {
         editable: null,
-        uuid: "",
-        formatBlocks: ["p", "h1", "h2", "h3"],
+        uuid: '',
+        formatBlocks: ['p', 'h1', 'h2', 'h3'],
         buttonCssClass: null,
       },
       populateToolbar: function (toolbar) {
@@ -861,16 +861,16 @@
           _this = this;
         widget = this;
         buttonset = jQuery('<span class="' + widget.widgetName + '"></span>');
-        ie = navigator.appName === "Microsoft Internet Explorer";
-        command = ie ? "FormatBlock" : "formatBlock";
+        ie = navigator.appName === 'Microsoft Internet Explorer';
+        command = ie ? 'FormatBlock' : 'formatBlock';
         buttonize = function (format) {
           var buttonHolder;
-          buttonHolder = jQuery("<span></span>");
+          buttonHolder = jQuery('<span></span>');
           buttonHolder.hallobutton({
             label: format,
             editable: _this.options.editable,
             command: command,
-            commandValue: ie ? "<" + format + ">" : format,
+            commandValue: ie ? '<' + format + '>' : format,
             uuid: _this.options.uuid,
             cssClass: _this.options.buttonCssClass,
             queryState: function (event) {
@@ -879,26 +879,26 @@
                 value = document.queryCommandValue(command);
                 if (ie) {
                   map = {
-                    p: "normal",
+                    p: 'normal',
                   };
                   _ref = [1, 2, 3, 4, 5, 6];
                   for (_i = 0, _len = _ref.length; _i < _len; _i++) {
                     val = _ref[_i];
-                    map["h" + val] = val;
+                    map['h' + val] = val;
                   }
-                  compared = value.match(new RegExp(map[format], "i"));
+                  compared = value.match(new RegExp(map[format], 'i'));
                 } else {
-                  compared = value.match(new RegExp(format, "i"));
+                  compared = value.match(new RegExp(format, 'i'));
                 }
                 result = compared ? true : false;
-                return buttonHolder.hallobutton("checked", result);
+                return buttonHolder.hallobutton('checked', result);
               } catch (_error) {
                 e = _error;
               }
             },
           });
           buttonHolder
-            .find("button .ui-button-text")
+            .find('button .ui-button-text')
             .text(format.toUpperCase());
           return buttonset.append(buttonHolder);
         };
@@ -916,32 +916,32 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.hallohtml", {
+    return jQuery.widget('IKS.hallohtml', {
       options: {
         editable: null,
         toolbar: null,
-        uuid: "",
-        lang: "en",
+        uuid: '',
+        lang: 'en',
         dialogOpts: {
           autoOpen: false,
           width: 600,
-          height: "auto",
+          height: 'auto',
           modal: false,
           resizable: true,
           draggable: true,
-          dialogClass: "htmledit-dialog",
+          dialogClass: 'htmledit-dialog',
         },
         dialog: null,
         buttonCssClass: null,
       },
       translations: {
         en: {
-          title: "Edit HTML",
-          update: "Update",
+          title: 'Edit HTML',
+          update: 'Update',
         },
         de: {
-          title: "HTML bearbeiten",
-          update: "Aktualisieren",
+          title: 'HTML bearbeiten',
+          update: 'Aktualisieren',
         },
       },
       texts: null,
@@ -950,14 +950,14 @@
         widget = this;
         this.texts = this.translations[this.options.lang];
         this.options.toolbar = $toolbar;
-        selector = "" + this.options.uuid + "-htmledit-dialog";
-        this.options.dialog = jQuery("<div>").attr("id", selector);
-        $buttonset = jQuery("<span>").addClass(widget.widgetName);
-        id = "" + this.options.uuid + "-htmledit";
-        $buttonHolder = jQuery("<span>");
+        selector = '' + this.options.uuid + '-htmledit-dialog';
+        this.options.dialog = jQuery('<div>').attr('id', selector);
+        $buttonset = jQuery('<span>').addClass(widget.widgetName);
+        id = '' + this.options.uuid + '-htmledit';
+        $buttonHolder = jQuery('<span>');
         $buttonHolder.hallobutton({
           label: this.texts.title,
-          icon: "icon-list-alt",
+          icon: 'icon-list-alt',
           editable: this.options.editable,
           command: null,
           queryState: false,
@@ -966,20 +966,20 @@
         });
         $buttonset.append($buttonHolder);
         this.button = $buttonHolder;
-        this.button.on("click", function () {
-          if (widget.options.dialog.dialog("isOpen")) {
+        this.button.on('click', function () {
+          if (widget.options.dialog.dialog('isOpen')) {
             widget._closeDialog();
           } else {
             widget._openDialog();
           }
           return false;
         });
-        this.options.editable.element.on("hallodeactivated", function () {
+        this.options.editable.element.on('hallodeactivated', function () {
           return widget._closeDialog();
         });
         $toolbar.append($buttonset);
         this.options.dialog.dialog(this.options.dialogOpts);
-        return this.options.dialog.dialog("option", "title", this.texts.title);
+        return this.options.dialog.dialog('option', 'title', this.texts.title);
       },
       _openDialog: function () {
         var $editableEl,
@@ -993,32 +993,32 @@
         xposition = $editableEl.offset().left + $editableEl.outerWidth() + 10;
         yposition =
           this.options.toolbar.offset().top - jQuery(document).scrollTop();
-        this.options.dialog.dialog("option", "position", [
+        this.options.dialog.dialog('option', 'position', [
           xposition,
           yposition,
         ]);
         this.options.editable.keepActivated(true);
-        this.options.dialog.dialog("open");
-        this.options.dialog.on("dialogclose", function () {
-          jQuery("label", _this.button).removeClass("ui-state-active");
-          _this.options.editable.element.trigger("focus");
+        this.options.dialog.dialog('open');
+        this.options.dialog.on('dialogclose', function () {
+          jQuery('label', _this.button).removeClass('ui-state-active');
+          _this.options.editable.element.trigger('focus');
           return _this.options.editable.keepActivated(false);
         });
-        this.options.dialog.html(jQuery("<textarea>").addClass("html_source"));
+        this.options.dialog.html(jQuery('<textarea>').addClass('html_source'));
         html = this.options.editable.element.html();
-        this.options.dialog.children(".html_source").val(html);
+        this.options.dialog.children('.html_source').val(html);
         this.options.dialog.prepend(
-          jQuery("<button>" + this.texts.update + "</button>")
+          jQuery('<button>' + this.texts.update + '</button>'),
         );
-        return this.options.dialog.on("click", "button", function () {
-          html = widget.options.dialog.children(".html_source").val();
+        return this.options.dialog.on('click', 'button', function () {
+          html = widget.options.dialog.children('.html_source').val();
           widget.options.editable.element.html(html);
-          widget.options.editable.element.trigger("change");
+          widget.options.editable.element.trigger('change');
           return false;
         });
       },
       _closeDialog: function () {
-        return this.options.dialog.dialog("close");
+        return this.options.dialog.dialog('close');
       },
     });
   })(jQuery);
@@ -1026,11 +1026,11 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.halloimage", {
+    return jQuery.widget('IKS.halloimage', {
       options: {
         editable: null,
         toolbar: null,
-        uuid: "",
+        uuid: '',
         limit: 8,
         search: null,
         searchUrl: null,
@@ -1041,18 +1041,18 @@
         dialogOpts: {
           autoOpen: false,
           width: 270,
-          height: "auto",
-          title: "Insert Images",
+          height: 'auto',
+          title: 'Insert Images',
           modal: false,
           resizable: false,
           draggable: true,
-          dialogClass: "halloimage-dialog",
+          dialogClass: 'halloimage-dialog',
         },
         dialog: null,
         buttonCssClass: null,
         entity: null,
         vie: null,
-        dbPediaUrl: "http://dev.iks-project.eu/stanbolfull",
+        dbPediaUrl: 'http://dev.iks-project.eu/stanbolfull',
         maxWidth: 250,
         maxHeight: 250,
       },
@@ -1060,16 +1060,16 @@
         var buttonHolder, buttonset, dialogId, id, tabContent, tabs, widget;
         this.options.toolbar = toolbar;
         widget = this;
-        dialogId = "" + this.options.uuid + "-image-dialog";
+        dialogId = '' + this.options.uuid + '-image-dialog';
         this.options.dialog = jQuery(
           '<div id="' +
             dialogId +
             '">        <div class="nav">          <ul class="tabs">          </ul>          <div id="' +
             this.options.uuid +
-            '-tab-activeIndicator"            class="tab-activeIndicator" />        </div>        <div class="dialogcontent">        </div>'
+            '-tab-activeIndicator"            class="tab-activeIndicator" />        </div>        <div class="dialogcontent">        </div>',
         );
-        tabs = jQuery(".tabs", this.options.dialog);
-        tabContent = jQuery(".dialogcontent", this.options.dialog);
+        tabs = jQuery('.tabs', this.options.dialog);
+        tabContent = jQuery('.dialogcontent', this.options.dialog);
         if (widget.options.suggestions) {
           this._addGuiTabSuggestions(tabs, tabContent);
         }
@@ -1080,7 +1080,7 @@
           this._addGuiTabUpload(tabs, tabContent);
         }
         this.current = jQuery(
-          '<div class="currentImage"></div>'
+          '<div class="currentImage"></div>',
         ).halloimagecurrent({
           uuid: this.options.uuid,
           imageWidget: this,
@@ -1089,13 +1089,13 @@
           maxWidth: this.options.maxWidth,
           maxHeight: this.options.maxHeight,
         });
-        jQuery(".dialogcontent", this.options.dialog).append(this.current);
+        jQuery('.dialogcontent', this.options.dialog).append(this.current);
         buttonset = jQuery('<span class="' + widget.widgetName + '"></span>');
-        id = "" + this.options.uuid + "-image";
-        buttonHolder = jQuery("<span></span>");
+        id = '' + this.options.uuid + '-image';
+        buttonHolder = jQuery('<span></span>');
         buttonHolder.hallobutton({
-          label: "Images",
-          icon: "icon-picture",
+          label: 'Images',
+          icon: 'icon-picture',
           editable: this.options.editable,
           command: null,
           queryState: false,
@@ -1104,47 +1104,47 @@
         });
         buttonset.append(buttonHolder);
         this.button = buttonHolder;
-        this.button.on("click", function (event) {
-          if (widget.options.dialog.dialog("isOpen")) {
+        this.button.on('click', function (event) {
+          if (widget.options.dialog.dialog('isOpen')) {
             widget._closeDialog();
           } else {
             widget._openDialog();
           }
           return false;
         });
-        this.options.editable.element.on("hallodeactivated", function (event) {
+        this.options.editable.element.on('hallodeactivated', function (event) {
           return widget._closeDialog();
         });
         jQuery(this.options.editable.element).delegate(
-          "img",
-          "click",
+          'img',
+          'click',
           function (event) {
             return widget._openDialog();
-          }
+          },
         );
         toolbar.append(buttonset);
         this.options.dialog.dialog(this.options.dialogOpts);
         return this._handleTabs();
       },
       setCurrent: function (image) {
-        return this.current.halloimagecurrent("setImage", image);
+        return this.current.halloimagecurrent('setImage', image);
       },
       _handleTabs: function () {
         var widget;
         widget = this;
-        jQuery(".nav li", this.options.dialog).on("click", function () {
+        jQuery('.nav li', this.options.dialog).on('click', function () {
           var id, left;
-          jQuery("." + widget.widgetName + "-tab").hide();
-          id = jQuery(this).attr("id");
-          jQuery("#" + id + "-content").show();
+          jQuery('.' + widget.widgetName + '-tab').hide();
+          id = jQuery(this).attr('id');
+          jQuery('#' + id + '-content').show();
           left = jQuery(this).position().left + jQuery(this).width() / 2;
-          return jQuery("#" + widget.options.uuid + "-tab-activeIndicator").css(
+          return jQuery('#' + widget.options.uuid + '-tab-activeIndicator').css(
             {
-              "margin-left": left,
-            }
+              'margin-left': left,
+            },
           );
         });
-        return jQuery(".nav li", this.options.dialog).first().trigger("click");
+        return jQuery('.nav li', this.options.dialog).first().trigger('click');
       },
       _openDialog: function () {
         var cleanUp,
@@ -1160,32 +1160,32 @@
         cleanUp = function () {
           return window.setTimeout(function () {
             var thumbnails;
-            thumbnails = jQuery(".imageThumbnail");
+            thumbnails = jQuery('.imageThumbnail');
             return jQuery(thumbnails).each(function () {
               var size;
-              size = jQuery("#" + this.id).width();
+              size = jQuery('#' + this.id).width();
               if (size <= 20) {
-                return jQuery("#" + this.id)
-                  .parent("li")
+                return jQuery('#' + this.id)
+                  .parent('li')
                   .remove();
               }
             });
           }, 15000);
         };
         suggestionSelector =
-          "#" + this.options.uuid + "-tab-suggestions-content";
+          '#' + this.options.uuid + '-tab-suggestions-content';
         getActive = function () {
-          return jQuery(".imageThumbnailActive", suggestionSelector)
+          return jQuery('.imageThumbnailActive', suggestionSelector)
             .first()
-            .attr("src");
+            .attr('src');
         };
-        jQuery("#" + this.options.uuid + "-sugg-activeImage").attr(
-          "src",
-          getActive()
+        jQuery('#' + this.options.uuid + '-sugg-activeImage').attr(
+          'src',
+          getActive(),
         );
-        jQuery("#" + this.options.uuid + "-sugg-activeImageBg").attr(
-          "src",
-          getActive()
+        jQuery('#' + this.options.uuid + '-sugg-activeImageBg').attr(
+          'src',
+          getActive(),
         );
         this.lastSelection = this.options.editable.getSelection();
         editableEl = jQuery(this.options.editable.element);
@@ -1193,22 +1193,22 @@
         xposition = editableEl.offset().left + editableEl.outerWidth() - 3;
         yposition = toolbarEl.offset().top + toolbarEl.outerHeight() + 29;
         yposition -= jQuery(document).scrollTop();
-        this.options.dialog.dialog("option", "position", [
+        this.options.dialog.dialog('option', 'position', [
           xposition,
           yposition,
         ]);
         cleanUp();
         widget.options.loaded = 1;
         this.options.editable.keepActivated(true);
-        this.options.dialog.dialog("open");
-        return this.options.dialog.on("dialogclose", function () {
-          jQuery("label", _this.button).removeClass("ui-state-active");
-          _this.options.editable.element.trigger("focus");
+        this.options.dialog.dialog('open');
+        return this.options.dialog.on('dialogclose', function () {
+          jQuery('label', _this.button).removeClass('ui-state-active');
+          _this.options.editable.element.trigger('focus');
           return _this.options.editable.keepActivated(false);
         });
       },
       _closeDialog: function () {
-        return this.options.dialog.dialog("close");
+        return this.options.dialog.dialog('close');
       },
       _addGuiTabSuggestions: function (tabs, element) {
         var tab;
@@ -1218,17 +1218,17 @@
               this.options.uuid +
               '-tab-suggestions"        class="' +
               this.widgetName +
-              "-tabselector " +
+              '-tabselector ' +
               this.widgetName +
-              '-tab-suggestions">          <span>Suggestions</span>        </li>'
-          )
+              '-tab-suggestions">          <span>Suggestions</span>        </li>',
+          ),
         );
         tab = jQuery(
           '<div id="' +
             this.options.uuid +
             '-tab-suggestions-content"        class="' +
             this.widgetName +
-            '-tab tab-suggestions"></div>'
+            '-tab tab-suggestions"></div>',
         );
         element.append(tab);
         return tab.halloimagesuggestions({
@@ -1240,24 +1240,24 @@
       _addGuiTabSearch: function (tabs, element) {
         var dialogId, tab, widget;
         widget = this;
-        dialogId = "" + this.options.uuid + "-image-dialog";
+        dialogId = '' + this.options.uuid + '-image-dialog';
         tabs.append(
           jQuery(
             '<li id="' +
               this.options.uuid +
               '-tab-search"        class="' +
               this.widgetName +
-              "-tabselector " +
+              '-tabselector ' +
               this.widgetName +
-              '-tab-search">          <span>Search</span>        </li>'
-          )
+              '-tab-search">          <span>Search</span>        </li>',
+          ),
         );
         tab = jQuery(
           '<div id="' +
             this.options.uuid +
             '-tab-search-content"        class="' +
             widget.widgetName +
-            '-tab tab-search"></div>'
+            '-tab tab-search"></div>',
         );
         element.append(tab);
         return tab.halloimagesearch({
@@ -1277,17 +1277,17 @@
               this.options.uuid +
               '-tab-upload"        class="' +
               this.widgetName +
-              "-tabselector " +
+              '-tabselector ' +
               this.widgetName +
-              '-tab-upload">          <span>Upload</span>        </li>'
-          )
+              '-tab-upload">          <span>Upload</span>        </li>',
+          ),
         );
         tab = jQuery(
           '<div id="' +
             this.options.uuid +
             '-tab-upload-content"        class="' +
             this.widgetName +
-            '-tab tab-upload"></div>'
+            '-tab tab-upload"></div>',
         );
         element.append(tab);
         return tab.halloimageupload({
@@ -1304,10 +1304,10 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.halloimagecurrent", {
+    return jQuery.widget('IKS.halloimagecurrent', {
       options: {
         imageWidget: null,
-        startPlace: "",
+        startPlace: '',
         draggables: [],
         maxWidth: 400,
         maxHeight: 200,
@@ -1322,7 +1322,7 @@
                 </div>\
                 <img src="" class="activeImage activeImageBg" />\
               </div>\
-            </div>'
+            </div>',
         );
         this.element.hide();
         return this._prepareDnD();
@@ -1331,15 +1331,15 @@
         var editable, widget;
         editable = jQuery(this.options.editable.element);
         widget = this;
-        jQuery("img", editable).each(function (index, elem) {
+        jQuery('img', editable).each(function (index, elem) {
           return widget._initDraggable(elem, editable);
         });
-        return jQuery("p", editable).each(function (index, elem) {
-          if (jQuery(elem).data("jquery_droppable_initialized")) {
+        return jQuery('p', editable).each(function (index, elem) {
+          if (jQuery(elem).data('jquery_droppable_initialized')) {
             return;
           }
           jQuery(elem).droppable({
-            tolerance: "pointer",
+            tolerance: 'pointer',
             drop: function (event, ui) {
               return widget._handleDropEvent(event, ui);
             },
@@ -1350,7 +1350,7 @@
               return widget._handleLeaveEvent(event, ui);
             },
           });
-          return jQuery(elem).data("jquery_droppable_initialized", true);
+          return jQuery(elem).data('jquery_droppable_initialized', true);
         });
       },
       _prepareDnD: function () {
@@ -1364,23 +1364,23 @@
           height: editable.height(),
         };
         this.overlay = {
-          big: jQuery("<div/>")
-            .addClass("bigOverlay")
+          big: jQuery('<div/>')
+            .addClass('bigOverlay')
             .css({
               width: this.options.third * 2,
               height: editable.height(),
             }),
-          left: jQuery("<div/>").addClass("smallOverlay smallOverlayLeft"),
-          right: jQuery("<div/>").addClass("smallOverlay smallOverlayRight"),
+          left: jQuery('<div/>').addClass('smallOverlay smallOverlayLeft'),
+          right: jQuery('<div/>').addClass('smallOverlay smallOverlayRight'),
         };
         this.overlay.left.css(overlayMiddleConfig);
         this.overlay.right
           .css(overlayMiddleConfig)
-          .css("left", this.options.third * 2);
-        editable.on("halloactivated", function () {
+          .css('left', this.options.third * 2);
+        editable.on('halloactivated', function () {
           return widget._enableDragging();
         });
-        return editable.on("hallodeactivated", function () {
+        return editable.on('hallodeactivated', function () {
           return widget._disableDragging();
         });
       },
@@ -1389,9 +1389,9 @@
           return;
         }
         this.element.show();
-        jQuery(".activeImage", this.element).attr("src", image.url);
+        jQuery('.activeImage', this.element).attr('src', image.url);
         if (image.label) {
-          jQuery("input", this.element).val(image.label);
+          jQuery('input', this.element).val(image.label);
         }
         return this._initImage(jQuery(this.options.editable.element));
       },
@@ -1407,48 +1407,48 @@
         position = offset.left + this.options.third;
         rightTreshold = offset.left + this.options.third * 2;
         if (event.pageX >= position && event.pageX <= rightTreshold) {
-          return "middle";
+          return 'middle';
         } else if (event.pageX < position) {
-          return "left";
+          return 'left';
         } else if (event.pageX > rightTreshold) {
-          return "right";
+          return 'right';
         }
       },
       _createInsertElement: function (image, tmp) {
         var imageInsert, tmpImg;
-        imageInsert = jQuery("<img>");
+        imageInsert = jQuery('<img>');
         tmpImg = new Image();
-        jQuery(tmpImg).on("load", function () {});
+        jQuery(tmpImg).on('load', function () {});
         tmpImg.src = image.src;
         imageInsert.attr({
           src: tmpImg.src,
-          alt: !tmp ? jQuery(image).attr("alt") : void 0,
-          class: tmp ? "halloTmp" : "imageInText",
+          alt: !tmp ? jQuery(image).attr('alt') : void 0,
+          class: tmp ? 'halloTmp' : 'imageInText',
         });
         imageInsert.show();
         return imageInsert;
       },
       _createLineFeedbackElement: function () {
-        return jQuery("<div/>").addClass("halloTmpLine");
+        return jQuery('<div/>').addClass('halloTmpLine');
       },
       _removeFeedbackElements: function () {
         this.overlay.big.remove();
         this.overlay.left.remove();
         this.overlay.right.remove();
         return jQuery(
-          ".halloTmp, .halloTmpLine",
-          this.options.editable.element
+          '.halloTmp, .halloTmpLine',
+          this.options.editable.element,
         ).remove();
       },
       _removeCustomHelper: function () {
-        return jQuery(".customHelper").remove();
+        return jQuery('.customHelper').remove();
       },
       _showOverlay: function (position) {
         var eHeight, editable;
         editable = jQuery(this.options.editable.element);
         eHeight = editable.height();
-        eHeight += parseFloat(editable.css("paddingTop"));
-        eHeight += parseFloat(editable.css("paddingBottom"));
+        eHeight += parseFloat(editable.css('paddingTop'));
+        eHeight += parseFloat(editable.css('paddingBottom'));
         this.overlay.big.css({
           height: eHeight,
         });
@@ -1459,23 +1459,23 @@
           height: eHeight,
         });
         switch (position) {
-          case "left":
-            this.overlay.big.addClass("bigOverlayLeft");
-            this.overlay.big.removeClass("bigOverlayRight");
+          case 'left':
+            this.overlay.big.addClass('bigOverlayLeft');
+            this.overlay.big.removeClass('bigOverlayRight');
             this.overlay.big.css({
               left: this.options.third,
             });
             this.overlay.big.show();
             this.overlay.left.hide();
             return this.overlay.right.hide();
-          case "middle":
-            this.overlay.big.removeClass("bigOverlayLeft bigOverlayRight");
+          case 'middle':
+            this.overlay.big.removeClass('bigOverlayLeft bigOverlayRight');
             this.overlay.big.hide();
             this.overlay.left.show();
             return this.overlay.right.show();
-          case "right":
-            this.overlay.big.addClass("bigOverlayRight");
-            this.overlay.big.removeClass("bigOverlayLeft");
+          case 'right':
+            this.overlay.big.addClass('bigOverlayRight');
+            this.overlay.big.removeClass('bigOverlayLeft');
             this.overlay.big.css({
               left: 0,
             });
@@ -1485,18 +1485,18 @@
         }
       },
       _checkOrigin: function (event) {
-        if (jQuery(event.target).parents("[contenteditable]").length !== 0) {
+        if (jQuery(event.target).parents('[contenteditable]').length !== 0) {
           return true;
         }
         return false;
       },
       _createFeedback: function (image, position) {
         var el;
-        if (position === "middle") {
+        if (position === 'middle') {
           return this._createLineFeedbackElement();
         }
         el = this._createInsertElement(image, true);
-        return el.addClass("inlineImage-" + position);
+        return el.addClass('inlineImage-' + position);
       },
       _handleOverEvent: function (event, ui) {
         var editable, postPone, widget;
@@ -1506,19 +1506,19 @@
           var position, target;
           window.waitWithTrash = clearTimeout(window.waitWithTrash);
           position = widget._calcDropPosition(widget.options.offset, event);
-          jQuery(".trashcan", ui.helper).remove();
+          jQuery('.trashcan', ui.helper).remove();
           editable[0].element.append(widget.overlay.big);
           editable[0].element.append(widget.overlay.left);
           editable[0].element.append(widget.overlay.right);
           widget._removeFeedbackElements();
           target = jQuery(event.target);
           target.prepend(widget._createFeedback(ui.draggable[0], position));
-          if (position === "middle") {
-            target.prepend(widget._createFeedback(ui.draggable[0], "right"));
-            jQuery(".halloTmp", event.target).hide();
+          if (position === 'middle') {
+            target.prepend(widget._createFeedback(ui.draggable[0], 'right'));
+            jQuery('.halloTmp', event.target).hide();
           } else {
-            target.prepend(widget._createFeedback(ui.draggable[0], "middle"));
-            jQuery(".halloTmpLine", event.target).hide();
+            target.prepend(widget._createFeedback(ui.draggable[0], 'middle'));
+            jQuery('.halloTmpLine', event.target).hide();
           }
           return widget._showOverlay(position);
         };
@@ -1531,18 +1531,18 @@
           return;
         }
         this._lastPositionDrag = position;
-        tmpFeedbackLR = jQuery(".halloTmp", this.options.editable.element);
+        tmpFeedbackLR = jQuery('.halloTmp', this.options.editable.element);
         tmpFeedbackMiddle = jQuery(
-          ".halloTmpLine",
-          this.options.editable.element
+          '.halloTmpLine',
+          this.options.editable.element,
         );
-        if (position === "middle") {
+        if (position === 'middle') {
           tmpFeedbackMiddle.show();
           tmpFeedbackLR.hide();
         } else {
           tmpFeedbackMiddle.hide();
-          tmpFeedbackLR.removeClass("inlineImage-left inlineImage-right");
-          tmpFeedbackLR.addClass("inlineImage-" + position);
+          tmpFeedbackLR.removeClass('inlineImage-left inlineImage-right');
+          tmpFeedbackLR.addClass('inlineImage-' + position);
           tmpFeedbackLR.show();
         }
         return this._showOverlay(position);
@@ -1550,9 +1550,9 @@
       _handleLeaveEvent: function (event, ui) {
         var func;
         func = function () {
-          if (!jQuery("div.trashcan", ui.helper).length) {
+          if (!jQuery('div.trashcan', ui.helper).length) {
             jQuery(ui.helper).append(jQuery('<div class="trashcan"></div>'));
-            return jQuery(".bigOverlay, .smallOverlay").remove();
+            return jQuery('.bigOverlay, .smallOverlay').remove();
           }
         };
         window.waitWithTrash = setTimeout(func, 200);
@@ -1564,7 +1564,7 @@
         if (internalDrop) {
           jQuery(event.target).remove();
         }
-        jQuery(document).trigger("startPreventSave");
+        jQuery(document).trigger('startPreventSave');
         return (this.options.startPlace = jQuery(event.target));
       },
       _handleStopEvent: function (event, ui) {
@@ -1573,12 +1573,12 @@
         if (internalDrop) {
           jQuery(event.target).remove();
         } else {
-          jQuery(this.options.editable.element).trigger("change");
+          jQuery(this.options.editable.element).trigger('change');
         }
         this.overlay.big.hide();
         this.overlay.left.hide();
         this.overlay.right.hide();
-        return jQuery(document).trigger("stopPreventSave");
+        return jQuery(document).trigger('stopPreventSave');
       },
       _handleDropEvent: function (event, ui) {
         var classes, editable, imageInsert, internalDrop, left, position;
@@ -1588,39 +1588,39 @@
         this._removeFeedbackElements();
         this._removeCustomHelper();
         imageInsert = this._createInsertElement(ui.draggable[0], false);
-        classes = "inlineImage-middle inlineImage-left inlineImage-right";
-        if (position === "middle") {
+        classes = 'inlineImage-middle inlineImage-left inlineImage-right';
+        if (position === 'middle') {
           imageInsert.show();
           imageInsert.removeClass(classes);
           left = editable.width();
-          left += parseFloat(editable.css("paddingLeft"));
-          left += parseFloat(editable.css("paddingRight"));
-          left -= imageInsert.attr("width");
-          imageInsert.addClass("inlineImage-" + position).css({
-            position: "relative",
+          left += parseFloat(editable.css('paddingLeft'));
+          left += parseFloat(editable.css('paddingRight'));
+          left -= imageInsert.attr('width');
+          imageInsert.addClass('inlineImage-' + position).css({
+            position: 'relative',
             left: left / 2,
           });
           imageInsert.insertBefore(jQuery(event.target));
         } else {
           imageInsert.removeClass(classes);
-          imageInsert.addClass("inlineImage-" + position);
-          imageInsert.css("display", "block");
+          imageInsert.addClass('inlineImage-' + position);
+          imageInsert.css('display', 'block');
           jQuery(event.target).prepend(imageInsert);
         }
         this.overlay.big.hide();
         this.overlay.left.hide();
         this.overlay.right.hide();
-        editable.trigger("change");
+        editable.trigger('change');
         return this._initImage(editable);
       },
       _createHelper: function (event) {
-        return jQuery("<div>")
+        return jQuery('<div>')
           .css({
             backgroundImage:
-              "url(" + jQuery(event.currentTarget).attr("src") + ")",
+              'url(' + jQuery(event.currentTarget).attr('src') + ')',
           })
-          .addClass("customHelper")
-          .appendTo("body");
+          .addClass('customHelper')
+          .appendTo('body');
       },
       _initDraggable: function (elem, editable) {
         var widget;
@@ -1628,7 +1628,7 @@
         if (!elem.jquery_draggable_initialized) {
           elem.jquery_draggable_initialized = true;
           jQuery(elem).draggable({
-            cursor: "move",
+            cursor: 'move',
             helper: function (event) {
               return widget._createHelper(event);
             },
@@ -1641,7 +1641,7 @@
             stop: function (event, ui) {
               return widget._handleStopEvent(event, ui);
             },
-            disabled: !editable.hasClass("inEditMode"),
+            disabled: !editable.hasClass('inEditMode'),
             cursorAt: {
               top: 50,
               left: 50,
@@ -1653,20 +1653,20 @@
       _initImage: function (editable) {
         var widget;
         widget = this;
-        return jQuery(".rotationWrapper img", this.options.dialog).each(
+        return jQuery('.rotationWrapper img', this.options.dialog).each(
           function (index, elem) {
             return widget._initDraggable(elem, editable);
-          }
+          },
         );
       },
       _enableDragging: function () {
         return jQuery.each(this.options.draggables, function (index, d) {
-          return jQuery(d).draggable("option", "disabled", false);
+          return jQuery(d).draggable('option', 'disabled', false);
         });
       },
       _disableDragging: function () {
         return jQuery.each(this.options.draggables, function (index, d) {
-          return jQuery(d).draggable("option", "disabled", true);
+          return jQuery(d).draggable('option', 'disabled', true);
         });
       },
     });
@@ -1675,7 +1675,7 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.halloimagesearch", {
+    return jQuery.widget('IKS.halloimagesearch', {
       options: {
         imageWidget: null,
         searchCallback: null,
@@ -1693,7 +1693,7 @@
               <div class="activitySpinner">Loading images...</div>\
               <ul></ul>\
             </div>\
-          </div>'
+          </div>',
         );
       },
       _init: function () {
@@ -1701,19 +1701,19 @@
         if (this.options.searchUrl && !this.options.searchCallback) {
           this.options.searchCallback = this._ajaxSearch;
         }
-        jQuery(".activitySpinner", this.element).hide();
-        return jQuery("form", this.element).submit(function (event) {
+        jQuery('.activitySpinner', this.element).hide();
+        return jQuery('form', this.element).submit(function (event) {
           var query;
           event.preventDefault();
-          jQuery(".activitySpinner", _this.element).show();
-          query = jQuery(".searchInput", _this.element.element).val();
+          jQuery('.activitySpinner', _this.element).show();
+          query = jQuery('.searchInput', _this.element.element).val();
           return _this.options.searchCallback(
             query,
             _this.options.limit,
             0,
             function (results) {
               return _this._showResults(results);
-            }
+            },
           );
         });
       },
@@ -1728,34 +1728,34 @@
             image.url +
             '" class="imageThumbnail"          title="' +
             image.label +
-            '"></li>'
+            '"></li>',
         );
-        html.on("click", function () {
+        html.on('click', function () {
           return _this.options.imageWidget.setCurrent(image);
         });
-        jQuery("img", html).on("mousedown", function (event) {
+        jQuery('img', html).on('mousedown', function (event) {
           event.preventDefault();
           return _this.options.imageWidget.setCurrent(image);
         });
-        return jQuery(".imageThumbnailContainer ul", this.element).append(html);
+        return jQuery('.imageThumbnailContainer ul', this.element).append(html);
       },
       _showNextPrev: function (results) {
         var container,
           _this = this;
-        container = jQuery("imageThumbnailContainer ul", this.element);
+        container = jQuery('imageThumbnailContainer ul', this.element);
         container.prepend(
-          jQuery('<div class="pager-prev" style="display:none" />')
+          jQuery('<div class="pager-prev" style="display:none" />'),
         );
         container.append(
-          jQuery('<div class="pager-next" style="display:none" />')
+          jQuery('<div class="pager-next" style="display:none" />'),
         );
         if (results.offset > 0) {
-          jQuery(".pager-prev", container).show();
+          jQuery('.pager-prev', container).show();
         }
         if (results.offset < results.total) {
-          jQuery(".pager-next", container).show();
+          jQuery('.pager-next', container).show();
         }
-        jQuery(".pager-prev", container).on("click", function (event) {
+        jQuery('.pager-prev', container).on('click', function (event) {
           var offset;
           offset = results.offset - _this.options.limit;
           return _this.options.searchCallback(
@@ -1764,10 +1764,10 @@
             offset,
             function (results) {
               return _this._showResults(results);
-            }
+            },
           );
         });
-        return jQuery(".pager-next", container).on("click", function (event) {
+        return jQuery('.pager-next', container).on('click', function (event) {
           var offset;
           offset = results.offset + _this.options.limit;
           return _this.options.searchCallback(
@@ -1776,15 +1776,15 @@
             offset,
             function (results) {
               return _this._showResults(results);
-            }
+            },
           );
         });
       },
       _showResults: function (results) {
         var image, _i, _len, _ref;
-        jQuery(".activitySpinner", this.element).hide();
-        jQuery(".imageThumbnailContainer ul", this.element).empty();
-        jQuery(".imageThumbnailContainer ul", this.element).show();
+        jQuery('.activitySpinner', this.element).hide();
+        jQuery('.imageThumbnailContainer ul', this.element).empty();
+        jQuery('.imageThumbnailContainer ul', this.element).show();
         _ref = results.assets;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           image = _ref[_i];
@@ -1797,7 +1797,7 @@
         var searchUrl;
         searchUrl =
           this.searchUrl +
-          "?" +
+          '?' +
           jQuery.param({
             q: query,
             limit: limit,
@@ -1811,14 +1811,14 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.halloimagesuggestions", {
+    return jQuery.widget('IKS.halloimagesuggestions', {
       loaded: false,
       options: {
         entity: null,
         vie: null,
         dbPediaUrl: null,
         getSuggestions: null,
-        thumbnailUri: "<http://dbpedia.org/ontology/thumbnail>",
+        thumbnailUri: '<http://dbpedia.org/ontology/thumbnail>',
       },
       _create: function () {
         return this.element.html(
@@ -1830,20 +1830,20 @@
               <div class="activitySpinner">Loading images...</div>\
               <ul></ul>\
             </div>\
-          </div>'
+          </div>',
         );
       },
       _init: function () {
-        return jQuery(".activitySpinner", this.element).hide();
+        return jQuery('.activitySpinner', this.element).hide();
       },
       _normalizeRelated: function (related) {
         if (_.isString(related)) {
           return related;
         }
         if (_.isArray(related)) {
-          return related.join(",");
+          return related.join(',');
         }
-        return related.pluck("@subject").join(",");
+        return related.pluck('@subject').join(',');
       },
       _prepareVIE: function () {
         if (!this.options.vie) {
@@ -1859,7 +1859,7 @@
           new vie.DBPediaService({
             url: this.options.dbPediaUrl,
             proxyDisabled: true,
-          })
+          }),
         );
       },
       _getSuggestions: function () {
@@ -1870,13 +1870,13 @@
         if (!this.options.entity) {
           return;
         }
-        jQuery(".activitySpinner", this.element).show();
-        tags = this.options.entity.get("skos:related");
+        jQuery('.activitySpinner', this.element).show();
+        tags = this.options.entity.get('skos:related');
         if (tags.length === 0) {
-          jQuery("#activitySpinner").html("No images found.");
+          jQuery('#activitySpinner').html('No images found.');
           return;
         }
-        jQuery(".imageThumbnailContainer ul", this.element).empty();
+        jQuery('.imageThumbnailContainer ul', this.element).empty();
         normalizedTags = this._normalizeRelated(tags);
         limit = this.options.limit;
         if (this.options.getSuggestions) {
@@ -1884,7 +1884,7 @@
             normalizedTags,
             limit,
             0,
-            this._showSuggestions
+            this._showSuggestions,
           );
         }
         this._prepareVIE();
@@ -1902,10 +1902,10 @@
             .load({
               entity: tag,
             })
-            .using("dbpedia")
+            .using('dbpedia')
             .execute()
             .done(function (entities) {
-              jQuery(".activitySpinner", this.element).hide();
+              jQuery('.activitySpinner', this.element).hide();
               return _.each(entities, function (entity) {
                 var img, thumbnail;
                 thumbnail = entity.attributes[widget.options.thumbnailUri];
@@ -1934,16 +1934,16 @@
             image.url +
             '" class="imageThumbnail"          title="' +
             image.label +
-            '">        </li>'
+            '">        </li>',
         );
-        html.on("click", function () {
+        html.on('click', function () {
           return _this.options.imageWidget.setCurrent(image);
         });
-        return jQuery(".imageThumbnailContainer ul", this.element).append(html);
+        return jQuery('.imageThumbnailContainer ul', this.element).append(html);
       },
       _showSuggestions: function (suggestions) {
         var _this = this;
-        jQuery(".activitySpinner", this.element).hide();
+        jQuery('.activitySpinner', this.element).hide();
         return _.each(suggestions, function (image) {
           return _this._showSuggestion(image);
         });
@@ -1954,7 +1954,7 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.halloimageupload", {
+    return jQuery.widget('IKS.halloimageupload', {
       options: {
         uploadCallback: null,
         uploadUrl: null,
@@ -1970,7 +1970,7 @@
             <input type="text" class="caption" name="caption" placeholder="Title" />\
             <button class="uploadSubmit">Upload</button>\
             </form>\
-          '
+          ',
         );
       },
       _init: function () {
@@ -1979,8 +1979,8 @@
         if (widget.options.uploadUrl && !widget.options.uploadCallback) {
           widget.options.uploadCallback = widget._iframeUpload;
         }
-        return jQuery(".uploadSubmit", this.element).on(
-          "click",
+        return jQuery('.uploadSubmit', this.element).on(
+          'click',
           function (event) {
             event.preventDefault();
             event.stopPropagation();
@@ -1989,19 +1989,19 @@
               success: function (url) {
                 return widget.options.imageWidget.setCurrent({
                   url: url,
-                  label: "",
+                  label: '',
                 });
               },
             });
-          }
+          },
         );
       },
       _prepareIframe: function (widget) {
         var iframe, iframeName;
         iframeName =
-          "" + widget.widgetName + "_postframe_" + widget.options.uuid;
-        iframeName = iframeName.replace(/-/g, "_");
-        iframe = jQuery("#" + iframeName);
+          '' + widget.widgetName + '_postframe_' + widget.options.uuid;
+        iframeName = iframeName.replace(/-/g, '_');
+        iframe = jQuery('#' + iframeName);
         if (iframe.length) {
           return iframe;
         }
@@ -2010,7 +2010,7 @@
             iframeName +
             '" id="' +
             iframeName +
-            '"        class="hidden" style="display:none" />'
+            '"        class="hidden" style="display:none" />',
         );
         this.element.append(iframe);
         iframe.get(0).name = iframeName;
@@ -2020,23 +2020,23 @@
         var iframe, uploadForm, uploadUrl, widget;
         widget = data.widget;
         iframe = widget._prepareIframe(widget);
-        uploadForm = jQuery("form.upload", widget.element);
-        if (typeof widget.options.uploadUrl === "function") {
+        uploadForm = jQuery('form.upload', widget.element);
+        if (typeof widget.options.uploadUrl === 'function') {
           uploadUrl = widget.options.uploadUrl(widget.options.entity);
         } else {
           uploadUrl = widget.options.uploadUrl;
         }
-        iframe.on("load", function () {
+        iframe.on('load', function () {
           var imageUrl;
           imageUrl = iframe.get(0).contentWindow.location.href;
           widget.element.hide();
           return data.success(imageUrl);
         });
-        uploadForm.attr("action", uploadUrl);
-        uploadForm.attr("method", "post");
-        uploadForm.attr("target", iframe.get(0).name);
-        uploadForm.attr("enctype", "multipart/form-data");
-        uploadForm.attr("encoding", "multipart/form-data");
+        uploadForm.attr('action', uploadUrl);
+        uploadForm.attr('method', 'post');
+        uploadForm.attr('target', iframe.get(0).name);
+        uploadForm.attr('enctype', 'multipart/form-data');
+        uploadForm.attr('encoding', 'multipart/form-data');
         return uploadForm.submit();
       },
     });
@@ -2045,55 +2045,55 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.hallo-image-insert-edit", {
+    return jQuery.widget('IKS.hallo-image-insert-edit', {
       options: {
         editable: null,
         toolbar: null,
-        uuid: "",
+        uuid: '',
         insert_file_dialog_ui_url: null,
-        lang: "en",
+        lang: 'en',
         dialogOpts: {
           autoOpen: false,
           width: 560,
-          height: "auto",
+          height: 'auto',
           modal: false,
           resizable: true,
           draggable: true,
-          dialogClass: "insert-image-dialog",
+          dialogClass: 'insert-image-dialog',
         },
         dialog: null,
         buttonCssClass: null,
       },
       translations: {
         en: {
-          title_insert: "Insert Image",
-          title_properties: "Image Properties",
-          insert: "Insert",
-          chage_image: "Change Image:",
-          source: "URL",
-          width: "Width",
-          height: "Height",
-          alt: "Alt Text",
-          padding: "Padding",
-          float: "Float",
-          float_left: "left",
-          float_right: "right",
-          float_none: "No",
+          title_insert: 'Insert Image',
+          title_properties: 'Image Properties',
+          insert: 'Insert',
+          chage_image: 'Change Image:',
+          source: 'URL',
+          width: 'Width',
+          height: 'Height',
+          alt: 'Alt Text',
+          padding: 'Padding',
+          float: 'Float',
+          float_left: 'left',
+          float_right: 'right',
+          float_none: 'No',
         },
         de: {
-          title_insert: "Bild einfügen",
-          title_properties: "Bildeigenschaften",
-          insert: "Einfügen",
-          chage_image: "Bild ändern:",
-          source: "URL",
-          width: "Breite",
-          height: "Höhe",
-          alt: "Alt Text",
-          padding: "Padding",
-          float: "Float",
-          float_left: "Links",
-          float_right: "Rechts",
-          float_none: "Nein",
+          title_insert: 'Bild einfügen',
+          title_properties: 'Bildeigenschaften',
+          insert: 'Einfügen',
+          chage_image: 'Bild ändern:',
+          source: 'URL',
+          width: 'Breite',
+          height: 'Höhe',
+          alt: 'Alt Text',
+          padding: 'Padding',
+          float: 'Float',
+          float_left: 'Links',
+          float_right: 'Rechts',
+          float_none: 'Nein',
         },
       },
       texts: null,
@@ -2108,14 +2108,14 @@
         if (this.options.insert_file_dialog_ui_url) {
           dialog_html += "<div id='hallo_img_file_select_ui'></div>";
         }
-        this.options.dialog = jQuery("<div>")
-          .attr("id", "" + this.options.uuid + "-insert-image-dialog")
+        this.options.dialog = jQuery('<div>')
+          .attr('id', '' + this.options.uuid + '-insert-image-dialog')
           .html(dialog_html);
-        $buttonset = jQuery("<span>").addClass(this.widgetName);
-        $buttonHolder = jQuery("<span>");
+        $buttonset = jQuery('<span>').addClass(this.widgetName);
+        $buttonHolder = jQuery('<span>');
         $buttonHolder.hallobutton({
           label: this.texts.title_insert,
-          icon: "icon-picture",
+          icon: 'icon-picture',
           editable: this.options.editable,
           command: null,
           queryState: false,
@@ -2124,8 +2124,8 @@
         });
         $buttonset.append($buttonHolder);
         this.button = $buttonHolder;
-        this.button.on("click", function () {
-          if (widget.options.dialog.dialog("isOpen")) {
+        this.button.on('click', function () {
+          if (widget.options.dialog.dialog('isOpen')) {
             widget._closeDialog();
           } else {
             widget.lastSelection = widget.options.editable.getSelection();
@@ -2134,34 +2134,34 @@
           return false;
         });
         this.options.editable.element.on(
-          "halloselected, hallounselected",
+          'halloselected, hallounselected',
           function () {
-            if (widget.options.dialog.dialog("isOpen")) {
+            if (widget.options.dialog.dialog('isOpen')) {
               return (widget.lastSelection =
                 widget.options.editable.getSelection());
             }
-          }
+          },
         );
-        this.options.editable.element.on("hallodeactivated", function () {
+        this.options.editable.element.on('hallodeactivated', function () {
           return widget._closeDialog();
         });
-        jQuery(this.options.editable.element).on("click", "img", function (e) {
+        jQuery(this.options.editable.element).on('click', 'img', function (e) {
           widget._openDialog(jQuery(this));
           return false;
         });
         this.options.editable.element.on(
-          "halloselected",
+          'halloselected',
           function (event, data) {
             var toolbar_option;
             toolbar_option = widget.options.editable.options.toolbar;
             if (
-              toolbar_option === "halloToolbarContextual" &&
-              jQuery(data.originalEvent.target).is("img")
+              toolbar_option === 'halloToolbarContextual' &&
+              jQuery(data.originalEvent.target).is('img')
             ) {
               $toolbar.hide();
               return false;
             }
-          }
+          },
         );
         $toolbar.append($buttonset);
         return this.options.dialog.dialog(this.options.dialogOpts);
@@ -2182,19 +2182,19 @@
           yposition =
             this.options.toolbar.offset().top - jQuery(document).scrollTop();
         }
-        this.options.dialog.dialog("option", "position", [
+        this.options.dialog.dialog('option', 'position', [
           xposition,
           yposition,
         ]);
         this.options.editable.keepActivated(true);
-        this.options.dialog.dialog("open");
+        this.options.dialog.dialog('open');
         if (this.$image) {
           this.options.dialog.dialog(
-            "option",
-            "title",
-            this.texts.title_properties
+            'option',
+            'title',
+            this.texts.title_properties,
           );
-          jQuery(document).on("keyup", function (e) {
+          jQuery(document).on('keyup', function (e) {
             if (e.keyCode === 46 || e.keyCode === 8) {
               jQuery(document).off();
               widget._closeDialog();
@@ -2203,27 +2203,27 @@
             }
             return e.preventDefault();
           });
-          this.options.editable.element.on("click", function () {
+          this.options.editable.element.on('click', function () {
             widget.$image = null;
             return widget._closeDialog();
           });
         } else {
-          this.options.dialog.children("#hallo_img_properties").hide();
+          this.options.dialog.children('#hallo_img_properties').hide();
           this.options.dialog.dialog(
-            "option",
-            "title",
-            this.texts.title_insert
+            'option',
+            'title',
+            this.texts.title_insert,
           );
-          if (jQuery("#hallo_img_file_select_title").length > 0) {
-            jQuery("#hallo_img_file_select_title").text("");
+          if (jQuery('#hallo_img_file_select_title').length > 0) {
+            jQuery('#hallo_img_file_select_title').text('');
           }
         }
         this._load_dialog_image_properties_ui();
-        this.options.dialog.on("dialogclose", function () {
+        this.options.dialog.on('dialogclose', function () {
           var scrollbar_pos;
-          jQuery("label", _this.button).removeClass("ui-state-active");
+          jQuery('label', _this.button).removeClass('ui-state-active');
           scrollbar_pos = jQuery(document).scrollTop();
-          _this.options.editable.element.trigger("focus");
+          _this.options.editable.element.trigger('focus');
           jQuery(document).scrollTop(scrollbar_pos);
           return _this.options.editable.keepActivated(false);
         });
@@ -2231,23 +2231,23 @@
           this.options.insert_file_dialog_ui_url &&
           !this.dialog_image_selection_ui_loaded
         ) {
-          this.options.dialog.on("click", ".reload_link", function () {
+          this.options.dialog.on('click', '.reload_link', function () {
             widget._load_dialog_image_selection_ui();
             return false;
           });
-          this.options.dialog.on("click", ".file_preview img", function () {
+          this.options.dialog.on('click', '.file_preview img', function () {
             var new_source;
             if (widget.$image) {
               new_source = jQuery(this)
-                .attr("src")
-                .replace(/-thumb/, "");
-              widget.$image.attr("src", new_source);
-              jQuery("#hallo_img_source").val(new_source);
+                .attr('src')
+                .replace(/-thumb/, '');
+              widget.$image.attr('src', new_source);
+              jQuery('#hallo_img_source').val(new_source);
             } else {
               widget._insert_image(
                 jQuery(this)
-                  .attr("src")
-                  .replace(/-thumb/, "")
+                  .attr('src')
+                  .replace(/-thumb/, ''),
               );
             }
             return false;
@@ -2257,13 +2257,13 @@
       },
       _insert_image: function (source) {
         this.options.editable.restoreSelection(this.lastSelection);
-        document.execCommand("insertImage", null, source);
-        this.options.editable.element.trigger("change");
+        document.execCommand('insertImage', null, source);
+        this.options.editable.element.trigger('change');
         this.options.editable.removeAllSelections();
         return this._closeDialog();
       },
       _closeDialog: function () {
-        return this.options.dialog.dialog("close");
+        return this.options.dialog.dialog('close');
       },
       _load_dialog_image_selection_ui: function () {
         var widget;
@@ -2272,25 +2272,25 @@
           url: this.options.insert_file_dialog_ui_url,
           success: function (data, textStatus, jqXHR) {
             var $properties, file_select_title, t;
-            file_select_title = "";
+            file_select_title = '';
             $properties = widget.options.dialog.children(
-              "#hallo_img_properties"
+              '#hallo_img_properties',
             );
-            if ($properties.is(":visible")) {
+            if ($properties.is(':visible')) {
               file_select_title = widget.texts.change_image;
             }
             t =
               "<div id='hallo_img_file_select_title'>" +
               file_select_title +
-              "</div>";
+              '</div>';
             widget.options.dialog
-              .children("#hallo_img_file_select_ui")
+              .children('#hallo_img_file_select_ui')
               .html(t + data);
             return (widget.dialog_image_selection_ui_loaded = true);
           },
           beforeSend: function () {
             return widget.options.dialog
-              .children("#hallo_img_file_select_ui")
+              .children('#hallo_img_file_select_ui')
               .html('<div class="hallo_insert_file_loader"></div>');
           },
         });
@@ -2298,184 +2298,184 @@
       _load_dialog_image_properties_ui: function () {
         var $img_properties, button, height, html, widget, width;
         widget = this;
-        $img_properties = this.options.dialog.children("#hallo_img_properties");
+        $img_properties = this.options.dialog.children('#hallo_img_properties');
         if (this.$image) {
-          width = this.$image.is("[width]") ? this.$image.attr("width") : "";
-          height = this.$image.is("[height]") ? this.$image.attr("height") : "";
+          width = this.$image.is('[width]') ? this.$image.attr('width') : '';
+          height = this.$image.is('[height]') ? this.$image.attr('height') : '';
           html =
-            this._property_input_html("source", this.$image.attr("src"), {
+            this._property_input_html('source', this.$image.attr('src'), {
               label: this.texts.source,
             }) +
-            this._property_input_html("alt", this.$image.attr("alt") || "", {
+            this._property_input_html('alt', this.$image.attr('alt') || '', {
               label: this.texts.alt,
             }) +
             this._property_row_html(
-              this._property_input_html("width", width, {
+              this._property_input_html('width', width, {
                 label: this.texts.width,
                 row: false,
               }) +
-                this._property_input_html("height", height, {
+                this._property_input_html('height', height, {
                   label: this.texts.height,
                   row: false,
-                })
+                }),
             ) +
-            this._property_input_html("padding", this.$image.css("padding"), {
+            this._property_input_html('padding', this.$image.css('padding'), {
               label: this.texts.padding,
             }) +
             this._property_row_html(
               this._property_cb_html(
-                "float_left",
-                this.$image.css("float") === "left",
+                'float_left',
+                this.$image.css('float') === 'left',
                 {
                   label: this.texts.float_left,
                   row: false,
-                }
+                },
               ) +
                 this._property_cb_html(
-                  "float_right",
-                  this.$image.css("float") === "right",
+                  'float_right',
+                  this.$image.css('float') === 'right',
                   {
                     label: this.texts.float_right,
                     row: false,
-                  }
+                  },
                 ) +
                 this._property_cb_html(
-                  "unfloat",
-                  this.$image.css("float") === "none",
+                  'unfloat',
+                  this.$image.css('float') === 'none',
                   {
                     label: this.texts.float_none,
                     row: false,
-                  }
+                  },
                 ),
-              this.texts[float]
+              this.texts[float],
             );
           $img_properties.html(html);
           $img_properties.show();
         } else {
           if (!this.options.insert_file_dialog_ui_url) {
             $img_properties.html(
-              this._property_input_html("source", "", {
+              this._property_input_html('source', '', {
                 label: this.texts.source,
-              })
+              }),
             );
             $img_properties.show();
           }
         }
         if (this.$image) {
           if (!this.options.insert_file_dialog_ui_url) {
-            jQuery("#insert_image_btn").remove();
+            jQuery('#insert_image_btn').remove();
           }
-          if (jQuery("#hallo_img_file_select_title").length > 0) {
-            jQuery("#hallo_img_file_select_title").text(this.texts.chage_image);
+          if (jQuery('#hallo_img_file_select_title').length > 0) {
+            jQuery('#hallo_img_file_select_title').text(this.texts.chage_image);
           }
-          jQuery("#hallo_img_properties #hallo_img_source").on(
-            "keyup",
+          jQuery('#hallo_img_properties #hallo_img_source').on(
+            'keyup',
             function () {
-              return widget.$image.attr("src", this.value);
-            }
+              return widget.$image.attr('src', this.value);
+            },
           );
-          jQuery("#hallo_img_properties #hallo_img_alt").on(
-            "keyup",
+          jQuery('#hallo_img_properties #hallo_img_alt').on(
+            'keyup',
             function () {
-              return widget.$image.attr("alt", this.value);
-            }
+              return widget.$image.attr('alt', this.value);
+            },
           );
-          jQuery("#hallo_img_properties #hallo_img_padding").on(
-            "keyup",
+          jQuery('#hallo_img_properties #hallo_img_padding').on(
+            'keyup',
             function () {
-              return widget.$image.css("padding", this.value);
-            }
+              return widget.$image.css('padding', this.value);
+            },
           );
-          jQuery("#hallo_img_properties #hallo_img_height").on(
-            "keyup",
+          jQuery('#hallo_img_properties #hallo_img_height').on(
+            'keyup',
             function () {
-              widget.$image.css("height", this.value);
-              return widget.$image.attr("height", this.value);
-            }
+              widget.$image.css('height', this.value);
+              return widget.$image.attr('height', this.value);
+            },
           );
-          jQuery("#hallo_img_properties #hallo_img_width").on(
-            "keyup",
+          jQuery('#hallo_img_properties #hallo_img_width').on(
+            'keyup',
             function () {
-              widget.$image.css("width", this.value);
-              return widget.$image.attr("width", this.value);
-            }
+              widget.$image.css('width', this.value);
+              return widget.$image.attr('width', this.value);
+            },
           );
-          jQuery("#hallo_img_properties #hallo_img_float_left").on(
-            "click",
+          jQuery('#hallo_img_properties #hallo_img_float_left').on(
+            'click',
             function () {
               if (!this.checked) {
                 return false;
               }
-              widget.$image.css("float", "left");
-              jQuery("#hallo_img_properties #hallo_img_float_right").prop(
-                "checked",
-                false
+              widget.$image.css('float', 'left');
+              jQuery('#hallo_img_properties #hallo_img_float_right').prop(
+                'checked',
+                false,
               );
-              return jQuery("#hallo_img_properties #hallo_img_unfloat").prop(
-                "checked",
-                false
+              return jQuery('#hallo_img_properties #hallo_img_unfloat').prop(
+                'checked',
+                false,
               );
-            }
+            },
           );
-          jQuery("#hallo_img_properties #hallo_img_float_right").on(
-            "click",
+          jQuery('#hallo_img_properties #hallo_img_float_right').on(
+            'click',
             function () {
               if (!this.checked) {
                 return false;
               }
-              widget.$image.css("float", "right");
-              jQuery("#hallo_img_properties #hallo_img_unfloat").prop(
-                "checked",
-                false
+              widget.$image.css('float', 'right');
+              jQuery('#hallo_img_properties #hallo_img_unfloat').prop(
+                'checked',
+                false,
               );
-              return jQuery("#hallo_img_properties #hallo_img_float_left").prop(
-                "checked",
-                false
+              return jQuery('#hallo_img_properties #hallo_img_float_left').prop(
+                'checked',
+                false,
               );
-            }
+            },
           );
-          return jQuery("#hallo_img_properties #hallo_img_unfloat").on(
-            "click",
+          return jQuery('#hallo_img_properties #hallo_img_unfloat').on(
+            'click',
             function () {
               if (!this.checked) {
                 return false;
               }
-              widget.$image.css("float", "none");
-              jQuery("#hallo_img_properties #hallo_img_float_right").prop(
-                "checked",
-                false
+              widget.$image.css('float', 'none');
+              jQuery('#hallo_img_properties #hallo_img_float_right').prop(
+                'checked',
+                false,
               );
-              return jQuery("#hallo_img_properties #hallo_img_float_left").prop(
-                "checked",
-                false
+              return jQuery('#hallo_img_properties #hallo_img_float_left').prop(
+                'checked',
+                false,
               );
-            }
+            },
           );
         } else {
           if (!this.options.insert_file_dialog_ui_url) {
             button =
               '<button id="insert_image_btn">' +
               this.texts.insert +
-              "</button>";
+              '</button>';
             $img_properties.after(button);
-            return jQuery("#insert_image_btn").on("click", function () {
+            return jQuery('#insert_image_btn').on('click', function () {
               var $img_source;
-              $img_source = jQuery("#hallo_img_properties #hallo_img_source");
+              $img_source = jQuery('#hallo_img_properties #hallo_img_source');
               return widget._insert_image($img_source.val());
             });
           }
         }
       },
       _property_col_html: function (col_html) {
-        return "<div class='hallo_img_property_col'>" + col_html + "</div>";
+        return "<div class='hallo_img_property_col'>" + col_html + '</div>';
       },
       _property_row_html: function (row_html, label) {
         if (label == null) {
-          label = "";
+          label = '';
         }
         row_html =
           this._property_col_html(label) + this._property_col_html(row_html);
-        return "<div class='hallo_img_property_row'>" + row_html + "</div>";
+        return "<div class='hallo_img_property_row'>" + row_html + '</div>';
       },
       _property_html: function (property_html, options) {
         var entry;
@@ -2484,14 +2484,14 @@
         }
         if (options.row === false) {
           if (options.label) {
-            entry = "" + options.label + " " + property_html;
+            entry = '' + options.label + ' ' + property_html;
             property_html =
-              "<span class='img_property_entry'>" + entry + "</span>";
+              "<span class='img_property_entry'>" + entry + '</span>';
           }
           return property_html;
         } else {
           entry =
-            "<span class='img_property_entry'>" + property_html + "</span>";
+            "<span class='img_property_entry'>" + property_html + '</span>';
           return this._property_row_html(entry, options.label);
         }
       },
@@ -2509,7 +2509,7 @@
         if (options == null) {
           options = {};
         }
-        checked_attr = checked ? "checked=checked" : "";
+        checked_attr = checked ? 'checked=checked' : '';
         cb =
           "<input type='checkbox' id='hallo_img_" +
           id +
@@ -2524,14 +2524,14 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.halloindicator", {
+    return jQuery.widget('IKS.halloindicator', {
       options: {
         editable: null,
-        className: "halloEditIndicator",
+        className: 'halloEditIndicator',
       },
       _create: function () {
         var _this = this;
-        return this.element.on("halloenabled", function () {
+        return this.element.on('halloenabled', function () {
           return _this.buildIndicator();
         });
       },
@@ -2547,24 +2547,24 @@
       },
       bindIndicator: function (indicator) {
         var _this = this;
-        indicator.on("click", function () {
-          return _this.options.editable.element.trigger("focus");
+        indicator.on('click', function () {
+          return _this.options.editable.element.trigger('focus');
         });
-        this.element.on("halloactivated", function () {
+        this.element.on('halloactivated', function () {
           return indicator.hide();
         });
-        this.element.on("hallodisabled", function () {
+        this.element.on('hallodisabled', function () {
           return indicator.remove();
         });
         return this.options.editable.element
-          .on("mouseenter", function () {
-            if (jQuery(this).hasClass("inEditMode")) {
+          .on('mouseenter', function () {
+            if (jQuery(this).hasClass('inEditMode')) {
               return;
             }
             return indicator.show();
           })
-          .on("mouseleave", function (data) {
-            if (jQuery(this).hasClass("inEditMode")) {
+          .on('mouseleave', function (data) {
+            if (jQuery(this).hasClass('inEditMode')) {
               return;
             }
             if (data.relatedTarget === indicator.get(0)) {
@@ -2575,10 +2575,10 @@
       },
       setIndicatorPosition: function (indicator) {
         var offset;
-        indicator.css("position", "absolute");
+        indicator.css('position', 'absolute');
         offset = this.element.position();
-        indicator.css("top", offset.top + 2);
-        return indicator.css("left", offset.left + 2);
+        indicator.css('top', offset.top + 2);
+        return indicator.css('left', offset.left + 2);
       },
     });
   })(jQuery);
@@ -2586,11 +2586,11 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.hallojustify", {
+    return jQuery.widget('IKS.hallojustify', {
       options: {
         editable: null,
         toolbar: null,
-        uuid: "",
+        uuid: '',
         buttonCssClass: null,
       },
       populateToolbar: function (toolbar) {
@@ -2600,20 +2600,20 @@
         buttonset = jQuery('<span class="' + this.widgetName + '"></span>');
         buttonize = function (alignment) {
           var buttonElement;
-          buttonElement = jQuery("<span></span>");
+          buttonElement = jQuery('<span></span>');
           buttonElement.hallobutton({
             uuid: _this.options.uuid,
             editable: _this.options.editable,
             label: alignment,
-            command: "justify" + alignment,
-            icon: "icon-align-" + alignment.toLowerCase(),
+            command: 'justify' + alignment,
+            icon: 'icon-align-' + alignment.toLowerCase(),
             cssClass: _this.options.buttonCssClass,
           });
           return buttonset.append(buttonElement);
         };
-        buttonize("Left");
-        buttonize("Center");
-        buttonize("Right");
+        buttonize('Left');
+        buttonize('Center');
+        buttonize('Right');
         buttonset.hallobuttonset();
         return toolbar.append(buttonset);
       },
@@ -2623,24 +2623,24 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.hallolink", {
+    return jQuery.widget('IKS.hallolink', {
       options: {
         editable: null,
-        uuid: "",
+        uuid: '',
         link: true,
         image: true,
-        defaultUrl: "http://",
+        defaultUrl: 'http://',
         dialogOpts: {
           autoOpen: false,
           width: 540,
           height: 200,
-          title: "Enter Link",
-          buttonTitle: "Insert",
-          buttonUpdateTitle: "Update",
+          title: 'Enter Link',
+          buttonTitle: 'Insert',
+          buttonUpdateTitle: 'Update',
           modal: true,
           resizable: false,
           draggable: false,
-          dialogClass: "hallolink-dialog",
+          dialogClass: 'hallolink-dialog',
         },
         buttonCssClass: null,
       },
@@ -2657,7 +2657,7 @@
           widget,
           _this = this;
         widget = this;
-        dialogId = "" + this.options.uuid + "-dialog";
+        dialogId = '' + this.options.uuid + '-dialog';
         butTitle = this.options.dialogOpts.buttonTitle;
         butUpdateTitle = this.options.dialogOpts.buttonUpdateTitle;
         dialog = jQuery(
@@ -2667,9 +2667,9 @@
             this.options.defaultUrl +
             '" />          <input type="submit" id="addlinkButton" value="' +
             butTitle +
-            '"/>        </form></div>'
+            '"/>        </form></div>',
         );
-        urlInput = jQuery("input[name=url]", dialog);
+        urlInput = jQuery('input[name=url]', dialog);
         isEmptyLink = function (link) {
           if (new RegExp(/^\s*$/).test(link)) {
             return true;
@@ -2683,39 +2683,39 @@
           var link, linkNode;
           event.preventDefault();
           link = urlInput.val();
-          dialog.dialog("close");
+          dialog.dialog('close');
           widget.options.editable.restoreSelection(widget.lastSelection);
           if (isEmptyLink(link)) {
-            document.execCommand("unlink", null, "");
+            document.execCommand('unlink', null, '');
           } else {
             if (!/:\/\//.test(link) && !/^mailto:/.test(link)) {
-              link = "http://" + link;
+              link = 'http://' + link;
             }
             if (
               widget.lastSelection.startContainer.parentNode.href === void 0
             ) {
               if (widget.lastSelection.collapsed) {
-                linkNode = jQuery("<a href='" + link + "'>" + link + "</a>")[0];
+                linkNode = jQuery("<a href='" + link + "'>" + link + '</a>')[0];
                 widget.lastSelection.insertNode(linkNode);
               } else {
-                document.execCommand("createLink", null, link);
+                document.execCommand('createLink', null, link);
               }
             } else {
               widget.lastSelection.startContainer.parentNode.href = link;
             }
           }
-          widget.options.editable.element.trigger("change");
+          widget.options.editable.element.trigger('change');
           return false;
         };
-        dialog.find("input[type=submit]").on("click", dialogSubmitCb);
+        dialog.find('input[type=submit]').on('click', dialogSubmitCb);
         buttonset = jQuery('<span class="' + widget.widgetName + '"></span>');
         buttonize = function (type) {
           var button, buttonHolder, id;
-          id = "" + _this.options.uuid + "-" + type;
-          buttonHolder = jQuery("<span></span>");
+          id = '' + _this.options.uuid + '-' + type;
+          buttonHolder = jQuery('<span></span>');
           buttonHolder.hallobutton({
-            label: "Link",
-            icon: "icon-link",
+            label: 'Link',
+            icon: 'icon-link',
             editable: _this.options.editable,
             command: null,
             queryState: false,
@@ -2724,53 +2724,53 @@
           });
           buttonset.append(buttonHolder);
           button = buttonHolder;
-          button.on("click", function (event) {
+          button.on('click', function (event) {
             var button_selector, selectionParent;
             widget.lastSelection = widget.options.editable.getSelection();
-            urlInput = jQuery("input[name=url]", dialog);
+            urlInput = jQuery('input[name=url]', dialog);
             selectionParent = widget.lastSelection.startContainer.parentNode;
             if (!selectionParent.href) {
               urlInput.val(widget.options.defaultUrl);
-              jQuery(urlInput[0].form).find("input[type=submit]").val(butTitle);
+              jQuery(urlInput[0].form).find('input[type=submit]').val(butTitle);
             } else {
-              urlInput.val(jQuery(selectionParent).attr("href"));
-              button_selector = "input[type=submit]";
+              urlInput.val(jQuery(selectionParent).attr('href'));
+              button_selector = 'input[type=submit]';
               jQuery(urlInput[0].form)
                 .find(button_selector)
                 .val(butUpdateTitle);
             }
             widget.options.editable.keepActivated(true);
-            dialog.dialog("open");
-            dialog.on("dialogclose", function () {
+            dialog.dialog('open');
+            dialog.on('dialogclose', function () {
               widget.options.editable.restoreSelection(widget.lastSelection);
-              jQuery("label", buttonHolder).removeClass("ui-state-active");
-              widget.options.editable.element.trigger("focus");
+              jQuery('label', buttonHolder).removeClass('ui-state-active');
+              widget.options.editable.element.trigger('focus');
               return widget.options.editable.keepActivated(false);
             });
             return false;
           });
           return _this.element.on(
-            "keyup paste change mouseup",
+            'keyup paste change mouseup',
             function (event) {
               var nodeName, start;
               start = jQuery(
-                widget.options.editable.getSelection().startContainer
+                widget.options.editable.getSelection().startContainer,
               );
-              if (start.prop("nodeName")) {
-                nodeName = start.prop("nodeName");
+              if (start.prop('nodeName')) {
+                nodeName = start.prop('nodeName');
               } else {
-                nodeName = start.parent().prop("nodeName");
+                nodeName = start.parent().prop('nodeName');
               }
-              if (nodeName && nodeName.toUpperCase() === "A") {
-                jQuery("label", button).addClass("ui-state-active");
+              if (nodeName && nodeName.toUpperCase() === 'A') {
+                jQuery('label', button).addClass('ui-state-active');
                 return;
               }
-              return jQuery("label", button).removeClass("ui-state-active");
-            }
+              return jQuery('label', button).removeClass('ui-state-active');
+            },
           );
         };
         if (this.options.link) {
-          buttonize("A");
+          buttonize('A');
         }
         if (this.options.link) {
           toolbar.append(buttonset);
@@ -2784,11 +2784,11 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.hallolists", {
+    return jQuery.widget('IKS.hallolists', {
       options: {
         editable: null,
         toolbar: null,
-        uuid: "",
+        uuid: '',
         lists: {
           ordered: true,
           unordered: true,
@@ -2802,22 +2802,22 @@
         buttonset = jQuery('<span class="' + this.widgetName + '"></span>');
         buttonize = function (type, label) {
           var buttonElement;
-          buttonElement = jQuery("<span></span>");
+          buttonElement = jQuery('<span></span>');
           buttonElement.hallobutton({
             uuid: _this.options.uuid,
             editable: _this.options.editable,
             label: label,
-            command: "insert" + type + "List",
-            icon: "icon-list-" + label.toLowerCase(),
+            command: 'insert' + type + 'List',
+            icon: 'icon-list-' + label.toLowerCase(),
             cssClass: _this.options.buttonCssClass,
           });
           return buttonset.append(buttonElement);
         };
         if (this.options.lists.ordered) {
-          buttonize("Ordered", "OL");
+          buttonize('Ordered', 'OL');
         }
         if (this.options.lists.unordered) {
-          buttonize("Unordered", "UL");
+          buttonize('Unordered', 'UL');
         }
         buttonset.hallobuttonset();
         return toolbar.append(buttonset);
@@ -2828,11 +2828,11 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.hallooverlay", {
+    return jQuery.widget('IKS.hallooverlay', {
       options: {
         editable: null,
         toolbar: null,
-        uuid: "",
+        uuid: '',
         overlay: null,
         padding: 10,
         background: null,
@@ -2843,57 +2843,57 @@
         if (!this.options.bound) {
           this.options.bound = true;
           this.options.editable.element.on(
-            "halloactivated",
+            'halloactivated',
             function (event, data) {
               widget.options.currentEditable = jQuery(event.target);
               if (!widget.options.visible) {
                 return widget.showOverlay();
               }
-            }
+            },
           );
           this.options.editable.element.on(
-            "hallomodified",
+            'hallomodified',
             function (event, data) {
               widget.options.currentEditable = jQuery(event.target);
               if (widget.options.visible) {
                 return widget.resizeOverlay();
               }
-            }
+            },
           );
           return this.options.editable.element.on(
-            "hallodeactivated",
+            'hallodeactivated',
             function (event, data) {
               widget.options.currentEditable = jQuery(event.target);
               if (widget.options.visible) {
                 return widget.hideOverlay();
               }
-            }
+            },
           );
         }
       },
       showOverlay: function () {
         this.options.visible = true;
         if (this.options.overlay === null) {
-          if (jQuery("#halloOverlay").length > 0) {
-            this.options.overlay = jQuery("#halloOverlay");
+          if (jQuery('#halloOverlay').length > 0) {
+            this.options.overlay = jQuery('#halloOverlay');
           } else {
             this.options.overlay = jQuery(
-              '<div id="halloOverlay"            class="halloOverlay">'
+              '<div id="halloOverlay"            class="halloOverlay">',
             );
             jQuery(document.body).append(this.options.overlay);
           }
           this.options.overlay.on(
-            "click",
-            jQuery.proxy(this.options.editable.turnOff, this.options.editable)
+            'click',
+            jQuery.proxy(this.options.editable.turnOff, this.options.editable),
           );
         }
         this.options.overlay.show();
         if (this.options.background === null) {
-          if (jQuery("#halloBackground").length > 0) {
-            this.options.background = jQuery("#halloBackground");
+          if (jQuery('#halloBackground').length > 0) {
+            this.options.background = jQuery('#halloBackground');
           } else {
             this.options.background = jQuery(
-              '<div id="halloBackground"            class="halloBackground">'
+              '<div id="halloBackground"            class="halloBackground">',
             );
             jQuery(document.body).append(this.options.background);
           }
@@ -2902,9 +2902,9 @@
         this.options.background.show();
         if (!this.options.originalZIndex) {
           this.options.originalZIndex =
-            this.options.currentEditable.css("z-index");
+            this.options.currentEditable.css('z-index');
         }
-        return this.options.currentEditable.css("z-index", "350");
+        return this.options.currentEditable.css('z-index', '350');
       },
       resizeOverlay: function () {
         var offset;
@@ -2923,18 +2923,18 @@
         this.options.overlay.hide();
         this.options.background.hide();
         return this.options.currentEditable.css(
-          "z-index",
-          this.options.originalZIndex
+          'z-index',
+          this.options.originalZIndex,
         );
       },
       _findBackgroundColor: function (jQueryfield) {
         var color;
-        color = jQueryfield.css("background-color");
-        if (color !== "rgba(0, 0, 0, 0)" && color !== "transparent") {
+        color = jQueryfield.css('background-color');
+        if (color !== 'rgba(0, 0, 0, 0)' && color !== 'transparent') {
           return color;
         }
-        if (jQueryfield.is("body")) {
-          return "white";
+        if (jQueryfield.is('body')) {
+          return 'white';
         } else {
           return this._findBackgroundColor(jQueryfield.parent());
         }
@@ -2945,11 +2945,11 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.halloreundo", {
+    return jQuery.widget('IKS.halloreundo', {
       options: {
         editable: null,
         toolbar: null,
-        uuid: "",
+        uuid: '',
         buttonCssClass: null,
       },
       populateToolbar: function (toolbar) {
@@ -2959,20 +2959,20 @@
         buttonset = jQuery('<span class="' + this.widgetName + '"></span>');
         buttonize = function (cmd, label) {
           var buttonElement;
-          buttonElement = jQuery("<span></span>");
+          buttonElement = jQuery('<span></span>');
           buttonElement.hallobutton({
             uuid: _this.options.uuid,
             editable: _this.options.editable,
             label: label,
-            icon: cmd === "undo" ? "icon-undo" : "icon-repeat",
+            icon: cmd === 'undo' ? 'icon-undo' : 'icon-repeat',
             command: cmd,
             queryState: false,
             cssClass: _this.options.buttonCssClass,
           });
           return buttonset.append(buttonElement);
         };
-        buttonize("undo", "Undo");
-        buttonize("redo", "Redo");
+        buttonize('undo', 'Undo');
+        buttonize('redo', 'Redo');
         buttonset.hallobuttonset();
         return toolbar.append(buttonset);
       },
@@ -2982,10 +2982,10 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.hallotoolbarlinebreak", {
+    return jQuery.widget('IKS.hallotoolbarlinebreak', {
       options: {
         editable: null,
-        uuid: "",
+        uuid: '',
         breakAfter: [],
       },
       populateToolbar: function (toolbar) {
@@ -3000,7 +3000,7 @@
           _len,
           _len1,
           _ref;
-        buttonsets = jQuery(".ui-buttonset", toolbar);
+        buttonsets = jQuery('.ui-buttonset', toolbar);
         queuedButtonsets = jQuery();
         rowcounter = 0;
         _ref = this.options.breakAfter;
@@ -3037,10 +3037,10 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.halloToolbarContextual", {
+    return jQuery.widget('IKS.halloToolbarContextual', {
       toolbar: null,
       options: {
-        parentElement: "body",
+        parentElement: 'body',
         editable: null,
         toolbar: null,
         positionAbove: false,
@@ -3050,7 +3050,7 @@
         this.toolbar = this.options.toolbar;
         jQuery(this.options.parentElement).append(this.toolbar);
         this._bindEvents();
-        return jQuery(window).on("resize", function (event) {
+        return jQuery(window).on('resize', function (event) {
           return _this._updatePosition(_this._getPosition(event));
         });
       },
@@ -3061,13 +3061,13 @@
         }
         eventType = event.type;
         switch (eventType) {
-          case "keydown":
-          case "keyup":
-          case "keypress":
+          case 'keydown':
+          case 'keyup':
+          case 'keypress':
             return this._getCaretPosition(selection);
-          case "click":
-          case "mousedown":
-          case "mouseup":
+          case 'click':
+          case 'mousedown':
+          case 'mouseup':
             return (position = {
               top: event.pageY,
               left: event.pageX,
@@ -3076,7 +3076,7 @@
       },
       _getCaretPosition: function (range) {
         var newRange, position, tmpSpan;
-        tmpSpan = jQuery("<span/>");
+        tmpSpan = jQuery('<span/>');
         newRange = rangy.createRange();
         newRange.setStart(range.endContainer, range.endOffset);
         newRange.insertNode(tmpSpan.get(0));
@@ -3088,13 +3088,13 @@
         return position;
       },
       setPosition: function () {
-        if (this.options.parentElement !== "body") {
-          this.options.parentElement = "body";
+        if (this.options.parentElement !== 'body') {
+          this.options.parentElement = 'body';
           jQuery(this.options.parentElement).append(this.toolbar);
         }
-        this.toolbar.css("position", "absolute");
-        this.toolbar.css("top", this.element.offset().top - 20);
-        return this.toolbar.css("left", this.element.offset().left);
+        this.toolbar.css('position', 'absolute');
+        this.toolbar.css('top', this.element.offset().top - 20);
+        return this.toolbar.css('left', this.element.offset().left);
       },
       _updatePosition: function (position, selection) {
         var left, selectionRect, toolbar_height_offset, top, top_offset;
@@ -3126,37 +3126,37 @@
           top = position.top + top_offset;
           left = position.left - this.toolbar.outerWidth() / 2 + 30;
         }
-        this.toolbar.css("top", top);
-        return this.toolbar.css("left", left);
+        this.toolbar.css('top', top);
+        return this.toolbar.css('left', left);
       },
       _bindEvents: function () {
         var _this = this;
-        this.element.on("click", function (event, data) {
+        this.element.on('click', function (event, data) {
           var position, scrollTop;
           position = {};
-          scrollTop = $("window").scrollTop();
+          scrollTop = $('window').scrollTop();
           position.top = event.clientY + scrollTop;
           position.left = event.clientX;
           _this._updatePosition(position, null);
-          if (_this.toolbar.html() !== "") {
+          if (_this.toolbar.html() !== '') {
             return _this.toolbar.show();
           }
         });
-        this.element.on("halloselected", function (event, data) {
+        this.element.on('halloselected', function (event, data) {
           var position;
           position = _this._getPosition(data.originalEvent, data.selection);
           if (!position) {
             return;
           }
           _this._updatePosition(position, data.selection);
-          if (_this.toolbar.html() !== "") {
+          if (_this.toolbar.html() !== '') {
             return _this.toolbar.show();
           }
         });
-        this.element.on("hallounselected", function (event, data) {
+        this.element.on('hallounselected', function (event, data) {
           return _this.toolbar.hide();
         });
-        return this.element.on("hallodeactivated", function (event, data) {
+        return this.element.on('hallodeactivated', function (event, data) {
           return _this.toolbar.hide();
         });
       },
@@ -3166,10 +3166,10 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.halloToolbarFixed", {
+    return jQuery.widget('IKS.halloToolbarFixed', {
       toolbar: null,
       options: {
-        parentElement: "body",
+        parentElement: 'body',
         editable: null,
         toolbar: null,
         affix: true,
@@ -3183,21 +3183,21 @@
         this.toolbar.show();
         jQuery(this.options.parentElement).append(this.toolbar);
         this._bindEvents();
-        jQuery(window).on("resize", function (event) {
+        jQuery(window).on('resize', function (event) {
           return _this.setPosition();
         });
-        jQuery(window).on("scroll", function (event) {
+        jQuery(window).on('scroll', function (event) {
           return _this.setPosition();
         });
-        if (this.options.parentElement === "body") {
+        if (this.options.parentElement === 'body') {
           el = jQuery(this.element);
-          widthToAdd = parseFloat(el.css("padding-left"));
-          widthToAdd += parseFloat(el.css("padding-right"));
-          widthToAdd += parseFloat(el.css("border-left-width"));
-          widthToAdd += parseFloat(el.css("border-right-width"));
-          widthToAdd += parseFloat(el.css("outline-width")) * 2;
-          widthToAdd += parseFloat(el.css("outline-offset")) * 2;
-          return jQuery(this.toolbar).css("width", el.width() + widthToAdd);
+          widthToAdd = parseFloat(el.css('padding-left'));
+          widthToAdd += parseFloat(el.css('padding-right'));
+          widthToAdd += parseFloat(el.css('border-left-width'));
+          widthToAdd += parseFloat(el.css('border-right-width'));
+          widthToAdd += parseFloat(el.css('outline-width')) * 2;
+          widthToAdd += parseFloat(el.css('outline-offset')) * 2;
+          return jQuery(this.toolbar).css('width', el.width() + widthToAdd);
         }
       },
       _getPosition: function (event, selection) {
@@ -3205,8 +3205,8 @@
         if (!event) {
           return;
         }
-        width = parseFloat(this.element.css("outline-width"));
-        offset = width + parseFloat(this.element.css("outline-offset"));
+        width = parseFloat(this.element.css('outline-width'));
+        offset = width + parseFloat(this.element.css('outline-offset'));
         return (position = {
           top: this.element.offset().top - this.toolbar.outerHeight() - offset,
           left: this.element.offset().left - offset,
@@ -3214,7 +3214,7 @@
       },
       _getCaretPosition: function (range) {
         var newRange, position, tmpSpan;
-        tmpSpan = jQuery("<span/>");
+        tmpSpan = jQuery('<span/>');
         newRange = rangy.createRange();
         newRange.setStart(range.endContainer, range.endOffset);
         newRange.insertNode(tmpSpan.get(0));
@@ -3227,13 +3227,13 @@
       },
       setPosition: function () {
         var elementBottom, elementTop, height, offset, scrollTop, topOffset;
-        if (this.options.parentElement !== "body") {
+        if (this.options.parentElement !== 'body') {
           return;
         }
-        this.toolbar.css("position", "absolute");
+        this.toolbar.css('position', 'absolute');
         this.toolbar.css(
-          "top",
-          this.element.offset().top - this.toolbar.outerHeight()
+          'top',
+          this.element.offset().top - this.toolbar.outerHeight(),
         );
         if (this.options.affix) {
           scrollTop = jQuery(window).scrollTop();
@@ -3245,22 +3245,22 @@
           elementBottom =
             height - topOffset + (offset.top - this.toolbar.height());
           if (scrollTop > elementTop && scrollTop < elementBottom) {
-            this.toolbar.css("position", "fixed");
-            this.toolbar.css("top", this.options.affixTopOffset);
+            this.toolbar.css('position', 'fixed');
+            this.toolbar.css('top', this.options.affixTopOffset);
           }
         } else {
         }
 
-        return this.toolbar.css("left", this.element.offset().left - 2);
+        return this.toolbar.css('left', this.element.offset().left - 2);
       },
       _updatePosition: function (position) {},
       _bindEvents: function () {
         var _this = this;
-        this.element.on("halloactivated", function (event, data) {
+        this.element.on('halloactivated', function (event, data) {
           _this.setPosition();
           return _this.toolbar.show();
         });
-        return this.element.on("hallodeactivated", function (event, data) {
+        return this.element.on('hallodeactivated', function (event, data) {
           return _this.toolbar.hide();
         });
       },
@@ -3270,10 +3270,10 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.halloToolbarInstant", {
+    return jQuery.widget('IKS.halloToolbarInstant', {
       toolbar: null,
       options: {
-        parentElement: "body",
+        parentElement: 'body',
         editable: null,
         toolbar: null,
         positionAbove: false,
@@ -3283,7 +3283,7 @@
         this.toolbar = this.options.toolbar;
         jQuery(this.options.parentElement).append(this.toolbar);
         this._bindEvents();
-        return jQuery(window).on("resize", function (event) {
+        return jQuery(window).on('resize', function (event) {
           return _this._updatePosition(_this._getPosition(event));
         });
       },
@@ -3294,13 +3294,13 @@
         }
         eventType = event.type;
         switch (eventType) {
-          case "keydown":
-          case "keyup":
-          case "keypress":
+          case 'keydown':
+          case 'keyup':
+          case 'keypress':
             return this._getCaretPosition(selection);
-          case "click":
-          case "mousedown":
-          case "mouseup":
+          case 'click':
+          case 'mousedown':
+          case 'mouseup':
             return (position = {
               top: event.pageY,
               left: event.pageX,
@@ -3309,7 +3309,7 @@
       },
       _getCaretPosition: function (range) {
         var newRange, position, tmpSpan;
-        tmpSpan = jQuery("<span/>");
+        tmpSpan = jQuery('<span/>');
         newRange = rangy.createRange();
         newRange.setStart(range.endContainer, range.endOffset);
         newRange.insertNode(tmpSpan.get(0));
@@ -3321,13 +3321,13 @@
         return position;
       },
       setPosition: function () {
-        if (this.options.parentElement !== "body") {
-          this.options.parentElement = "body";
+        if (this.options.parentElement !== 'body') {
+          this.options.parentElement = 'body';
           jQuery(this.options.parentElement).append(this.toolbar);
         }
-        this.toolbar.css("position", "absolute");
-        this.toolbar.css("top", this.element.offset().top - 20);
-        return this.toolbar.css("left", this.element.offset().left);
+        this.toolbar.css('position', 'absolute');
+        this.toolbar.css('top', this.element.offset().top - 20);
+        return this.toolbar.css('left', this.element.offset().left);
       },
       _updatePosition: function (position, selection) {
         var left, selectionRect, toolbar_height_offset, top, top_offset;
@@ -3359,37 +3359,37 @@
           top = position.top + top_offset;
           left = position.left - this.toolbar.outerWidth() / 2 + 30;
         }
-        this.toolbar.css("top", top);
-        return this.toolbar.css("left", left);
+        this.toolbar.css('top', top);
+        return this.toolbar.css('left', left);
       },
       _bindEvents: function () {
         var _this = this;
-        this.element.on("click", function (event, data) {
+        this.element.on('click', function (event, data) {
           var position, scrollTop;
           position = {};
-          scrollTop = $("window").scrollTop();
+          scrollTop = $('window').scrollTop();
           position.top = event.clientY + scrollTop;
           position.left = event.clientX;
           _this._updatePosition(position, null);
-          if (_this.toolbar.html() !== "") {
+          if (_this.toolbar.html() !== '') {
             return _this.toolbar.show();
           }
         });
-        this.element.on("halloselected", function (event, data) {
+        this.element.on('halloselected', function (event, data) {
           var position;
           position = _this._getPosition(data.originalEvent, data.selection);
           if (!position) {
             return;
           }
           _this._updatePosition(position, data.selection);
-          if (_this.toolbar.html() !== "") {
+          if (_this.toolbar.html() !== '') {
             return _this.toolbar.show();
           }
         });
-        this.element.on("hallounselected", function (event, data) {
+        this.element.on('hallounselected', function (event, data) {
           return _this.toolbar.hide();
         });
-        return this.element.on("hallodeactivated", function (event, data) {
+        return this.element.on('hallodeactivated', function (event, data) {
           return _this.toolbar.hide();
         });
       },
@@ -3399,11 +3399,11 @@
 
 (function () {
   (function (jQuery) {
-    jQuery.widget("IKS.hallobutton", {
+    jQuery.widget('IKS.hallobutton', {
       button: null,
       isChecked: false,
       options: {
-        uuid: "",
+        uuid: '',
         label: null,
         icon: null,
         editable: null,
@@ -3419,34 +3419,34 @@
           _base,
           _this = this;
         if ((_base = this.options).icon == null) {
-          _base.icon = "icon-" + this.options.label.toLowerCase();
+          _base.icon = 'icon-' + this.options.label.toLowerCase();
         }
-        id = "" + this.options.uuid + "-" + this.options.label;
+        id = '' + this.options.uuid + '-' + this.options.label;
         opts = this.options;
         this.button = this._createButton(
           id,
           opts.command,
           opts.label,
-          opts.icon
+          opts.icon,
         );
         this.element.append(this.button);
         if (this.options.cssClass) {
           this.button.addClass(this.options.cssClass);
         }
         if (this.options.editable.options.touchScreen) {
-          this.button.addClass("btn-large");
+          this.button.addClass('btn-large');
         }
-        this.button.data("hallo-command", this.options.command);
+        this.button.data('hallo-command', this.options.command);
         if (this.options.commandValue) {
-          this.button.data("hallo-command-value", this.options.commandValue);
+          this.button.data('hallo-command-value', this.options.commandValue);
         }
-        hoverclass = "ui-state-hover";
-        this.button.on("mouseenter", function (event) {
+        hoverclass = 'ui-state-hover';
+        this.button.on('mouseenter', function (event) {
           if (_this.isEnabled()) {
             return _this.button.addClass(hoverclass);
           }
         });
-        return this.button.on("mouseleave", function (event) {
+        return this.button.on('mouseleave', function (event) {
           return _this.button.removeClass(hoverclass);
         });
       },
@@ -3469,12 +3469,12 @@
               if (_this.options.commandValue) {
                 value = document.queryCommandValue(_this.options.command);
                 compared = value.match(
-                  new RegExp(_this.options.commandValue, "i")
+                  new RegExp(_this.options.commandValue, 'i'),
                 );
                 return _this.checked(compared ? true : false);
               } else {
                 return _this.checked(
-                  document.queryCommandState(_this.options.command)
+                  document.queryCommandState(_this.options.command),
                 );
               }
             } catch (_error) {
@@ -3485,16 +3485,16 @@
           queryState = this.options.queryState;
         }
         if (this.options.command) {
-          this.button.on("click", function (event) {
+          this.button.on('click', function (event) {
             if (_this.options.commandValue) {
               _this.options.editable.execute(
                 _this.options.command,
-                _this.options.commandValue
+                _this.options.commandValue,
               );
             } else {
               _this.options.editable.execute(_this.options.command);
             }
-            if (typeof queryState === "function") {
+            if (typeof queryState === 'function') {
               queryState();
             }
             return false;
@@ -3504,29 +3504,29 @@
           return;
         }
         editableElement = this.options.editable.element;
-        events = "keyup paste change mouseup hallomodified";
+        events = 'keyup paste change mouseup hallomodified';
         editableElement.on(events, queryState);
-        editableElement.on("halloenabled", function () {
+        editableElement.on('halloenabled', function () {
           return editableElement.on(events, queryState);
         });
-        return editableElement.on("hallodisabled", function () {
+        return editableElement.on('hallodisabled', function () {
           return editableElement.off(events, queryState);
         });
       },
       enable: function () {
-        return this.button.prop("disabled", false);
+        return this.button.prop('disabled', false);
       },
       disable: function () {
-        return this.button.attr("disabled", "true");
+        return this.button.attr('disabled', 'true');
       },
       isEnabled: function () {
-        return this.button.attr("disabled") !== "true";
+        return this.button.attr('disabled') !== 'true';
       },
       refresh: function () {
         if (this.isChecked) {
-          return this.button.addClass("ui-state-active");
+          return this.button.addClass('ui-state-active');
         } else {
-          return this.button.removeClass("ui-state-active");
+          return this.button.removeClass('ui-state-active');
         }
       },
       checked: function (checked) {
@@ -3536,47 +3536,47 @@
       _createButton: function (id, command, label, icon) {
         var classes;
         classes = [
-          "ui-button",
-          "ui-widget",
-          "ui-state-default",
-          "ui-corner-all",
-          "ui-button-text-only",
-          "" + command + "_button",
+          'ui-button',
+          'ui-widget',
+          'ui-state-default',
+          'ui-corner-all',
+          'ui-button-text-only',
+          '' + command + '_button',
         ];
         return jQuery(
           '<button id="' +
             id +
             '"        class="' +
-            classes.join(" ") +
+            classes.join(' ') +
             '" title="' +
             label +
             '">          <span class="ui-button-text">            <i class="' +
             icon +
-            '"></i>          </span>        </button>'
+            '"></i>          </span>        </button>',
         );
       },
     });
-    return jQuery.widget("IKS.hallobuttonset", {
+    return jQuery.widget('IKS.hallobuttonset', {
       buttons: null,
       _create: function () {
-        return this.element.addClass("ui-buttonset");
+        return this.element.addClass('ui-buttonset');
       },
       _init: function () {
         return this.refresh();
       },
       refresh: function () {
         var rtl;
-        rtl = this.element.css("direction") === "rtl";
-        this.buttons = this.element.find(".ui-button");
+        rtl = this.element.css('direction') === 'rtl';
+        this.buttons = this.element.find('.ui-button');
         this.buttons.removeClass(
-          "ui-corner-all ui-corner-left ui-corner-right"
+          'ui-corner-all ui-corner-left ui-corner-right',
         );
         if (rtl) {
-          this.buttons.filter(":first").addClass("ui-corner-right");
-          return this.buttons.filter(":last").addClass("ui-corner-left");
+          this.buttons.filter(':first').addClass('ui-corner-right');
+          return this.buttons.filter(':last').addClass('ui-corner-left');
         } else {
-          this.buttons.filter(":first").addClass("ui-corner-left");
-          return this.buttons.filter(":last").addClass("ui-corner-right");
+          this.buttons.filter(':first').addClass('ui-corner-left');
+          return this.buttons.filter(':last').addClass('ui-corner-right');
         }
       },
     });
@@ -3585,43 +3585,43 @@
 
 (function () {
   (function (jQuery) {
-    return jQuery.widget("IKS.hallodropdownbutton", {
+    return jQuery.widget('IKS.hallodropdownbutton', {
       button: null,
       options: {
-        uuid: "",
+        uuid: '',
         label: null,
         icon: null,
         editable: null,
-        target: "",
+        target: '',
         cssClass: null,
       },
       _create: function () {
         var _base;
         return (_base = this.options).icon != null
           ? (_base = this.options).icon
-          : (_base.icon = "icon-" + this.options.label.toLowerCase());
+          : (_base.icon = 'icon-' + this.options.label.toLowerCase());
       },
       _init: function () {
         var target,
           _this = this;
         target = jQuery(this.options.target);
-        target.css("position", "absolute");
-        target.addClass("dropdown-menu");
+        target.css('position', 'absolute');
+        target.addClass('dropdown-menu');
         target.hide();
         if (!this.button) {
           this.button = this._prepareButton();
         }
-        this.button.on("click", function () {
-          if (target.hasClass("open")) {
+        this.button.on('click', function () {
+          if (target.hasClass('open')) {
             _this._hideTarget();
             return;
           }
           return _this._showTarget();
         });
-        target.on("click", function () {
+        target.on('click', function () {
           return _this._hideTarget();
         });
-        this.options.editable.element.on("hallodeactivated", function () {
+        this.options.editable.element.on('hallodeactivated', function () {
           return _this._hideTarget();
         });
         return this.element.append(this.button);
@@ -3630,13 +3630,13 @@
         var target;
         target = jQuery(this.options.target);
         this._updateTargetPosition();
-        target.addClass("open");
+        target.addClass('open');
         return target.show();
       },
       _hideTarget: function () {
         var target;
         target = jQuery(this.options.target);
-        target.removeClass("open");
+        target.removeClass('open');
         return target.hide();
       },
       _updateTargetPosition: function () {
@@ -3644,29 +3644,29 @@
         target = jQuery(this.options.target);
         (_ref = this.button.position()), (top = _ref.top), (left = _ref.left);
         top += this.button.outerHeight();
-        target.css("top", top);
-        return target.css("left", left - 20);
+        target.css('top', top);
+        return target.css('left', left - 20);
       },
       _prepareButton: function () {
         var buttonEl, classes, id;
-        id = "" + this.options.uuid + "-" + this.options.label;
+        id = '' + this.options.uuid + '-' + this.options.label;
         classes = [
-          "ui-button",
-          "ui-widget",
-          "ui-state-default",
-          "ui-corner-all",
-          "ui-button-text-only",
+          'ui-button',
+          'ui-widget',
+          'ui-state-default',
+          'ui-corner-all',
+          'ui-button-text-only',
         ];
         buttonEl = jQuery(
           '<button id="' +
             id +
             '"       class="' +
-            classes.join(" ") +
+            classes.join(' ') +
             '" title="' +
             this.options.label +
             '">       <span class="ui-button-text"><i class="' +
             this.options.icon +
-            '"></i></span>       </button>'
+            '"></i></span>       </button>',
         );
         if (this.options.cssClass) {
           buttonEl.addClass(this.options.cssClass);

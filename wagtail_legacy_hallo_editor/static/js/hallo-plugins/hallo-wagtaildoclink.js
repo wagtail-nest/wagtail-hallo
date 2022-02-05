@@ -1,8 +1,10 @@
+'use strict';
+
 (function () {
   // hallo-wagtaildoclink
-  $.widget("IKS.hallowagtaildoclink", {
+  $.widget('IKS.hallowagtaildoclink', {
     options: {
-      uuid: "",
+      uuid: '',
       editable: null,
     },
     populateToolbar: function (toolbar) {
@@ -14,12 +16,12 @@
       button.hallobutton({
         uuid: this.options.uuid,
         editable: this.options.editable,
-        label: "Documents",
-        icon: "icon-doc-full",
+        label: 'Documents',
+        icon: 'icon-doc-full',
         command: null,
       });
       toolbar.append(button);
-      return button.on("click", function (event) {
+      return button.on('click', function (event) {
         var lastSelection;
 
         lastSelection = widget.options.editable.getSelection();
@@ -28,23 +30,23 @@
           onload: DOCUMENT_CHOOSER_MODAL_ONLOAD_HANDLERS,
           responses: {
             documentChosen: function (docData) {
-              var a;
+              var link;
 
-              a = document.createElement("a");
-              a.setAttribute("href", docData.url);
-              a.setAttribute("data-id", docData.id);
-              a.setAttribute("data-linktype", "document");
+              link = document.createElement('a');
+              link.setAttribute('href', docData.url);
+              link.setAttribute('data-id', docData.id);
+              link.setAttribute('data-linktype', 'document');
               if (
                 !lastSelection.collapsed &&
                 lastSelection.canSurroundContents()
               ) {
-                lastSelection.surroundContents(a);
+                lastSelection.surroundContents(link);
               } else {
-                a.appendChild(document.createTextNode(docData.title));
-                lastSelection.insertNode(a);
+                link.appendChild(document.createTextNode(docData.title));
+                lastSelection.insertNode(link);
               }
 
-              return widget.options.editable.element.trigger("change");
+              return widget.options.editable.element.trigger('change');
             },
           },
         });
