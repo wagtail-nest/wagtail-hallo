@@ -9,9 +9,9 @@ Please be aware of the `known hallo.js issues <https://github.com/wagtail/wagtai
 ## Installing the Hallo Editor
 
 - Important: Requires jQuery and jQueryUI - which are not included and may not always be included with Wagtail.
+- `pip install wagtail-legacy-hallo-editor`
+- Add `'wagtail_legacy_hallo_editor'` to your settings.py `INSTALLED_APPS`
 - **INSTRUCTIONS NEEDED FOR PACKAGE HERE**
-
-## Using the Hallo Editor
 
 To use hallo.js on Wagtail 2.x, add the following to your settings:
 
@@ -23,19 +23,73 @@ To use hallo.js on Wagtail 2.x, add the following to your settings:
     }
 ```
 
+## Using the Hallo Editor in `RichTextField`
+
 ```python
 # models.py
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page
 
-class HalloPage(Page):
+class MyHalloPage(Page):
     body = RichTextField(editor='legacy')
 
     content_panels = Page.content_panels + [
         FieldPanel('body', classname='full'),
     ]
 ```
+
+<!-- prettier-ignore-start -->
+```html
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+    {% include "base/include/header.html" %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">{{ page.body|richtext }}</div>
+        </div>
+    </div>
+{% endblock content %}
+```
+<!-- prettier-ignore-end -->
+
+## Using the Hallo Editor in `StreamField` via `RichTextBlock`
+
+```python
+# models.py
+from wagtail.core.models import Page
+from wagtail.core.blocks import CharBlock, RichTextBlock
+from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.core.fields import StreamField
+
+class MyOtherHalloPage(Page):
+    body = StreamField([
+        ('heading', CharBlock(form_classname="full title")),
+        ('paragraph', RichTextBlock(editor='legacy')),
+    ], blank=True)
+
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('body'),
+    ]
+```
+
+<!-- prettier-ignore-start -->
+```html
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+    {% include "base/include/header.html" %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">{{ page.body }}</div>
+        </div>
+    </div>
+{% endblock content %}
+```
+<!-- prettier-ignore-end -->
 
 ## Extending the Hallo Editor
 
@@ -103,7 +157,12 @@ The `wagtail.core.whitelist` module provides a few helper functions to assist in
 
 ## Python / Django
 
--
+- `pip install wagtail-legacy-hallo-editor --no-index --find-links file:///path/to/wagtail-legacy-hallo-editor`
+- Ensure `'wagtail_legacy_hallo_editor'` is added to your settings.py `INSTALLED_APPS`
+- You will need to have a test application (e.g. Bakery Demo) and have a Page model to work with, along with a template.
+  - see `test/testapp/models.py` for a reference model
+  - see `test/testapp/templates/hallo_test_page.html` for a reference template
+- After creating the model, remember to run `python manage.py makemigrations` and `python manage.py migrate`
 
 ### Frontend
 
