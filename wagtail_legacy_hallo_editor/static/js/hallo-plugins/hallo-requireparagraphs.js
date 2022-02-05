@@ -1,26 +1,28 @@
+'use strict';
+
 (function () {
   // hallo-requireparagraphs
 
-  $.widget("IKS.hallorequireparagraphs", {
+  $.widget('IKS.hallorequireparagraphs', {
     options: {
       editable: null,
-      uuid: "",
+      uuid: '',
       blockElements: [
-        "dd",
-        "div",
-        "dl",
-        "figure",
-        "form",
-        "ul",
-        "ol",
-        "table",
-        "p",
-        "h1",
-        "h2",
-        "h3",
-        "h4",
-        "h5",
-        "h6",
+        'dd',
+        'div',
+        'dl',
+        'figure',
+        'form',
+        'ul',
+        'ol',
+        'table',
+        'p',
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
       ],
     },
     cleanupContentClone(el) {
@@ -29,9 +31,8 @@
         el.html().length &&
         !$(this.options.blockElements.toString(), el).length
       ) {
-        this.options.editable.execute("formatBlock", "p");
+        this.options.editable.execute('formatBlock', 'p');
       }
     },
   });
-
 })();

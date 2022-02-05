@@ -1,8 +1,10 @@
+'use strict';
+
 (function () {
   // hallo-wagtailimage
-  $.widget("IKS.hallowagtailimage", {
+  $.widget('IKS.hallowagtailimage', {
     options: {
-      uuid: "",
+      uuid: '',
       editable: null,
     },
     populateToolbar: function (toolbar) {
@@ -14,21 +16,21 @@
       button.hallobutton({
         uuid: this.options.uuid,
         editable: this.options.editable,
-        label: "Images",
-        icon: "icon-image",
+        label: 'Images',
+        icon: 'icon-image',
         command: null,
       });
       toolbar.append(button);
-      return button.on("click", function (event) {
+      return button.on('click', function (event) {
         var insertionPoint;
         var lastSelection;
 
         lastSelection = widget.options.editable.getSelection();
         insertionPoint = $(lastSelection.endContainer)
-          .parentsUntil("[data-hallo-editor]")
+          .parentsUntil('[data-hallo-editor]')
           .last();
         return ModalWorkflow({
-          url: window.chooserUrls.imageChooser + "?select_format=true",
+          url: window.chooserUrls.imageChooser + '?select_format=true',
           onload: IMAGE_CHOOSER_MODAL_ONLOAD_HANDLERS,
           responses: {
             imageChosen: function (imageData) {
@@ -36,11 +38,11 @@
 
               elem = $(imageData.html).get(0);
               lastSelection.insertNode(elem);
-              if (elem.getAttribute("contenteditable") === "false") {
+              if (elem.getAttribute('contenteditable') === 'false') {
                 insertRichTextDeleteControl(elem);
               }
 
-              return widget.options.editable.element.trigger("change");
+              return widget.options.editable.element.trigger('change');
             },
           },
         });
