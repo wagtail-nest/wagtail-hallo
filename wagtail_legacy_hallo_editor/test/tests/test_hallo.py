@@ -1,5 +1,6 @@
 import unittest
 from bs4 import BeautifulSoup
+
 from django.test import SimpleTestCase, TestCase
 from django.test.utils import override_settings
 from django.urls import reverse
@@ -17,7 +18,7 @@ class BaseRichTextEditHandlerTestCase(TestCase):
         cached edit handlers should be cleared before and after each test run
         to ensure that no changes leak through to other tests.
         """
-        from wagtail.tests.testapp.models import DefaultRichBlockFieldPage
+        from wagtail_legacy_hallo_editor.test.testapp.models import DefaultRichBlockFieldPage
 
         rich_text_block = (DefaultRichBlockFieldPage.get_edit_handler()
                            .get_form_class().base_fields['body'].block
