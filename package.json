@@ -4,42 +4,115 @@
   "description": "",
   "main": "wagtail_legacy_hallo_editor/static_src/main.tsx",
   "scripts": {
-    "build": "webpack --mode=production",
-    "start": "webpack --mode=development --watch",
-    "format": "prettier --write wagtail_legacy_hallo_editor/**/*.{ts,tsx,scss}",
-    "lint": "prettier --check wagtail_legacy_hallo_editor/**/*.{ts,tsx,scss}"
+    "format": "prettier --write '**/*.{js,md,css,scss,yaml,yml,json}'",
+    "fix": "npm run fix:css && npm run fix:js",
+    "fix:css": "stylelint **/*.css --fix",
+    "fix:js": "eslint ./ --fix",
+    "lint:format": "prettier --check '**/*.{js,md,css,scss,yaml,yml,json}'",
+    "lint:css": "stylelint **/*.css",
+    "lint:js": "eslint ./ --max-warnings 0",
+    "lint": "npm run lint:format && npm run lint:css && npm run lint:js",
+    "test": "jest",
+    "preflight": "npm run format && npm run lint && npm run test"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@svgr/webpack": "^5.4.0",
-    "@types/react": "^16.8.19",
-    "@types/react-dom": "^16.8.19",
-    "@types/styled-components": "^5.1.2",
-    "@typescript-eslint/eslint-plugin": "^1.12.0",
-    "@typescript-eslint/parser": "^1.12.0",
-    "css-loader": "^2.1.1",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-config-torchbox": "^0.2.0",
-    "eslint-plugin-import": "^2.18.0",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.2",
-    "file-loader": "^3.0.1",
-    "node-sass": "^4.13.1",
-    "prettier": "1.18.2",
-    "sass": "^1.20.3",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
-    "ts-loader": "^6.0.2",
-    "typescript": "^3.5.1",
-    "webpack": "^4.32.2",
-    "webpack-cli": "^3.3.2"
+    "@wagtail/eslint-config-wagtail": "^0.4.0",
+    "@wagtail/stylelint-config-wagtail": "^0.3.2",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "^19.0.2",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "jest": "^27.4.7",
+    "prettier": "^2.5.1",
+    "stylelint": "^14.3.0",
+    "stylelint-config-prettier-scss": "^0.0.1",
+    "stylelint-config-recommended-scss": "^5.0.2",
+    "stylelint-declaration-strict-value": "^1.8.0"
   },
-  "dependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "styled-components": "^5.1.1"
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@wagtail/eslint-config-wagtail"
+    ],
+    "env": {
+      "jest": true,
+      "browser": true
+    },
+    "ignorePatterns": [
+      "coverage/",
+      "node_modules",
+      "**/vendor/"
+    ],
+    "globals": {
+      "$": "readonly",
+      "addMessage": "readonly",
+      "buildExpandingFormset": "readonly",
+      "cancelSpinner": "readonly",
+      "escapeHtml": "readonly",
+      "insertRichTextDeleteControl": "readonly",
+      "jQuery": "readonly",
+      "jsonData": "readonly",
+      "ModalWorkflow": "readonly",
+      "DOCUMENT_CHOOSER_MODAL_ONLOAD_HANDLERS": "writable",
+      "EMBED_CHOOSER_MODAL_ONLOAD_HANDLERS": "writable",
+      "IMAGE_CHOOSER_MODAL_ONLOAD_HANDLERS": "writable",
+      "QUERY_CHOOSER_MODAL_ONLOAD_HANDLERS": "writable",
+      "SNIPPET_CHOOSER_MODAL_ONLOAD_HANDLERS": "writable"
+    },
+    "rules": {
+      "class-methods-use-this": "off",
+      "constructor-super": "off",
+      "default-param-last": "off",
+      "func-names": "off",
+      "import/extensions": "off",
+      "import/first": "off",
+      "import/newline-after-import": "off",
+      "import/no-extraneous-dependencies": "off",
+      "import/no-unresolved": "off",
+      "import/no-useless-path-segments": "off",
+      "import/order": "off",
+      "import/prefer-default-export": "off",
+      "lines-between-class-members": "off",
+      "max-classes-per-file": "off",
+      "no-await-in-loop": "off",
+      "no-continue": "off",
+      "no-else-return": "off",
+      "no-extra-boolean-cast": "off",
+      "no-import-assign": "off",
+      "no-lonely-if": "off",
+      "no-plusplus": "off",
+      "no-prototype-builtins": "off",
+      "no-restricted-syntax": "off",
+      "no-this-before-super": "off",
+      "no-unused-vars": "off",
+      "object-shorthand": "off",
+      "operator-assignment": "off",
+      "prefer-arrow-callback": "off",
+      "prefer-destructuring": "off",
+      "prefer-object-spread": "off",
+      "prefer-promise-reject-errors": "off",
+      "strict": "off"
+    }
+  },
+  "stylelint": {
+    "extends": [
+      "@wagtail/stylelint-config-wagtail"
+    ],
+    "rules": {
+      "declaration-property-value-allowed-list": null,
+      "font-family-no-missing-generic-family-keyword": null,
+      "no-descending-specificity": null,
+      "no-duplicate-selectors": null,
+      "property-disallowed-list": null,
+      "scss/media-feature-value-dollar-variable": null
+    }
   }
 }
