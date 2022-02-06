@@ -4,6 +4,7 @@ from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Page
 
+
 class HalloTestPage(Page):
     body = RichTextField(editor='legacy', blank=True)
 

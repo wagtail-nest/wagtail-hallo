@@ -1,9 +1,10 @@
-from .hallo import (
-    HalloFormatPlugin, HalloHeadingPlugin, HalloListPlugin, HalloPlugin)
 from wagtail.admin.rich_text.converters.editor_html import (
     LinkTypeRule, PageLinkHandler, WhitelistRule)
 from wagtail.core import hooks
 from wagtail.core.whitelist import allow_without_attributes, attribute_rule, check_url
+
+from .plugins import (
+    HalloFormatPlugin, HalloHeadingPlugin, HalloListPlugin, HalloPlugin)
 
 
 @hooks.register('register_rich_text_features')
