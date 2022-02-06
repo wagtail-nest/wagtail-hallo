@@ -177,6 +177,7 @@ The `wagtail.core.whitelist` module provides a few helper functions to assist in
   - see `test/testapp/models.py` for a reference model
   - see `test/testapp/templates/hallo_test_page.html` for a reference template
 - After creating the model, remember to run `python manage.py makemigrations` and `python manage.py migrate`
+- Run tests `python testmanage.py test` **WIP - not functional as yet**
 - Run linting `flake8 wagtail_legacy_hallo_editor`
 - Run formatting `black wagtail_legacy_hallo_editor`
 
