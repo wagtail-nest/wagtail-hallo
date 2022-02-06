@@ -2,9 +2,16 @@
 
 The legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](http://hallojs.org/).
 
-**As of [Wagtail 2.0, the hallo.js editor is deprecated](https://docs.wagtail.io/en/stable/releases/2.0.html).** it will no longer receive bug fixes.
+**As of [Wagtail 2.0, the hallo.js editor is deprecated](https://docs.wagtail.org/en/stable/releases/2.0.html#new-rich-text-editor).**
 
-Please be aware of the `known hallo.js issues <https://github.com/wagtail/wagtail/issues?q=is%3Aissue+is%3Aclosed+hallo+label%3A%22component%3ARich+text%22+label%3Atype%3ABug+label%3A%22status%3AWont+Fix%22>`\_ should you want to keep using it.
+**Status** This package should be compatible with Wagtail 2.17 and earlier versions, however, it will no longer receive bug fixes or be actively maintained. Pull requests will be accepted and if maintainers wish to support this outside of the Core Wagtail team please raise an Issue to discuss this.
+
+## Major risks of using this package
+
+- Please be aware of the [known hallo.js issues](https://github.com/wagtail/wagtail/issues?q=is%3Aissue+hallo+is%3Aclosed+label%3A%22status%3AWon%27t+Fix%22) should you want to keep using it.
+- Hallo’s has inappropriate handling of HTML and editor input – it is not reliable, has browser-specific inconsistent behavior, is not a good user experience and is not accessible.
+- This package is a source of security concerns (XSS injections, not CSP compatible) and allows injection of undesirable content or formatting (e.g. images in headings, or headings in lists).
+- There is no guarantee that this package will be compatible with Wagtail beyond the supported versions listed above.
 
 ## Installing the Hallo Editor
 
@@ -151,11 +158,18 @@ The following code will add the `<blockquote>` element to the whitelist whenever
 
 The `wagtail.core.whitelist` module provides a few helper functions to assist in defining these handlers: `allow_without_attributes`, a handler which preserves the element but strips out all of its attributes, and `attribute_rule` which accepts a dict specifying how to handle each attribute, and returns a handler function. This dict will map attribute names to either True (indicating that the attribute should be kept), False (indicating that it should be dropped), or a callable (which takes the initial attribute value and returns either a final value for the attribute, or None to drop the attribute).
 
-## Developing Instructions
+## Development instructions
 
-- Check out this repo locally.
+- Check out this repo locally `git clone git@github.com:wagtail/wagtail-legacy-hallo-editor.git`
 
-## Python / Django
+### TEMPORARY INSTRUCTIONS
+
+- While this package is in development, use these instructions instead.
+- You will need to clone the repo into a folder accessible via your virtual env `git clone git@github.com:lb-/wagtail-legacy-hallo-editor.git`
+- Your local Wagtail repo that is used for development must be checked out at `https://github.com/lb-/wagtail/tree/feature/hallo-editor-removal`
+- **Important**: Delete the built static assets at `wagtail/admin/static` and then run the Wagtail build pipeline `nvm use` then `npm run build` - this is required so that validation can be done without the styles/JS provided by Wagtail and only the ones provided by the new package.
+
+### Python (Django / Wagtail)
 
 - `pip install wagtail-legacy-hallo-editor --no-index --find-links file:///path/to/wagtail-legacy-hallo-editor`
 - Ensure `'wagtail_legacy_hallo_editor'` is added to your settings.py `INSTALLED_APPS`
@@ -163,8 +177,9 @@ The `wagtail.core.whitelist` module provides a few helper functions to assist in
   - see `test/testapp/models.py` for a reference model
   - see `test/testapp/templates/hallo_test_page.html` for a reference template
 - After creating the model, remember to run `python manage.py makemigrations` and `python manage.py migrate`
+- Run linting `flake8 wagtail_legacy_hallo_editor`
 
-### Frontend
+### JavaScript & CSS (Frontend)
 
 Currently the frontend tooling is based on Node & NPM and is only used to format and check code, this repository intentionally does not use any build tools and as such JavaScript and CSS must be written without that requirement.
 
@@ -174,3 +189,8 @@ Currently the frontend tooling is based on Node & NPM and is only used to format
 - `npm run lint` - Runs linting
 - `npm run format` - Runs Prettier formatting on most files (non-Python)
 - `npm run preflight` - Runs all the linting/formatting checks and must be done before committing code
+
+### Release checklist
+
+- [ ] Update `tox.ini` & `setup.py` with new supported Wagtail, Python or Django versions
+- [ ] Update changelog
