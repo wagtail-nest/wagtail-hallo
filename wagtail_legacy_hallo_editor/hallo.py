@@ -16,7 +16,9 @@ from .plugins import CORE_HALLO_PLUGINS
 
 
 class HalloRichTextArea(widgets.Textarea):
-    template_name = 'wagtail_wagtail_legacy_hallo_editor/widgets/hallo_rich_text_area.html'
+    template_name = (
+        "wagtail_wagtail_legacy_hallo_editor/widgets/hallo_rich_text_area.html"
+    )
 
     # this class's constructor accepts a 'features' kwarg
     accepts_features = True
@@ -25,9 +27,9 @@ class HalloRichTextArea(widgets.Textarea):
         return RichTextFieldPanel
 
     def __init__(self, *args, **kwargs):
-        self.options = kwargs.pop('options', None)
+        self.options = kwargs.pop("options", None)
 
-        self.features = kwargs.pop('features', None)
+        self.features = kwargs.pop("features", None)
         if self.features is None:
             self.features = features.get_default_features()
 
@@ -35,10 +37,15 @@ class HalloRichTextArea(widgets.Textarea):
 
         # construct a list of plugin objects, by querying the feature registry
         # and keeping the non-null responses from get_editor_plugin
-        self.plugins = CORE_HALLO_PLUGINS + list(filter(None, [
-            features.get_editor_plugin('hallo', feature_name)
-            for feature_name in self.features
-        ]))
+        self.plugins = CORE_HALLO_PLUGINS + list(
+            filter(
+                None,
+                [
+                    features.get_editor_plugin("hallo", feature_name)
+                    for feature_name in self.features
+                ],
+            )
+        )
         self.plugins.sort(key=lambda plugin: plugin.order)
 
         super().__init__(*args, **kwargs)
@@ -56,14 +63,14 @@ class HalloRichTextArea(widgets.Textarea):
     def get_context(self, name, value, attrs):
         context = super().get_context(name, value, attrs)
 
-        if self.options is not None and 'plugins' in self.options:
+        if self.options is not None and "plugins" in self.options:
             # explicit 'plugins' config passed in options, so use that
-            plugin_data = self.options['plugins']
+            plugin_data = self.options["plugins"]
         else:
             plugin_data = OrderedDict()
             for plugin in self.plugins:
                 plugin.construct_plugins_list(plugin_data)
-        context['widget']['plugins_json'] = json.dumps(plugin_data)
+        context["widget"]["plugins_json"] = json.dumps(plugin_data)
 
         return context
 
@@ -75,13 +82,14 @@ class HalloRichTextArea(widgets.Textarea):
 
     @cached_property
     def media(self):
-        media = Media(js=[
-            versioned_static('js/vendor/hallo.js'),
-            versioned_static('js/hallo-editor.js'),
-            versioned_static('js/hallo-telepath.js'),
-        ], css={
-            'all': [versioned_static('css/hallo.css')]
-        })
+        media = Media(
+            js=[
+                versioned_static("js/vendor/hallo.js"),
+                versioned_static("js/hallo-editor.js"),
+                versioned_static("js/hallo-telepath.js"),
+            ],
+            css={"all": [versioned_static("css/hallo.css")]},
+        )
 
         for plugin in self.plugins:
             media += plugin.media
@@ -90,7 +98,7 @@ class HalloRichTextArea(widgets.Textarea):
 
 
 class HalloRichTextAreaAdapter(WidgetAdapter):
-    js_constructor = 'wagtail.widgets.HalloRichTextArea'
+    js_constructor = "wagtail.widgets.HalloRichTextArea"
 
 
 register(HalloRichTextAreaAdapter(), HalloRichTextArea)

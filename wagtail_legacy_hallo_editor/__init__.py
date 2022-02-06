@@ -1,4 +1,6 @@
-default_app_config = "wagtail_legacy_hallo_editor.apps.WagtailLegacyHalloEditorAppConfig"
+default_app_config = (
+    "wagtail_legacy_hallo_editor.apps.WagtailLegacyHalloEditorAppConfig"
+)
 
 
 VERSION = (0, 1, 0)

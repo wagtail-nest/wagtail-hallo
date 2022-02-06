@@ -12,10 +12,10 @@ class TestDbWhitelisterMethods(TestCase):
         self.whitelister = EditorHTMLConverter().whitelister
 
     def test_clean_tag_node(self):
-        soup = BeautifulSoup('<a irrelevant="baz">foo</a>', 'html5lib')
+        soup = BeautifulSoup('<a irrelevant="baz">foo</a>', "html5lib")
         tag = soup.a
         self.whitelister.clean_tag_node(soup, tag)
-        self.assertEqual(str(tag), '<a>foo</a>')
+        self.assertEqual(str(tag), "<a>foo</a>")
 
 
 @unittest.skip("not implemented")
@@ -28,7 +28,9 @@ class TestDbWhitelister(TestCase):
         Assert that two HTML strings are equal at the DOM level
         (necessary because we can't guarantee the order that attributes are output in)
         """
-        self.assertEqual(BeautifulSoup(str1, 'html5lib'), BeautifulSoup(str2, 'html5lib'))
+        self.assertEqual(
+            BeautifulSoup(str1, "html5lib"), BeautifulSoup(str2, "html5lib")
+        )
 
     def test_page_link_is_rewritten(self):
         input_html = (
@@ -52,22 +54,24 @@ class TestDbWhitelister(TestCase):
         )
         output_html = self.whitelister.clean(input_html)
         expected = (
-            '<p>before</p><p>OMG <b>look</b> at this video of a kitten:'
+            "<p>before</p><p>OMG <b>look</b> at this video of a kitten:"
             ' <embed embedtype="media" url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" /></p><p>after</p>'
         )
         self.assertHtmlEqual(expected, output_html)
 
     def test_whitelist_with_feature_list(self):
-        converter = EditorHTMLConverter(features=['h1', 'bold', 'link', 'something_i_just_made_up'])
+        converter = EditorHTMLConverter(
+            features=["h1", "bold", "link", "something_i_just_made_up"]
+        )
         input_html = (
-            '<h1>this heading is allowed</h1> <h2>but not this one</h2> '
-            '<p><b>bold</b> <i>italic</i></p>'
+            "<h1>this heading is allowed</h1> <h2>but not this one</h2> "
+            "<p><b>bold</b> <i>italic</i></p>"
             '<p><a href="http://torchbox.com">external link</a> <a data-linktype="page" data-id="2" href="/">internal link</a></p>'
         )
         output_html = converter.to_database_format(input_html)
         expected = (
-            '<h1>this heading is allowed</h1> but not this one '
-            '<p><b>bold</b> italic</p>'
+            "<h1>this heading is allowed</h1> but not this one "
+            "<p><b>bold</b> italic</p>"
             '<p><a href="http://torchbox.com">external link</a> <a linktype="page" id="2">internal link</a></p>'
         )
         self.assertHtmlEqual(expected, output_html)

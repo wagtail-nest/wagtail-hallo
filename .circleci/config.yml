@@ -1,6 +1,14 @@
 version: 2
 
 jobs:
+  black:
+    docker:
+      - image: circleci/python:3.8
+    steps:
+      - checkout
+      - run: pip install black
+      - run: black wagtail_legacy_hallo_editor --check
+
   flake8:
     docker:
       - image: circleci/python:3.8
@@ -69,6 +77,7 @@ workflows:
   version: 2
   test:
     jobs:
+      - black
       - flake8
       - prettier
       - test
