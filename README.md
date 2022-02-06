@@ -190,7 +190,8 @@ Currently the frontend tooling is based on Node & NPM and is only used to format
 - `npm run fix` - Parses through JS/CSS files to fix anything it can
 - `npm run lint` - Runs linting
 - `npm run format` - Runs Prettier formatting on most files (non-Python)
-- `npm run preflight` - Runs all the linting/formatting checks and must be done before committing code
+- `npm test` - Runs tests (Jest)
+- `npm run preflight` - Runs all the linting/formatting/jest checks and must be done before committing code
 
 ### Release checklist
 

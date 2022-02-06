@@ -17,9 +17,9 @@ jobs:
       - run: pip install flake8
       - run: flake8 wagtail_legacy_hallo_editor
 
-  prettier:
+  preflight:
     docker:
-      - image: circleci/node:14
+      - image: circleci/node:16
     steps:
       - checkout:
 
@@ -29,8 +29,8 @@ jobs:
           - node-modules-{{ .Branch }}-
           - node-modules-master-
 
-      - run: npm install
-      - run: npm run lint
+      - run: npm ci
+      - run: npm run preflight
 
       - type: cache-save
         key: node-modules-{{ .Branch }}-{{ checksum "package-lock.json" }}
