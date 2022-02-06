@@ -47,7 +47,8 @@
     "ignorePatterns": [
       "coverage/",
       "node_modules",
-      "**/vendor/"
+      "**/vendor/",
+      "**/hallo-telepath.js"
     ],
     "globals": {
       "$": "readonly",
