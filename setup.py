@@ -40,7 +40,10 @@ setup(
         "Framework :: Wagtail",
         "Framework :: Wagtail :: 2",
     ],
-    install_requires=["Django>=3.0,<4.0", "Wagtail>=2.14,<2.18"],
+    install_requires=[
+        "Django>=3.0,<4.0",
+        "Wagtail>=2.14,<2.18",
+    ],
     extras_require={
         "testing": ["dj-database-url==0.5.0", "freezegun==0.3.15"],
     },
