@@ -6,12 +6,12 @@ from wagtail.core.models import Page
 
 
 class HalloTestPage(Page):
-    body = RichTextField(editor="legacy", blank=True)
+    body = RichTextField(editor="hallo", blank=True)
 
     body_stream = StreamField(
         [
             ("heading", blocks.CharBlock(form_classname="full title")),
-            ("paragraph", blocks.RichTextBlock(editor="legacy")),
+            ("paragraph", blocks.RichTextBlock(editor="hallo")),
         ]
     )
 

@@ -31,8 +31,8 @@ ALLOWED_HOSTS = ["localhost", "testserver"]
 # Application definition
 
 INSTALLED_APPS = [
-    "wagtail_legacy_hallo_editor",
-    "wagtail_legacy_hallo_editor.test",
+    "wagtail_hallo",
+    "wagtail_hallo.test",
     "wagtail.embeds",
     "wagtail.users",
     "wagtail.snippets",
@@ -61,7 +61,7 @@ MIDDLEWARE = [
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
 ]
 
-ROOT_URLCONF = "wagtail_legacy_hallo_editor.test.urls"
+ROOT_URLCONF = "wagtail_hallo.test.urls"
 
 TEMPLATES = [
     {
@@ -148,4 +148,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "test-media")
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "Wagtail Legacy Hallo Editor test site"
+WAGTAIL_SITE_NAME = "Wagtail Hallo test site"

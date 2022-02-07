@@ -1,8 +1,7 @@
 {
-  "name": "wagtail-legacy-hallo-editor",
+  "name": "wagtail-hallo",
   "version": "0.1.0",
   "description": "",
-  "main": "wagtail_legacy_hallo_editor/static_src/main.tsx",
   "scripts": {
     "format": "prettier --write '**/*.{js,md,css,scss,yaml,yml,json}'",
     "format:check": "prettier --check '**/*.{js,md,css,scss,yaml,yml,json}'",

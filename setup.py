@@ -4,7 +4,7 @@ from os import path
 
 from setuptools import find_packages, setup
 
-from wagtail_legacy_hallo_editor import __version__
+from wagtail_hallo import __version__
 
 
 this_directory = path.abspath(path.dirname(__file__))
@@ -12,9 +12,9 @@ with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 setup(
-    name="wagtail-legacy-hallo-editor",
+    name="wagtail-hallo",
     version=__version__,
-    description="Wagtail's legacy richtext editor - Hallo.",
+    description="Wagtail Hallo - The legacy richtext editor for Wagtail.",
     long_description=long_description,
     long_description_content_type='text/markdown',
     author="Wagtail core team",

@@ -1,6 +1,6 @@
-# Wagtail Legacy Hallo Editor
+# Wagtail Hallo - Rich Text Editor
 
-The legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](http://hallojs.org/).
+This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](http://hallojs.org/).
 
 **As of [Wagtail 2.0, the hallo.js editor is deprecated](https://docs.wagtail.org/en/stable/releases/2.0.html#new-rich-text-editor).**
 
@@ -16,18 +16,18 @@ The legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](http://hall
 ## Installing the Hallo Editor
 
 - Important: Requires jQuery and jQueryUI - which are not included and may not always be included with Wagtail.
-- `pip install wagtail-legacy-hallo-editor`
-- Add `'wagtail_legacy_hallo_editor'` to your settings.py `INSTALLED_APPS`
+- `pip install wagtail-hallo`
+- Add `'wagtail_hallo'` to your settings.py `INSTALLED_APPS`
 - **INSTRUCTIONS NEEDED FOR PACKAGE HERE**
 
 To use hallo.js on Wagtail 2.x, add the following to your settings:
 
 ```python
-    WAGTAILADMIN_RICH_TEXT_EDITORS = {
-        'legacy': {
-            'WIDGET': 'wagtail.admin.rich_text.HalloRichTextArea'
-        }
+WAGTAILADMIN_RICH_TEXT_EDITORS = {
+    'hallo': {
+        'WIDGET': 'wagtail_hallo.hallo.HalloRichTextArea'
     }
+}
 ```
 
 ## Using the Hallo Editor in `RichTextField`
@@ -39,7 +39,7 @@ from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page
 
 class MyHalloPage(Page):
-    body = RichTextField(editor='legacy')
+    body = RichTextField(editor='hallo')
 
     content_panels = Page.content_panels + [
         FieldPanel('body', classname='full'),
@@ -74,7 +74,7 @@ from wagtail.core.fields import StreamField
 class MyOtherHalloPage(Page):
     body = StreamField([
         ('heading', CharBlock(form_classname="full title")),
-        ('paragraph', RichTextBlock(editor='legacy')),
+        ('paragraph', RichTextBlock(editor='hallo')),
     ], blank=True)
 
     content_panels = Page.content_panels + [
@@ -160,26 +160,26 @@ The `wagtail.core.whitelist` module provides a few helper functions to assist in
 
 ## Development instructions
 
-- Check out this repo locally `git clone git@github.com:wagtail/wagtail-legacy-hallo-editor.git`
+- Check out this repo locally `git clone git@github.com:wagtail/wagtail-hallo.git`
 
 ### TEMPORARY INSTRUCTIONS
 
 - While this package is in development, use these instructions instead.
-- You will need to clone the repo into a folder accessible via your virtual env `git clone git@github.com:lb-/wagtail-legacy-hallo-editor.git`
+- You will need to clone the repo into a folder accessible via your virtual env `git clone git@github.com:lb-/wagtail-hallo.git`
 - Your local Wagtail repo that is used for development must be checked out at `https://github.com/lb-/wagtail/tree/feature/hallo-editor-removal`
 - **Important**: Delete the built static assets at `wagtail/admin/static` and then run the Wagtail build pipeline `nvm use` then `npm run build` - this is required so that validation can be done without the styles/JS provided by Wagtail and only the ones provided by the new package.
 
 ### Python (Django / Wagtail)
 
-- `pip install wagtail-legacy-hallo-editor --no-index --find-links file:///path/to/wagtail-legacy-hallo-editor`
-- Ensure `'wagtail_legacy_hallo_editor'` is added to your settings.py `INSTALLED_APPS`
+- `pip3 install -e ../path/to/wagtail-hallo/` -> this installs the package locally as [editable](https://pip.pypa.io/en/stable/cli/pip_install/#editable-installs)
+- Ensure `'wagtail_hallo'` is added to your settings.py `INSTALLED_APPS`
 - You will need to have a test application (e.g. Bakery Demo) and have a Page model to work with, along with a template.
   - see `test/testapp/models.py` for a reference model
   - see `test/testapp/templates/hallo_test_page.html` for a reference template
 - After creating the model, remember to run `python manage.py makemigrations` and `python manage.py migrate`
 - Run tests `python testmanage.py test` **WIP - not functional as yet**
-- Run linting `flake8 wagtail_legacy_hallo_editor`
-- Run formatting `black wagtail_legacy_hallo_editor`
+- Run linting `flake8 wagtail_hallo`
+- Run formatting `black wagtail_hallo`
 
 ### JavaScript & CSS (Frontend)
 

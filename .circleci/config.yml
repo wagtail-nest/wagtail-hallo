@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run: pip install black
-      - run: black wagtail_legacy_hallo_editor --check
+      - run: black wagtail_hallo --check
 
   flake8:
     docker:
@@ -15,7 +15,7 @@ jobs:
     steps:
       - checkout
       - run: pip install flake8
-      - run: flake8 wagtail_legacy_hallo_editor
+      - run: flake8 wagtail_hallo
 
   preflight:
     docker:

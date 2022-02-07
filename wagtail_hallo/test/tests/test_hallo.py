@@ -21,7 +21,7 @@ class BaseRichTextEditHandlerTestCase(TestCase):
         cached edit handlers should be cleared before and after each test run
         to ensure that no changes leak through to other tests.
         """
-        from wagtail_legacy_hallo_editor.test.testapp.models import (
+        from wagtail_hallo.test.testapp.models import (
             DefaultRichBlockFieldPage,
         )
 

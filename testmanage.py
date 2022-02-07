@@ -9,7 +9,7 @@ import warnings
 from django.core.management import execute_from_command_line
 
 
-os.environ["DJANGO_SETTINGS_MODULE"] = "wagtail_legacy_hallo_editor.test.settings"
+os.environ["DJANGO_SETTINGS_MODULE"] = "wagtail_hallo.test.settings"
 
 
 def make_parser():

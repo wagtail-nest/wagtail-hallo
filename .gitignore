@@ -1,14 +1,14 @@
 *.pyc
 /build
 /dist
-/wagtail_legacy_hallo_editor.egg-info
+/wagtail_hallo.egg-info
 /.coverage
 /htmlcov
 /.tox
 /venv
 /.vscode
 /site
-/test_wagtail_legacy_hallo_editor.db
+/test_wagtail_hallo.db
 /node_modules
 /test-static
 /test-media

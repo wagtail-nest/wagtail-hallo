@@ -16,9 +16,7 @@ from .plugins import CORE_HALLO_PLUGINS
 
 
 class HalloRichTextArea(widgets.Textarea):
-    template_name = (
-        "wagtail_wagtail_legacy_hallo_editor/widgets/hallo_rich_text_area.html"
-    )
+    template_name = "wagtail_hallo/widgets/hallo_rich_text_area.html"
 
     # this class's constructor accepts a 'features' kwarg
     accepts_features = True

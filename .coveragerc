@@ -1,6 +1,6 @@
 [run]
 branch = True
-include = wagtail_legacy_hallo_editor/*
+include = wagtail_hallo/*
 omit = */migrations/*,*/tests/*
 
 [report]
