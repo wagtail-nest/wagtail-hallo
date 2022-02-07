@@ -8,12 +8,11 @@
     "fix": "npm run fix:css && npm run fix:js",
     "fix:css": "stylelint **/*.css --fix",
     "fix:js": "eslint ./ --fix",
-    "lint:format": "prettier --check '**/*.{js,md,css,scss,yaml,yml,json}'",
+    "lint": "npm run lint:format && npm run lint:css && npm run lint:js",
     "lint:css": "stylelint **/*.css",
     "lint:js": "eslint ./ --max-warnings 0",
-    "lint": "npm run lint:format && npm run lint:css && npm run lint:js",
     "test": "jest",
-    "preflight": "npm run format && npm run lint && npm run test"
+    "preflight": "npm run format:check && npm run lint && npm run test"
   },
   "author": "",
   "license": "ISC",
