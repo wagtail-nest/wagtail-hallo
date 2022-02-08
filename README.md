@@ -30,7 +30,7 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
 }
 ```
 
-## Using the Hallo Editor in `RichTextField`
+### Using the Hallo Editor in `RichTextField`
 
 ```python
 # models.py
@@ -62,7 +62,7 @@ class MyHalloPage(Page):
 ```
 <!-- prettier-ignore-end -->
 
-## Using the Hallo Editor in `StreamField` via `RichTextBlock`
+### Using the Hallo Editor in `StreamField` via `RichTextBlock`
 
 ```python
 # models.py
@@ -107,8 +107,8 @@ Once the plugin has been created, it should be registered through the feature re
 A plugin `halloblockquote`, implemented in `myapp/js/hallo-blockquote.js`, that adds support for the `<blockquote>` tag, would be registered under the feature name `block-quote` as follows:
 
 ```python
-    from wagtail.admin.rich_text import HalloPlugin
     from wagtail.core import hooks
+    from wagtail_halo.plugins import HalloPlugin
 
     @hooks.register('register_rich_text_features')
     def register_embed_feature(features):
@@ -158,9 +158,13 @@ The following code will add the `<blockquote>` element to the whitelist whenever
 
 The `wagtail.core.whitelist` module provides a few helper functions to assist in defining these handlers: `allow_without_attributes`, a handler which preserves the element but strips out all of its attributes, and `attribute_rule` which accepts a dict specifying how to handle each attribute, and returns a handler function. This dict will map attribute names to either True (indicating that the attribute should be kept), False (indicating that it should be dropped), or a callable (which takes the initial attribute value and returns either a final value for the attribute, or None to drop the attribute).
 
-## Development instructions
+## Contributing
 
-- Check out this repo locally `git clone git@github.com:wagtail/wagtail-hallo.git`
+All contributions are welcome as the Wagtail core team will no longer be actively maintaining this project.
+
+### Development instructions
+
+- To make changes to this project, first clone this repository `git clone git@github.com:wagtail/wagtail-hallo.git`.
 
 ### TEMPORARY INSTRUCTIONS
 
@@ -197,3 +201,7 @@ Currently the frontend tooling is based on Node & NPM and is only used to format
 
 - [ ] Update `tox.ini` & `setup.py` with new supported Wagtail, Python or Django versions
 - [ ] Update changelog
+
+## Thanks
+
+Many thanks to all of our supporters, contributors, and users of Wagtail who built upon the amazing Hallo.js editor. We are thankful to the Wagtail core team and developers at Torchbox who sponsored the majority of the initial development. And a very special thanks to the original creator of the Hallo.js editor.
