@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "wagtail.sites",
     "wagtail.admin",
     "wagtail.core",
+    "wagtail.contrib.redirects",
+    "taggit",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -99,7 +101,10 @@ PASSWORD_HASHERS = ("django.contrib.auth.hashers.MD5PasswordHasher",)
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-    "default": "django.db.backends.sqlite3",
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    }
 }
 
 
@@ -149,3 +154,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "test-media")
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "Wagtail Hallo test site"
+
+WAGTAILADMIN_RICH_TEXT_EDITORS = {
+    "hallo": {"WIDGET": "wagtail_hallo.hallo.HalloRichTextArea"}
+}

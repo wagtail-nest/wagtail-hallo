@@ -61,6 +61,8 @@ def runtests():
         shutil.rmtree(STATIC_ROOT, ignore_errors=True)
         shutil.rmtree(MEDIA_ROOT, ignore_errors=True)
 
+    
+
 
 if __name__ == "__main__":
     runtests()

@@ -181,7 +181,8 @@ All contributions are welcome as the Wagtail core team will no longer be activel
   - see `test/testapp/models.py` for a reference model
   - see `test/testapp/templates/hallo_test_page.html` for a reference template
 - After creating the model, remember to run `python manage.py makemigrations` and `python manage.py migrate`
-- Run tests `python testmanage.py test` **WIP - not functional as yet**
+- Run tests `python testmanage.py test`
+- Run migrations for test models `django-admin makemigrations --settings=wagtail_hallo.test.settings`
 - Run linting `flake8 wagtail_hallo`
 - Run formatting `black wagtail_hallo`
 

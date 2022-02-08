@@ -9,11 +9,10 @@ from wagtail.core.blocks import RichTextBlock
 from wagtail.core.models import Page, get_page_models
 from wagtail.core.rich_text import features as feature_registry
 
-from hallo import HalloPlugin, HalloRichTextArea
+from wagtail_hallo.hallo import HalloRichTextArea
 from .utils import TestUtils
 
 
-@unittest.skip("TODO")
 class BaseRichTextEditHandlerTestCase(TestCase):
     def _clear_edit_handler_cache(self):
         """
@@ -21,15 +20,15 @@ class BaseRichTextEditHandlerTestCase(TestCase):
         cached edit handlers should be cleared before and after each test run
         to ensure that no changes leak through to other tests.
         """
-        from wagtail_hallo.test.testapp.models import (
-            DefaultRichBlockFieldPage,
+        from wagtail_hallo.test.models import (
+            HalloTestPage,
         )
 
         rich_text_block = (
-            DefaultRichBlockFieldPage.get_edit_handler()
+            HalloTestPage.get_edit_handler()
             .get_form_class()
-            .base_fields["body"]
-            .block.child_blocks["rich_text"]
+            .base_fields["body_stream"]
+            .block.child_blocks["paragraph"]
         )
         if hasattr(rich_text_block, "field"):
             del rich_text_block.field
@@ -46,31 +45,14 @@ class BaseRichTextEditHandlerTestCase(TestCase):
         super().tearDown()
 
 
-@unittest.skip("TODO")
-class TestHalloPlugin(SimpleTestCase):
-    def test_versioned_static_media(self):
-        plugin = HalloPlugin(
-            js=["wagtailadmin/js/vendor/hallo.js"],
-            css={
-                "all": ["wagtailadmin/css/panels/hallo.css"],
-            },
-        )
-        media_html = str(plugin.media)
-        self.assertRegex(media_html, r"hallo.js\?v=(\w+)")
-        self.assertRegex(media_html, r"hallo.css\?v=(\w+)")
-
-
-@unittest.skip("TODO")
-@override_settings(
-    WAGTAILADMIN_RICH_TEXT_EDITORS={
-        "default": {"WIDGET": "wagtail.admin.rich_text.HalloRichTextArea"},
-    }
-)
 class TestHalloRichText(BaseRichTextEditHandlerTestCase, TestUtils):
+    fixtures = ["test.json"]
+
     def setUp(self):
         super().setUp()
+
         # Find root page
-        self.root_page = Page.objects.get(id=2)
+        self.root_page = Page.objects.get(pk=2)
 
         self.login()
 
@@ -78,7 +60,7 @@ class TestHalloRichText(BaseRichTextEditHandlerTestCase, TestUtils):
         response = self.client.get(
             reverse(
                 "wagtailadmin_pages:add",
-                args=("tests", "defaultrichtextfieldpage", self.root_page.id),
+                args=("wagtail_hallo_test", "hallotestpage", self.root_page.id),
             )
         )
 
@@ -90,17 +72,11 @@ class TestHalloRichText(BaseRichTextEditHandlerTestCase, TestUtils):
 
         # check that media for the default hallo features (but not others) is being imported
         self.assertContains(
-            response, "wagtaildocs/js/hallo-plugins/hallo-wagtaildoclink.js"
+            response, "js/hallo-plugins/hallo-wagtaildoclink.js"
         )
         self.assertNotContains(response, "testapp/js/hallo-blockquote.js")
 
 
-@unittest.skip("TODO")
-@override_settings(
-    WAGTAILADMIN_RICH_TEXT_EDITORS={
-        "default": {"WIDGET": "wagtail.admin.rich_text.HalloRichTextArea"},
-    }
-)
 class TestHalloJsHeadingOrder(BaseRichTextEditHandlerTestCase, TestUtils):
     def test_heading_order(self):
         # Using the `register_rich_text_features` doesn't work here,
@@ -115,7 +91,6 @@ class TestHalloJsHeadingOrder(BaseRichTextEditHandlerTestCase, TestUtils):
         self.assertIn(expected_options, html)
 
 
-@unittest.skip("TODO")
 class TestWidgetWhitelisting(TestCase, TestUtils):
     def test_default_whitelist(self):
         widget = HalloRichTextArea()
@@ -210,7 +185,6 @@ class TestWidgetWhitelisting(TestCase, TestUtils):
         )
 
 
-@unittest.skip("TODO")
 class TestWidgetRendering(TestCase, TestUtils):
     fixtures = ["test.json"]
 
@@ -247,12 +221,10 @@ class TestWidgetRendering(TestCase, TestUtils):
         )
 
 
-@unittest.skip("TODO")
 @override_settings(
     WAGTAILADMIN_RICH_TEXT_EDITORS={
-        "default": {"WIDGET": "wagtail.admin.rich_text.HalloRichTextArea"},
-        "custom": {
-            "WIDGET": "wagtail.admin.rich_text.HalloRichTextArea",
+        "hallo": {
+            "WIDGET": "wagtail_hallo.hallo.HalloRichTextArea",
             "OPTIONS": {
                 "plugins": {
                     "halloheadings": {"formatBlocks": ["p", "h2"]},
@@ -274,7 +246,7 @@ class TestHalloJsWithCustomPluginOptions(BaseRichTextEditHandlerTestCase, TestUt
         response = self.client.get(
             reverse(
                 "wagtailadmin_pages:add",
-                args=("tests", "customrichtextfieldpage", self.root_page.id),
+                args=("wagtail_hallo_test", "hallotestpage", self.root_page.id),
             )
         )
 
@@ -287,7 +259,7 @@ class TestHalloJsWithCustomPluginOptions(BaseRichTextEditHandlerTestCase, TestUt
             'makeHalloRichTextEditable("id_body", {"halloheadings": {"formatBlocks": ["p", "h2"]}});',
         )
 
-    @unittest.expectedFailure  # TODO(telepath)
+    @unittest.skip("TODO - Telepath")
     def test_custom_editor_in_rich_text_block(self):
         block = RichTextBlock(editor="custom")
 
@@ -300,12 +272,7 @@ class TestHalloJsWithCustomPluginOptions(BaseRichTextEditHandlerTestCase, TestUt
         )
 
 
-@unittest.skip("TODO")
-@override_settings(
-    WAGTAILADMIN_RICH_TEXT_EDITORS={
-        "default": {"WIDGET": "wagtail.admin.rich_text.HalloRichTextArea"},
-    }
-)
+
 class TestHalloJsWithFeaturesKwarg(BaseRichTextEditHandlerTestCase, TestUtils):
     def setUp(self):
         super().setUp()
@@ -319,7 +286,7 @@ class TestHalloJsWithFeaturesKwarg(BaseRichTextEditHandlerTestCase, TestUtils):
         response = self.client.get(
             reverse(
                 "wagtailadmin_pages:add",
-                args=("tests", "richtextfieldwithfeaturespage", self.root_page.id),
+                args=("wagtail_hallo_test", "richtextfieldwithfeaturespage", self.root_page.id),
             )
         )
 
@@ -341,7 +308,7 @@ class TestHalloJsWithFeaturesKwarg(BaseRichTextEditHandlerTestCase, TestUtils):
             response, "wagtaildocs/js/hallo-plugins/hallo-wagtaildoclink.js"
         )
 
-    @unittest.expectedFailure  # TODO(telepath)
+    @unittest.skip("TODO - Telepath")
     def test_features_list_on_rich_text_block(self):
         block = RichTextBlock(features=["quotation", "embed", "made-up-feature"])
 
@@ -363,17 +330,13 @@ class TestHalloJsWithFeaturesKwarg(BaseRichTextEditHandlerTestCase, TestUtils):
         )
 
 
-@unittest.skip("TODO")
+
 @override_settings(
     WAGTAILADMIN_RICH_TEXT_EDITORS={
-        "default": {
-            "WIDGET": "wagtail.admin.rich_text.HalloRichTextArea",
+        "hallo": {
+            "WIDGET": "wagtail_hallo.hallo.HalloRichTextArea",
             "OPTIONS": {"features": ["quotation", "image"]},
-        },
-        "custom": {
-            "WIDGET": "wagtail.admin.rich_text.HalloRichTextArea",
-            "OPTIONS": {"features": ["quotation", "image"]},
-        },
+        }
     }
 )
 class TestHalloJsWithCustomFeatureOptions(BaseRichTextEditHandlerTestCase, TestUtils):
@@ -389,7 +352,7 @@ class TestHalloJsWithCustomFeatureOptions(BaseRichTextEditHandlerTestCase, TestU
         response = self.client.get(
             reverse(
                 "wagtailadmin_pages:add",
-                args=("tests", "customrichtextfieldpage", self.root_page.id),
+                args=("wagtail_hallo_test", "hallotestpage", self.root_page.id),
             )
         )
 
@@ -407,7 +370,7 @@ class TestHalloJsWithCustomFeatureOptions(BaseRichTextEditHandlerTestCase, TestU
         response = self.client.get(
             reverse(
                 "wagtailadmin_pages:add",
-                args=("tests", "richtextfieldwithfeaturespage", self.root_page.id),
+                args=("wagtail_hallo_test", "richtextfieldwithfeaturespage", self.root_page.id),
             )
         )
         self.assertEqual(response.status_code, 200)
@@ -425,7 +388,7 @@ class TestHalloJsWithCustomFeatureOptions(BaseRichTextEditHandlerTestCase, TestU
             response, "wagtaildocs/js/hallo-plugins/hallo-wagtaildoclink.js"
         )
 
-    @unittest.skip("TODO - (telepath)")
+    @unittest.skip("TODO - Telepath")
     def test_custom_features_option_on_rich_text_block(self):
         block = RichTextBlock(editor="custom")
 
