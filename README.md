@@ -169,7 +169,7 @@ All contributions are welcome as the Wagtail core team will no longer be activel
 ### TEMPORARY INSTRUCTIONS
 
 - While this package is in development, use these instructions instead.
-- You will need to clone the repo into a folder accessible via your virtual env `git clone git@github.com:lb-/wagtail-hallo.git`
+- You will need to clone the repo into a folder accessible via your virtual env `git clone git@github.com:wagtail/wagtail-hallo.git`
 - Your local Wagtail repo that is used for development must be checked out at `https://github.com/lb-/wagtail/tree/feature/hallo-editor-removal`
 - **Important**: Delete the built static assets at `wagtail/admin/static` and then run the Wagtail build pipeline `nvm use` then `npm run build` - this is required so that validation can be done without the styles/JS provided by Wagtail and only the ones provided by the new package.
 
