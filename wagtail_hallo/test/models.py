@@ -21,11 +21,12 @@ class HalloTestPage(Page):
     ]
 
 
-
 class RichTextFieldWithFeaturesPage(Page):
-    body = RichTextField(editor="hallo",features=['quotation', 'embed', 'made-up-feature'])
+    body = RichTextField(
+        editor="hallo", features=["quotation", "embed", "made-up-feature"]
+    )
 
     content_panels = [
-        FieldPanel('title', classname="full title"),
-        FieldPanel('body'),
+        FieldPanel("title", classname="full title"),
+        FieldPanel("body"),
     ]

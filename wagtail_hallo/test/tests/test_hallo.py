@@ -71,9 +71,7 @@ class TestHalloRichText(BaseRichTextEditHandlerTestCase, TestUtils):
         self.assertContains(response, 'makeHalloRichTextEditable("id_body",')
 
         # check that media for the default hallo features (but not others) is being imported
-        self.assertContains(
-            response, "js/hallo-plugins/hallo-wagtaildoclink.js"
-        )
+        self.assertContains(response, "js/hallo-plugins/hallo-wagtaildoclink.js")
         self.assertNotContains(response, "testapp/js/hallo-blockquote.js")
 
 
@@ -272,7 +270,6 @@ class TestHalloJsWithCustomPluginOptions(BaseRichTextEditHandlerTestCase, TestUt
         )
 
 
-
 class TestHalloJsWithFeaturesKwarg(BaseRichTextEditHandlerTestCase, TestUtils):
     def setUp(self):
         super().setUp()
@@ -286,7 +283,11 @@ class TestHalloJsWithFeaturesKwarg(BaseRichTextEditHandlerTestCase, TestUtils):
         response = self.client.get(
             reverse(
                 "wagtailadmin_pages:add",
-                args=("wagtail_hallo_test", "richtextfieldwithfeaturespage", self.root_page.id),
+                args=(
+                    "wagtail_hallo_test",
+                    "richtextfieldwithfeaturespage",
+                    self.root_page.id,
+                ),
             )
         )
 
@@ -330,7 +331,6 @@ class TestHalloJsWithFeaturesKwarg(BaseRichTextEditHandlerTestCase, TestUtils):
         )
 
 
-
 @override_settings(
     WAGTAILADMIN_RICH_TEXT_EDITORS={
         "hallo": {
@@ -370,7 +370,11 @@ class TestHalloJsWithCustomFeatureOptions(BaseRichTextEditHandlerTestCase, TestU
         response = self.client.get(
             reverse(
                 "wagtailadmin_pages:add",
-                args=("wagtail_hallo_test", "richtextfieldwithfeaturespage", self.root_page.id),
+                args=(
+                    "wagtail_hallo_test",
+                    "richtextfieldwithfeaturespage",
+                    self.root_page.id,
+                ),
             )
         )
         self.assertEqual(response.status_code, 200)
