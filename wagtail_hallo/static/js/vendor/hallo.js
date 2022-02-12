@@ -1,6 +1,7 @@
 /* Hallo 1.0.4 - rich text editor for jQuery UI
  * by Henri Bergius and contributors. Available under the MIT license.
  * See http://hallojs.org for more information
+ * Original source https://github.com/bergie/hallo/blob/greenkeeper/grunt-1.0.4/src/hallo.coffee
  */ (function () {
   (function (jQuery) {
     return jQuery.widget('IKS.hallo', {

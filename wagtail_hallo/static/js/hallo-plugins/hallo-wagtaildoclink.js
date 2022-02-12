@@ -1,5 +1,7 @@
 'use strict';
 
+// original source - https://github.com/wagtail/wagtail/blob/stable/2.16.x/wagtail/documents/static_src/wagtaildocs/js/hallo-plugins/hallo-wagtaildoclink.js
+
 (function () {
   // hallo-wagtaildoclink
   $.widget('IKS.hallowagtaildoclink', {

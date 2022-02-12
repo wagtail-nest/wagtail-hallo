@@ -1,5 +1,7 @@
 'use strict';
 
+// original source - https://github.com/wagtail/wagtail/blob/stable/2.16.x/wagtail/images/static_src/wagtailimages/js/hallo-plugins/hallo-wagtailimage.js
+
 (function () {
   // hallo-wagtailimage
   $.widget('IKS.hallowagtailimage', {

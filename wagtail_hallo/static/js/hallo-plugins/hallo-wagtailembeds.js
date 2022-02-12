@@ -1,7 +1,9 @@
 'use strict';
 
+// original source - https://github.com/wagtail/wagtail/blob/stable/2.16.x/wagtail/embeds/static_src/wagtailembeds/js/hallo-plugins/hallo-wagtailembeds.js
+
 (function () {
-  // hallow-wagtailembeds
+  // hallo-wagtailembeds
   $.widget('IKS.hallowagtailembeds', {
     options: {
       uuid: '',

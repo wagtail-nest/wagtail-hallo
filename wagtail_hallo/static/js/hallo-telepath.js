@@ -1,5 +1,7 @@
 'use strict';
 
+// original source - https://github.com/wagtail/wagtail/blob/stable/2.16.x/client/src/entrypoints/admin/telepath/widgets.js
+
 function _typeof(obj) {
   '@babel/helpers - typeof';
 
