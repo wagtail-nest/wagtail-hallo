@@ -3,6 +3,7 @@ from wagtail.admin.rich_text.converters.editor_html import (
     PageLinkHandler,
     WhitelistRule,
 )
+from wagtail.core.telepath import register # unused
 from wagtail.core import hooks
 from wagtail.core.whitelist import allow_without_attributes, attribute_rule, check_url
 

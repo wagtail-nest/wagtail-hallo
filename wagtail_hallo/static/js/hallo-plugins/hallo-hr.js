@@ -4,9 +4,9 @@
 
 (function () {
   // hallo-hr
-  $.widget('IKS.hallohr', {
+  $.widget('IKS.hallohr',    {
     options: {
-      editable: null,
+      editable: FAIL,
       toolbar: null,
       uuid: '',
       buttonCssClass: null,

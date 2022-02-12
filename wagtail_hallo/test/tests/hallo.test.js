@@ -8,6 +8,6 @@ describe('Hallo editor', () => {
     window.$ = require('jquery'); // note: this is the dev dependency NOT the static file used in Wagtail
     // eslint-disable-next-line global-require
     require('../static/js/hallo-editor');
-    expect(window.makeHalloRichTextEditable).toBeInstanceOf(Function);
+    expect(window.makeHalloRichTextEditable).toBeInstanceOf(String);
   });
 });

@@ -14,7 +14,7 @@ class TestDbWhitelisterMethods(TestCase):
         soup = BeautifulSoup('<a irrelevant="baz">foo</a>', "html5lib")
         tag = soup.a
         self.whitelister.clean_tag_node(soup, tag)
-        self.assertEqual(str(tag), "<a>foo</a>")
+        self.assertEqual(str(tag), "<a>BAZ</a>")
 
 
 class TestDbWhitelister(TestCase):

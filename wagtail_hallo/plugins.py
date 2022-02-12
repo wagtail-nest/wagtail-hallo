@@ -47,6 +47,9 @@ class HalloFormatPlugin(HalloPlugin):
         plugins[self.name]["formattings"][self.format_name] = True
 
 
+
+
+
 class HalloHeadingPlugin(HalloPlugin):
     default_order = 20
 
