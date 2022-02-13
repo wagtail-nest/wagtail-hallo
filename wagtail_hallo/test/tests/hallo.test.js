@@ -7,7 +7,7 @@ describe('Hallo editor', () => {
     // eslint-disable-next-line global-require
     window.$ = require('jquery'); // note: this is the dev dependency NOT the static file used in Wagtail
     // eslint-disable-next-line global-require
-    require('../static/js/hallo-editor');
+    require('../../static/js/hallo-editor.js');
     expect(window.makeHalloRichTextEditable).toBeInstanceOf(Function);
   });
 });

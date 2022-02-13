@@ -8,7 +8,7 @@
     "fix": "npm run fix:css && npm run fix:js",
     "fix:css": "stylelint **/*.css --fix",
     "fix:js": "eslint ./ --fix",
-    "lint": "npm run lint:format && npm run lint:css && npm run lint:js",
+    "lint": "npm run lint:css && npm run lint:js",
     "lint:css": "stylelint **/*.css",
     "lint:js": "eslint ./ --max-warnings 0",
     "test": "jest",
