@@ -1,4 +1,4 @@
-# Contributing to Wagtail Hello
+# Contributing to Wagtail Hallo
 
 Thank you for considering to help maintain the Wagtail Hallo editor.
 
