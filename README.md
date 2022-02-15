@@ -1,5 +1,7 @@
 # Wagtail Hallo - Rich Text Editor
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Wagtail Hallo CI](https://github.com/wagtail/wagtail-hallo/actions/workflows/test.yml/badge.svg)](https://github.com/wagtail/wagtail-hallo/actions/workflows/test.yml) [![PyPI version](https://badge.fury.io/py/wagtail-hallo.svg)](https://badge.fury.io/py/wagtail-hallo)
+
 This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](http://hallojs.org/).
 
 **As of [Wagtail 2.0, the hallo.js editor is deprecated](https://docs.wagtail.org/en/stable/releases/2.0.html#new-rich-text-editor).**
@@ -13,14 +15,23 @@ This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](htt
 - This package is a source of security concerns (XSS injections, not CSP compatible) and allows injection of undesirable content or formatting (e.g. images in headings, or headings in lists).
 - There is no guarantee that this package will be compatible with Wagtail beyond the supported versions listed above.
 
+## Release Notes
+
+- See the [Changelog](https://github.com/wagtail/wagtail-hallo/blob/main/CHANGELOG.md).
+
+## Supported Versions
+
+- Python 3.7, 3.8, 3.9
+- Django 3.1, 3.2. 4.0
+- Wagtail 2.14, 2.15, 2.16, 2.17
+
 ## Installing the Hallo Editor
 
 - Important: Requires jQuery and jQueryUI - which are not included and may not always be included with Wagtail.
 - `pip install wagtail-hallo`
 - Add `'wagtail_hallo'` to your settings.py `INSTALLED_APPS`
-- **INSTRUCTIONS NEEDED FOR PACKAGE HERE**
 
-To use hallo.js on Wagtail 2.x, add the following to your settings:
+To use Wagtail hallo on Wagtail 2.x, add the following to your settings:
 
 ```python
 WAGTAILADMIN_RICH_TEXT_EDITORS = {
@@ -166,13 +177,6 @@ All contributions are welcome as the Wagtail core team will no longer be activel
 
 - To make changes to this project, first clone this repository `git clone git@github.com:wagtail/wagtail-hallo.git`.
 
-### TEMPORARY INSTRUCTIONS
-
-- While this package is in development, use these instructions instead.
-- You will need to clone the repo into a folder accessible via your virtual env `git clone git@github.com:wagtail/wagtail-hallo.git`
-- Your local Wagtail repo that is used for development must be checked out at `https://github.com/lb-/wagtail/tree/feature/hallo-editor-removal`
-- **Important**: Delete the built static assets at `wagtail/admin/static` and then run the Wagtail build pipeline `nvm use` then `npm run build` - this is required so that validation can be done without the styles/JS provided by Wagtail and only the ones provided by the new package.
-
 ### Python (Django / Wagtail)
 
 - `pip3 install -e ../path/to/wagtail-hallo/` -> this installs the package locally as [editable](https://pip.pypa.io/en/stable/cli/pip_install/#editable-installs)
@@ -200,9 +204,15 @@ Currently the frontend tooling is based on Node & NPM and is only used to format
 
 ### Release checklist
 
-- [ ] Update `tox.ini` & `setup.py` with new supported Wagtail, Python or Django versions
-- [ ] Update changelog
+- [ ] Update `tox.ini`, `setup.py`, `README.md` with new supported Python, Django, or Wagtail versions
+- [ ] Update `setup.py` with new release version
+- [ ] Update `package.json` with new release version (note: npm package not deployed, however good to keep in sync), run `npm install` after to update `package-lock.json`
+- [ ] Update `CHANGELOG.md` with the release date
+- [ ] Push to Pypi
+  - `pip install twine`
+  - `python3 setup.py clean --all sdist bdist_wheel`
+  - `twine upload dist/*` <-- pushes to PyPI
 
 ## Thanks
 
-Many thanks to all of our supporters, contributors, and users of Wagtail who built upon the amazing Hallo.js editor. We are thankful to the Wagtail core team and developers at Torchbox who sponsored the majority of the initial development. And a very special thanks to the original creator of the Hallo.js editor.
+Many thanks to all of our supporters, [contributors](https://github.com/wagtail/wagtail-hallo/blob/main/CONTRIBUTORS.md), and users of Wagtail who built upon the amazing Hallo.js editor. We are thankful to the Wagtail core team and developers at Torchbox who sponsored the majority of the initial development. And a very special thanks to the original creator of the Hallo.js editor.
