@@ -212,6 +212,8 @@ Currently the frontend tooling is based on Node & NPM and is only used to format
   - `pip install twine`
   - `python3 setup.py clean --all sdist bdist_wheel`
   - `twine upload dist/*` <-- pushes to PyPI
+- [ ] Create a stable release branch (e.g. `stable/1.0.x`)
+- [ ] Add a Github release (e.g. `v1.0.0`)
 
 ## Thanks
 
