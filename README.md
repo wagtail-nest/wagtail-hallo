@@ -6,12 +6,12 @@ This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](htt
 
 **As of [Wagtail 2.0, the hallo.js editor is deprecated](https://docs.wagtail.org/en/stable/releases/2.0.html#new-rich-text-editor).**
 
-**Status** This package should be compatible with Wagtail 2.17 and earlier versions, however, it will no longer receive bug fixes or be actively maintained. Pull requests will be accepted and if maintainers wish to support this outside of the Core Wagtail team please raise an Issue to discuss this.
+**Status** This package should be compatible with Wagtail 2.17 and earlier versions. However, it will no longer receive bug fixes or be actively maintained. Pull requests will be accepted and if maintainers wish to support this outside of the core Wagtail team, please raise an issue to discuss this.
 
 ## Major risks of using this package
 
 - Please be aware of the [known hallo.js issues](https://github.com/wagtail/wagtail/issues?q=is%3Aissue+hallo+is%3Aclosed+label%3A%22status%3AWon%27t+Fix%22) should you want to keep using it.
-- Hallo’s has inappropriate handling of HTML and editor input – it is not reliable, has browser-specific inconsistent behavior, is not a good user experience and is not accessible.
+- Hallo.js has inappropriate handling of HTML and editor input – it is not reliable, has browser-specific inconsistent behavior, is not a good user experience and is not accessible.
 - This package is a source of security concerns (XSS injections, not CSP compatible) and allows injection of undesirable content or formatting (e.g. images in headings, or headings in lists).
 - There is no guarantee that this package will be compatible with Wagtail beyond the supported versions listed above.
 
@@ -27,11 +27,11 @@ This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](htt
 
 ## Installing the Hallo Editor
 
-- Important: Requires jQuery and jQueryUI - which are not included and may not always be included with Wagtail.
+- Important: requires jQuery and jQueryUI, which are not included and may not always be included with Wagtail.
 - `pip install wagtail-hallo`
 - Add `'wagtail_hallo'` to your settings.py `INSTALLED_APPS`
 
-To use Wagtail hallo on Wagtail 2.x, add the following to your settings:
+To use wagtail-hallo on Wagtail 2.x, add the following to your settings:
 
 ```python
 WAGTAILADMIN_RICH_TEXT_EDITORS = {
@@ -192,7 +192,7 @@ All contributions are welcome as the Wagtail core team will no longer be activel
 
 ### JavaScript & CSS (Frontend)
 
-Currently the frontend tooling is based on Node & NPM and is only used to format and check code, this repository intentionally does not use any build tools and as such JavaScript and CSS must be written without that requirement.
+Currently the frontend tooling is based on Node & NPM and is only used to format and check code. This repository intentionally does not use any build tools and as such JavaScript and CSS must be written without that requirement.
 
 - `nvm use` - Ensures you are on the right node version
 - `npm install --no-save` - Install NPM packages
