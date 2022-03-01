@@ -119,7 +119,7 @@ A plugin `halloblockquote`, implemented in `myapp/js/hallo-blockquote.js`, that 
 
 ```python
     from wagtail.core import hooks
-    from wagtail_halo.plugins import HalloPlugin
+    from wagtail_hallo.plugins import HalloPlugin
 
     @hooks.register('register_rich_text_features')
     def register_embed_feature(features):
