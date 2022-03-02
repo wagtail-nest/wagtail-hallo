@@ -16,7 +16,7 @@ setup(
     version=__version__,
     description="Wagtail Hallo - The legacy richtext editor for Wagtail.",
     long_description=long_description,
-    long_description_content_type='text/markdown',
+    long_description_content_type="text/markdown",
     author="Wagtail core team",
     author_email="hello@wagtail.org",
     url="https://github.com/wagtail/wagtail-hallo",

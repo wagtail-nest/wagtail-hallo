@@ -9,7 +9,7 @@ class TestUtils:
         """
         user_model = get_user_model()
         # Create a user
-        user_data = dict()
+        user_data = {}
         user_data[user_model.USERNAME_FIELD] = "test@email.com"
         user_data["email"] = "test@email.com"
         user_data["password"] = "password"
