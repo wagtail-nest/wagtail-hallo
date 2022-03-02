@@ -21,19 +21,10 @@
     "@wagtail/eslint-config-wagtail": "^0.4.0",
     "@wagtail/stylelint-config-wagtail": "^0.3.2",
     "eslint": "^8.2.0",
-    "eslint-config-airbnb": "^19.0.2",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.27.1",
-    "eslint-plugin-react-hooks": "^4.3.0",
     "jest": "^27.4.7",
     "jquery": "^3.6.0",
     "prettier": "^2.5.1",
-    "stylelint": "^14.3.0",
-    "stylelint-config-prettier-scss": "^0.0.1",
-    "stylelint-config-recommended-scss": "^5.0.2",
-    "stylelint-declaration-strict-value": "^1.8.0"
+    "stylelint": "^14.3.0"
   },
   "eslintConfig": {
     "extends": [
