@@ -1,12 +1,6 @@
 name: Wagtail Hallo CI
 
-on:
-  push:
-    branches:
-      - main
-      - 'stable/**'
-
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   check-client:
@@ -25,27 +19,20 @@ jobs:
         run: npm ci
       - run: npm run preflight
 
-  check-server:
+  check-server-black:
+    - name: Black?!
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
-      - name: Install Tox
-        run: |
-          python -m pip install tox
-      - name: Check flake8
-        run: |
-          tox
-        env:
-          TOXENV: flake8
-      - name: Check black
-        run: |
-          tox
-        env:
-          TOXENV: black
+      - name: Python black Lint
+        uses: psf/black@stable
+
+  check-server-flake8:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Python flake8 Lint
+        uses: py-actions/flake8@v2.0.0
 
   test-sqlite:
     runs-on: ubuntu-latest
