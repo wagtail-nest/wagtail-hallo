@@ -22,8 +22,8 @@ This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](htt
 ## Supported Versions
 
 - Python 3.7, 3.8, 3.9
-- Django 3.1, 3.2. 4.0
-- Wagtail 2.14, 2.15, 2.16, 2.17
+- Django 3.2. 4.0
+- Wagtail 2.15, 2.16
 
 ## Installing the Hallo Editor
 
@@ -203,7 +203,8 @@ Currently the frontend tooling is based on Node & NPM and is only used to format
 
 ### Release checklist
 
-- [ ] Update `tox.ini`, `setup.py`, `README.md` with new supported Python, Django, or Wagtail versions
+- [ ] Update `tox.ini`, `setup.py`, `README.md` with new supported Python, Django, or Wagtail versions.
+  - Add or remove `"Development Status :: # - Alpha"` based on status (# being a number)
 - [ ] Update `setup.py` with new release version
 - [ ] Update `CHANGELOG.md` with the release date
 - [ ] Push to PyPI

@@ -9,4 +9,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - Extract all Wagtail Hallo editor code from the Wagtail core codebase into a new package, prepare main documents _LB (Ben Johnston)_
-- Set up CI, code infrastructure, basic unit tests for this codebase _LB (Ben Johnston), Dan Braghis_
+- Set up CI, code infrastructure, basic unit tests for this codebase _LB (Ben Johnston), Dan Braghis, & Thibaud Colas_
