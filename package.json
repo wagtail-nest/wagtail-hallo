@@ -1,6 +1,6 @@
 {
   "name": "wagtail-hallo",
-  "version": "0.1.0",
+  "version": "0.1.0-dev",
   "description": "",
   "scripts": {
     "format": "prettier --write '**/*.{js,md,css,scss,yaml,yml,json}'",
@@ -15,7 +15,7 @@
     "preflight": "npm run format:check && npm run lint && npm run test"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@wagtail/eslint-config-wagtail": "^0.4.0",
     "@wagtail/stylelint-config-wagtail": "^0.3.2",

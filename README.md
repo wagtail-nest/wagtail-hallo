@@ -205,7 +205,6 @@ Currently the frontend tooling is based on Node & NPM and is only used to format
 
 - [ ] Update `tox.ini`, `setup.py`, `README.md` with new supported Python, Django, or Wagtail versions
 - [ ] Update `setup.py` with new release version
-- [ ] Update `package.json` with new release version (note: npm package not deployed, however good to keep in sync), run `npm install` after to update `package-lock.json`
 - [ ] Update `CHANGELOG.md` with the release date
 - [ ] Push to PyPI
   - `pip install twine`
