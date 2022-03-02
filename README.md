@@ -110,7 +110,7 @@ class MyOtherHalloPage(Page):
 
 ## Extending the Hallo Editor
 
-The legacy hallo.js editor’s functionality can be extended through plugins. For information on developing custom `hallo.js` plugins, see the project's page: https://github.com/bergie/hallo
+The legacy hallo.js editor’s functionality can be extended through plugins. For information on developing custom `hallo.js` plugins, see the project's page: <https://github.com/bergie/hallo>.
 
 Once the plugin has been created, it should be registered through the feature registry's `register_editor_plugin(editor, feature_name, plugin)` method. For a `hallo.js` plugin, the `editor` parameter should always be `'hallo'`.
 
@@ -135,8 +135,8 @@ The constructor for `HalloPlugin` accepts the following keyword arguments:
 
 - `name` - the plugin name as defined in the JavaScript code. `hallo.js` plugin names are prefixed with the `"IKS."` namespace, but the name passed here should be without the prefix.
 - `options` - a dictionary (or other JSON-serialisable object) of options to be passed to the JavaScript plugin code on initialisation
-- `js` - a list of JavaScript files to be imported for this plugin, defined in the same way as a [Django form media](django:topics/forms/media) definition
-- `css` - a dictionary of CSS files to be imported for this plugin, defined in the same way as a [Django form media](django:topics/forms/media) definition
+- `js` - a list of JavaScript files to be imported for this plugin, defined in the same way as a [Django form media](https://docs.djangoproject.com/en/4.0/topics/forms/media/) definition
+- `css` - a dictionary of CSS files to be imported for this plugin, defined in the same way as a [Django form media](https://docs.djangoproject.com/en/4.0/topics/forms/media/) definition
 - `order` - an index number (default 100) specifying the order in which plugins should be listed, which in turn determines the order buttons will appear in the toolbar
 
 When writing the front-end code for the plugin, Wagtail’s Hallo implementation offers two extension points:
@@ -180,7 +180,7 @@ All contributions are welcome as the Wagtail core team will no longer be activel
 
 - `pip3 install -e ../path/to/wagtail-hallo/` -> this installs the package locally as [editable](https://pip.pypa.io/en/stable/cli/pip_install/#editable-installs)
 - Ensure `'wagtail_hallo'` is added to your settings.py `INSTALLED_APPS`
-- You will need to have a test application (e.g. Bakery Demo) and have a Page model to work with, along with a template.
+- You will need to have a test application (e.g. [Bakery Demo](https://github.com/wagtail/bakerydemo)) and have a Page model to work with, along with a template.
   - see `test/testapp/models.py` for a reference model
   - see `test/testapp/templates/hallo_test_page.html` for a reference template
 - After creating the model, remember to run `python manage.py makemigrations` and `python manage.py migrate`
@@ -207,7 +207,7 @@ Currently the frontend tooling is based on Node & NPM and is only used to format
 - [ ] Update `setup.py` with new release version
 - [ ] Update `package.json` with new release version (note: npm package not deployed, however good to keep in sync), run `npm install` after to update `package-lock.json`
 - [ ] Update `CHANGELOG.md` with the release date
-- [ ] Push to Pypi
+- [ ] Push to PyPI
   - `pip install twine`
   - `python3 setup.py clean --all sdist bdist_wheel`
   - `twine upload dist/*` <-- pushes to PyPI
