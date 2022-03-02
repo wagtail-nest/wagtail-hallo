@@ -13,10 +13,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install modules
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+      - id: npm-cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('.nvmrc') }}-${{ hashFiles('**/package-lock.json') }}
+      - if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
-      - name: Run preflight checks
-        run: npm run preflight
+      - run: npm run preflight
 
   check-server:
     runs-on: ubuntu-latest
