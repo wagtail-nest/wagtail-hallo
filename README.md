@@ -216,4 +216,4 @@ Currently the frontend tooling is based on Node & NPM and is only used to format
 
 ## Thanks
 
-Many thanks to all of our supporters, [contributors](https://github.com/wagtail/wagtail-hallo/blob/main/CONTRIBUTORS.md), and users of Wagtail who built upon the amazing Hallo.js editor. We are thankful to the Wagtail core team and developers at Torchbox who sponsored the majority of the initial development. And a very special thanks to the original creator of the Hallo.js editor.
+Many thanks to all of our supporters, [contributors](https://github.com/wagtail/wagtail-hallo/blob/main/CONTRIBUTORS.md), and users of Wagtail who built upon the amazing Hallo.js editor. We are thankful to the Wagtail core team and developers at Torchbox who sponsored the majority of the initial development. Thank you to LB, who transferred the Hallo.js integration from Wagtail to the wagtail-hallo package. And a very special thanks to the original creator of the Hallo.js editor.
