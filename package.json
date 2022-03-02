@@ -1,6 +1,7 @@
 {
   "name": "wagtail-hallo",
   "version": "0.1.0-dev",
+  "private": true,
   "description": "",
   "scripts": {
     "format": "prettier --write '**/*.{js,md,css,scss,yaml,yml,json}'",
