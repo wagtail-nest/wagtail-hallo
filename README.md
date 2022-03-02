@@ -27,7 +27,6 @@ This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](htt
 
 ## Installing the Hallo Editor
 
-- Important: requires jQuery and jQueryUI, which are not included and may not always be included with Wagtail.
 - `pip install wagtail-hallo`
 - Add `'wagtail_hallo'` to your settings.py `INSTALLED_APPS`
 
