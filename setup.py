@@ -24,7 +24,7 @@ setup(
     include_package_data=True,
     license="MIT",
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Stable",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
@@ -39,10 +39,11 @@ setup(
         "Framework :: Wagtail",
         "Framework :: Wagtail :: 2.15",
         "Framework :: Wagtail :: 2.16",
+        "Framework :: Wagtail :: 3.0",
     ],
     install_requires=[
         "Django>=3.1,<4.1",
-        "Wagtail>=2.15,<2.17",
+        "Wagtail>=2.15,<4.0",
     ],
     extras_require={
         "testing": ["dj-database-url==0.5.0", "freezegun==0.3.15"],
