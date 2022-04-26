@@ -23,7 +23,7 @@ This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](htt
 
 - Python 3.7, 3.8, 3.9
 - Django 3.2. 4.0
-- Wagtail 2.15, 2.16
+- Wagtail 2.15, 2.16, 3.0
 
 ## Installing the Hallo Editor
 
