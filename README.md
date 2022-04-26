@@ -1,6 +1,6 @@
 # Wagtail Hallo - Rich Text Editor
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Wagtail Hallo CI](https://github.com/wagtail/wagtail-hallo/actions/workflows/test.yml/badge.svg)](https://github.com/wagtail/wagtail-hallo/actions/workflows/test.yml) [![PyPI version](https://badge.fury.io/py/wagtail-hallo.svg)](https://badge.fury.io/py/wagtail-hallo)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Wagtail Hallo CI](https://github.com/wagtail/wagtail-hallo/actions/workflows/test.yml/badge.svg)](https://github.com/wagtail/wagtail-hallo/actions/workflows/ci.yml/badge.svg) [![PyPI version](https://badge.fury.io/py/wagtail-hallo.svg)](https://badge.fury.io/py/wagtail-hallo)
 
 This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](http://hallojs.org/).
 
