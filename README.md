@@ -203,8 +203,10 @@ Currently the frontend tooling is based on Node & NPM and is only used to format
 
 ### Release checklist
 
-- [ ] Update `tox.ini`, `setup.py`, `README.md` with new supported Python, Django, or Wagtail versions.
-  - Add or remove `"Development Status :: # - Alpha"` based on status (# being a number)
+- [ ] Update `VERSION` in `wagtail_hallo/__init__.py`
+- [ ] Update `tox.ini`, `setup.py`, `README.md`, `package.json` and `workflows/ci.yml` with new supported Python, Django, or Wagtail versions
+- [ ] Run `npm install` to ensure the `package-lock.json` is updated
+- [ ] Update classifiers (e.g. `"Development Status :: # - Alpha"` based on status (# being a number) in `setup.py`
 - [ ] Update `setup.py` with new release version
 - [ ] Update `CHANGELOG.md` with the release date
 - [ ] Push to PyPI
