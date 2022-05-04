@@ -24,7 +24,7 @@ setup(
     include_package_data=True,
     license="MIT",
     classifiers=[
-        "Development Status :: 5 - Stable",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
@@ -37,9 +37,7 @@ setup(
         "Framework :: Django :: 3.2",
         "Framework :: Django :: 4.0",
         "Framework :: Wagtail",
-        "Framework :: Wagtail :: 2.15",
-        "Framework :: Wagtail :: 2.16",
-        "Framework :: Wagtail :: 3.0",
+        "Framework :: Wagtail :: 2"
     ],
     install_requires=[
         "Django>=3.1,<4.1",
