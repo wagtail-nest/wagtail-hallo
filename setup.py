@@ -33,15 +33,17 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Framework :: Django",
         "Framework :: Django :: 3.2",
         "Framework :: Django :: 4.0",
+        "Framework :: Django :: 4.1",
         "Framework :: Wagtail",
         "Framework :: Wagtail :: 2",
         "Framework :: Wagtail :: 3",
     ],
     install_requires=[
-        "Django>=3.1,<4.1",
+        "Django>=3.1,<4.2",
         "Wagtail>=2.15,<4.0",
     ],
     extras_require={
