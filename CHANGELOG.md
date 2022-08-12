@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [unreleased] - YYYY-MM-DD
 
 - Add Wagtail 3 classifier for PyPI _Paarth Agarwal_
+- Add Django 4.1 and Python 3.10 classifier to PyPI _Joren Hammudoglu_
+- Add Django 4.1 support to CI _Joren Hammudoglu_
 
 ## [0.1.0] - 2022-05-05
 
