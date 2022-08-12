@@ -6,7 +6,7 @@ This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](htt
 
 **As of [Wagtail 2.0, the hallo.js editor is deprecated](https://docs.wagtail.org/en/stable/releases/2.0.html#new-rich-text-editor).**
 
-**Status** This package should be compatible with Wagtail 2.17 and earlier versions. However, it will no longer receive bug fixes or be actively maintained. Pull requests will be accepted and if maintainers wish to support this outside of the core Wagtail team, please raise an issue to discuss this.
+**Status** See [supported versions](#supported-versions) for Wagtail compatibility, however, this package will longer receive bug fixes or be actively maintained. Pull requests will be accepted and if maintainers wish to support this outside of the core Wagtail team, please raise an issue to discuss this.
 
 ## Major risks of using this package
 
@@ -21,8 +21,8 @@ This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](htt
 
 ## Supported Versions
 
-- Python 3.7, 3.8, 3.9
-- Django 3.2. 4.0
+- Python 3.7, 3.8, 3.9, 3.10
+- Django 3.2. 4.0, 4.1
 - Wagtail 2.15, 2.16, 3.0
 
 ## Installing the Hallo Editor
@@ -30,7 +30,7 @@ This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](htt
 - `pip install wagtail-hallo`
 - Add `'wagtail_hallo'` to your settings.py `INSTALLED_APPS`
 
-To use wagtail-hallo on Wagtail 2.x, add the following to your settings:
+To use wagtail-hallo on Wagtail, add the following to your settings:
 
 ```python
 WAGTAILADMIN_RICH_TEXT_EDITORS = {
