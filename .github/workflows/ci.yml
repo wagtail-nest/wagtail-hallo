@@ -48,7 +48,7 @@ jobs:
       matrix:
         python: ['3.8', '3.9']
         django: ['3.2', '4.0']
-        wagtail: ['2.15', '2.16']
+        wagtail: ['2.15', '2.16', '3.0']
 
     steps:
       - uses: actions/checkout@v2
