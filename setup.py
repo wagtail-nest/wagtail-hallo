@@ -19,7 +19,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Wagtail core team",
     author_email="hello@wagtail.org",
-    url="https://github.com/wagtail/wagtail-hallo",
+    url="https://github.com/wagtail-nest/wagtail-hallo",
     packages=find_packages(),
     include_package_data=True,
     license="MIT",

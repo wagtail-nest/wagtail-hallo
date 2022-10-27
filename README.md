@@ -1,6 +1,6 @@
 # Wagtail Hallo - Rich Text Editor
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Wagtail Hallo CI](https://github.com/wagtail/wagtail-hallo/actions/workflows/ci.yml/badge.svg)](https://github.com/wagtail/wagtail-hallo/actions/workflows/ci.yml) [![PyPI version](https://badge.fury.io/py/wagtail-hallo.svg)](https://badge.fury.io/py/wagtail-hallo)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Wagtail Hallo CI](https://github.com/wagtail-nest/wagtail-hallo/actions/workflows/ci.yml/badge.svg)](https://github.com/wagtail-nest/wagtail-hallo/actions/workflows/ci.yml) [![PyPI version](https://badge.fury.io/py/wagtail-hallo.svg)](https://badge.fury.io/py/wagtail-hallo)
 
 This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](http://hallojs.org/).
 
@@ -17,7 +17,7 @@ This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](htt
 
 ## Release Notes
 
-- See the [Changelog](https://github.com/wagtail/wagtail-hallo/blob/main/CHANGELOG.md).
+- See the [Changelog](https://github.com/wagtail-nest/wagtail-hallo/blob/main/CHANGELOG.md).
 
 ## Supported Versions
 
@@ -218,4 +218,4 @@ Currently the frontend tooling is based on Node & NPM and is only used to format
 
 ## Thanks
 
-Many thanks to all of our supporters, [contributors](https://github.com/wagtail/wagtail-hallo/blob/main/CONTRIBUTORS.md), and users of Wagtail who built upon the amazing Hallo.js editor. We are thankful to the Wagtail core team and developers at Torchbox who sponsored the majority of the initial development. Thank you to LB, who transferred the Hallo.js integration from Wagtail to the wagtail-hallo package. And a very special thanks to the original creator of the Hallo.js editor.
+Many thanks to all of our supporters, [contributors](https://github.com/wagtail-nest/wagtail-hallo/blob/main/CONTRIBUTORS.md), and users of Wagtail who built upon the amazing Hallo.js editor. We are thankful to the Wagtail core team and developers at Torchbox who sponsored the majority of the initial development. Thank you to LB, who transferred the Hallo.js integration from Wagtail to the wagtail-hallo package. And a very special thanks to the original creator of the Hallo.js editor.
