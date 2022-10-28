@@ -10,7 +10,11 @@ if WAGTAIL_VERSION >= (3, 0):
     from wagtail.whitelist import allow_without_attributes, attribute_rule, check_url
 else:
     from wagtail.core import hooks
-    from wagtail.core.whitelist import allow_without_attributes, attribute_rule, check_url
+    from wagtail.core.whitelist import (
+        allow_without_attributes,
+        attribute_rule,
+        check_url,
+    )
 
 from .plugins import HalloFormatPlugin, HalloHeadingPlugin, HalloListPlugin, HalloPlugin
 

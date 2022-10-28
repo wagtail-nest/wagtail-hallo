@@ -28,8 +28,7 @@ class HalloTestPage(Page):
             [
                 ("heading", CharBlock(form_classname="full title")),
                 ("paragraph", RichTextBlock(editor="hallo")),
-            ],
-            use_json_field=True
+            ]
         )
 
     if WAGTAIL_VERSION >= (3, 0):
