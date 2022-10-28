@@ -15,12 +15,22 @@ else:
 class HalloTestPage(Page):
     body = RichTextField(editor="hallo", blank=True)
 
-    body_stream = StreamField(
-        [
-            ("heading", CharBlock(form_classname="full title")),
-            ("paragraph", RichTextBlock(editor="hallo")),
-        ]
-    )
+    if WAGTAIL_VERSION >= (3, 0):
+        body_stream = StreamField(
+            [
+                ("heading", CharBlock(form_classname="full title")),
+                ("paragraph", RichTextBlock(editor="hallo")),
+            ],
+            use_json_field=True
+        )
+    else:
+        body_stream = StreamField(
+            [
+                ("heading", CharBlock(form_classname="full title")),
+                ("paragraph", RichTextBlock(editor="hallo")),
+            ],
+            use_json_field=True
+        )
 
     if WAGTAIL_VERSION >= (3, 0):
         content_panels = Page.content_panels + [
