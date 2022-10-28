@@ -1,7 +1,14 @@
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.core.blocks
-import wagtail.core.fields
+
+from wagtail import VERSION as WAGTAIL_VERSION
+
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail import blocks
+    from wagtail import fields
+else:
+    from wagtail.core import blocks
+    from wagtail.core import fields
 
 
 class Migration(migrations.Migration):
@@ -27,20 +34,20 @@ class Migration(migrations.Migration):
                         to="wagtailcore.page",
                     ),
                 ),
-                ("body", wagtail.core.fields.RichTextField(blank=True)),
+                ("body", fields.RichTextField(blank=True)),
                 (
                     "body_stream",
-                    wagtail.core.fields.StreamField(
+                    fields.StreamField(
                         [
                             (
                                 "heading",
-                                wagtail.core.blocks.CharBlock(
+                                blocks.CharBlock(
                                     form_classname="full title"
                                 ),
                             ),
                             (
                                 "paragraph",
-                                wagtail.core.blocks.RichTextBlock(editor="hallo"),
+                                blocks.RichTextBlock(editor="hallo"),
                             ),
                         ]
                     ),

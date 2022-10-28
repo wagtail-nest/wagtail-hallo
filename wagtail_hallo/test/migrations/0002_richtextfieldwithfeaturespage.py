@@ -2,7 +2,13 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.core.fields
+
+from wagtail import VERSION as WAGTAIL_VERSION
+
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail import fields
+else:
+    from wagtail.core import fields
 
 
 class Migration(migrations.Migration):
@@ -27,7 +33,7 @@ class Migration(migrations.Migration):
                         to="wagtailcore.page",
                     ),
                 ),
-                ("body", wagtail.core.fields.RichTextField()),
+                ("body", fields.RichTextField()),
             ],
             options={
                 "abstract": False,

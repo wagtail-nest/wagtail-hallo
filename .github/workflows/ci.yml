@@ -13,12 +13,12 @@ jobs:
     name: 🧑‍🚀 preflight (check client)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
       - id: npm-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('.nvmrc') }}-${{ hashFiles('**/package-lock.json') }}
@@ -30,7 +30,7 @@ jobs:
     name: ⚫ Black (check server)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Python black Lint
         uses: psf/black@stable
 
@@ -38,7 +38,7 @@ jobs:
     name: 🎱 flake8 (check server)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Python flake8 Lint
         uses: py-actions/flake8@v2.0.0
 
@@ -46,14 +46,36 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.8', '3.9']
+        python: ['3.8', '3.9', '3.10']
         django: ['3.2', '4.0']
-        wagtail: ['2.15', '2.16']
+        wagtail: ['2.16', '3.0', '4.0']
+        include:
+          - wagtail: '2.15'
+            django: '3.2'
+            python: '3.7'
+          - wagtail: '2.15'
+            django: '3.2'
+            python: '3.8'
+          - wagtail: '2.15'
+            django: '3.2'
+            python: '3.9'
+          - wagtail: '2.15'
+            django: '3.2'
+            python: '3.10'
+          - wagtail: '4.0'
+            django: '4.1'
+            python: '3.8'
+          - wagtail: '4.0'
+            django: '4.1'
+            python: '3.9'
+          - wagtail: '4.0'
+            django: '4.1'
+            python: '3.10'
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
       - name: Install Tox
@@ -69,10 +91,39 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.8', '3.9']
+        python: ['3.8', '3.9', '3.10']
         django: ['3.2', '4.0']
-        wagtail: ['2.15', '2.16', '3.0']
+        wagtail: ['2.16', '3.0', '4.0']
         postgres: ['10.8']
+        include:
+          - wagtail: '2.15'
+            django: '3.2'
+            postgres: ['10.8']
+            python: '3.7'
+          - wagtail: '2.15'
+            django: '3.2'
+            postgres: ['10.8']
+            python: '3.8'
+          - wagtail: '2.15'
+            django: '3.2'
+            postgres: ['10.8']
+            python: '3.9'
+          - wagtail: '2.15'
+            django: '3.2'
+            postgres: ['10.8']
+            python: '3.10'
+          - wagtail: '4.0'
+            django: '4.1'
+            postgres: ['10.8']
+            python: '3.8'
+          - wagtail: '4.0'
+            django: '4.1'
+            postgres: ['10.8']
+            python: '3.9'
+          - wagtail: '4.0'
+            django: '4.1'
+            postgres: ['10.8']
+            python: '3.10'
 
     services:
       postgres:
@@ -82,9 +133,9 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
       - name: Install Tox

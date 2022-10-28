@@ -5,9 +5,16 @@ from django.test import TestCase
 from django.test.utils import override_settings
 from django.urls import reverse
 
-from wagtail.core.blocks import RichTextBlock
-from wagtail.core.models import Page, get_page_models
-from wagtail.core.rich_text import features as feature_registry
+from wagtail import VERSION as WAGTAIL_VERSION
+
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail.blocks import RichTextBlock
+    from wagtail.models import Page, get_page_models
+    from wagtail.rich_text import features as feature_registry
+else:
+    from wagtail.core.blocks import RichTextBlock
+    from wagtail.core.models import Page, get_page_models
+    from wagtail.core.rich_text import features as feature_registry
 
 from wagtail_hallo.hallo import HalloRichTextArea
 from .utils import TestUtils
