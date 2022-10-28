@@ -41,23 +41,21 @@ class Migration(migrations.Migration):
                         [
                             (
                                 "heading",
-                                blocks.CharBlock(
-                                    form_classname="full title"
-                                ),
+                                blocks.CharBlock(form_classname="full title"),
                             ),
                             (
                                 "paragraph",
                                 blocks.RichTextBlock(editor="hallo"),
                             ),
                         ],
-                        use_json_field=True
-                    ) if WAGTAIL_VERSION >= (3, 0) else fields.StreamField(
+                        use_json_field=True,
+                    )
+                    if WAGTAIL_VERSION >= (3, 0)
+                    else fields.StreamField(
                         [
                             (
                                 "heading",
-                                blocks.CharBlock(
-                                    form_classname="full title"
-                                ),
+                                blocks.CharBlock(form_classname="full title"),
                             ),
                             (
                                 "paragraph",

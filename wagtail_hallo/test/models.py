@@ -21,7 +21,7 @@ class HalloTestPage(Page):
                 ("heading", CharBlock(form_classname="full title")),
                 ("paragraph", RichTextBlock(editor="hallo")),
             ],
-            use_json_field=True
+            use_json_field=True,
         )
     else:
         body_stream = StreamField(
