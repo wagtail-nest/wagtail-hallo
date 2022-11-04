@@ -6,7 +6,7 @@ This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](htt
 
 **As of [Wagtail 2.0, the hallo.js editor is deprecated](https://docs.wagtail.org/en/stable/releases/2.0.html#new-rich-text-editor).**
 
-**Status** This package should be compatible with Wagtail 2.17 and earlier versions. However, it will no longer receive bug fixes or be actively maintained. Pull requests will be accepted and if maintainers wish to support this outside of the core Wagtail team, please raise an issue to discuss this.
+**Status** See [supported versions](#supported-versions) for Wagtail compatibility, however, this package will no longer receive bug fixes or be actively maintained. Pull requests will be accepted and if maintainers wish to support this outside of the core Wagtail team, please raise an issue to discuss this.
 
 ## Major risks of using this package
 
@@ -21,16 +21,16 @@ This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](htt
 
 ## Supported Versions
 
-- Python 3.7, 3.8, 3.9
-- Django 3.2. 4.0
-- Wagtail 2.15, 2.16, 3.0
+- Python 3.7, 3.8, 3.9 3.10
+- Django 3.2. 4.0 4.1
+- Wagtail 2.15, 2.16, 3.0, 4.0
 
 ## Installing the Hallo Editor
 
 - `pip install wagtail-hallo`
 - Add `'wagtail_hallo'` to your settings.py `INSTALLED_APPS`
 
-To use wagtail-hallo on Wagtail 2.x, add the following to your settings:
+To use wagtail-hallo on Wagtail, add the following to your settings:
 
 ```python
 WAGTAILADMIN_RICH_TEXT_EDITORS = {
@@ -44,9 +44,9 @@ WAGTAILADMIN_RICH_TEXT_EDITORS = {
 
 ```python
 # models.py
-from wagtail.admin.edit_handlers import FieldPanel
-from wagtail.core.fields import RichTextField
-from wagtail.core.models import Page
+from wagtail.admin.panels import FieldPanel
+from wagtail.fields import RichTextField
+from wagtail.models import Page
 
 class MyHalloPage(Page):
     body = RichTextField(editor='hallo')
@@ -76,10 +76,10 @@ class MyHalloPage(Page):
 
 ```python
 # models.py
-from wagtail.core.models import Page
-from wagtail.core.blocks import CharBlock, RichTextBlock
-from wagtail.admin.edit_handlers import StreamFieldPanel
-from wagtail.core.fields import StreamField
+from wagtail.models import Page
+from wagtail.blocks import CharBlock, RichTextBlock
+from wagtail.admin.panels import FieldPanel
+from wagtail.fields import StreamField
 
 class MyOtherHalloPage(Page):
     body = StreamField([
@@ -88,7 +88,7 @@ class MyOtherHalloPage(Page):
     ], blank=True)
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('body'),
+        FieldPanel('body'),
     ]
 ```
 
@@ -117,7 +117,7 @@ Once the plugin has been created, it should be registered through the feature re
 A plugin `halloblockquote`, implemented in `myapp/js/hallo-blockquote.js`, that adds support for the `<blockquote>` tag, would be registered under the feature name `block-quote` as follows:
 
 ```python
-    from wagtail.core import hooks
+    from wagtail import hooks
     from wagtail_hallo.plugins import HalloPlugin
 
     @hooks.register('register_rich_text_features')
@@ -155,7 +155,7 @@ The following code will add the `<blockquote>` element to the whitelist whenever
 ```python
 
     from wagtail.admin.rich_text.converters.editor_html import WhitelistRule
-    from wagtail.core.whitelist import allow_without_attributes
+    from wagtail.whitelist import allow_without_attributes
 
     @hooks.register('register_rich_text_features')
     def register_blockquote_feature(features):
@@ -166,7 +166,7 @@ The following code will add the `<blockquote>` element to the whitelist whenever
 
 `WhitelistRule` is passed the element name, and a callable which will perform some kind of manipulation of the element whenever it is encountered. This callable receives the element as a [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) Tag object.
 
-The `wagtail.core.whitelist` module provides a few helper functions to assist in defining these handlers: `allow_without_attributes`, a handler which preserves the element but strips out all of its attributes, and `attribute_rule` which accepts a dict specifying how to handle each attribute, and returns a handler function. This dict will map attribute names to either True (indicating that the attribute should be kept), False (indicating that it should be dropped), or a callable (which takes the initial attribute value and returns either a final value for the attribute, or None to drop the attribute).
+The `wagtail.whitelist` module provides a few helper functions to assist in defining these handlers: `allow_without_attributes`, a handler which preserves the element but strips out all of its attributes, and `attribute_rule` which accepts a dict specifying how to handle each attribute, and returns a handler function. This dict will map attribute names to either True (indicating that the attribute should be kept), False (indicating that it should be dropped), or a callable (which takes the initial attribute value and returns either a final value for the attribute, or None to drop the attribute).
 
 ## Contributing
 

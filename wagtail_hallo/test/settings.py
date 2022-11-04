@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from wagtail import VERSION as WAGTAIL_VERSION
 
 # Build paths inside the project like this: os.path.join(PROJECT_DIR, ...)
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,7 +41,7 @@ INSTALLED_APPS = [
     "wagtail.images",
     "wagtail.sites",
     "wagtail.admin",
-    "wagtail.core",
+    "wagtail" if WAGTAIL_VERSION >= (3, 0) else "wagtail.core",
     "wagtail.contrib.redirects",
     "taggit",
     "django.contrib.admin",
@@ -158,3 +159,7 @@ WAGTAIL_SITE_NAME = "Wagtail Hallo test site"
 WAGTAILADMIN_RICH_TEXT_EDITORS = {
     "hallo": {"WIDGET": "wagtail_hallo.hallo.HalloRichTextArea"}
 }
+
+# This should be the base URL used to access the Wagtail admin site.
+# Without this, URLs in notification emails will not display correctly.
+WAGTAILADMIN_BASE_URL = "http://example.com"

@@ -1,4 +1,10 @@
-from wagtail.core import hooks
+from wagtail import VERSION as WAGTAIL_VERSION
+
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail import hooks
+else:
+    from wagtail.core import hooks
+
 from wagtail_hallo.plugins import HalloPlugin
 
 

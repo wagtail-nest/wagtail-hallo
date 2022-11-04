@@ -1,10 +1,20 @@
+from wagtail import VERSION as WAGTAIL_VERSION
 from wagtail.admin.rich_text.converters.editor_html import (
     LinkTypeRule,
     PageLinkHandler,
     WhitelistRule,
 )
-from wagtail.core import hooks
-from wagtail.core.whitelist import allow_without_attributes, attribute_rule, check_url
+
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail import hooks
+    from wagtail.whitelist import allow_without_attributes, attribute_rule, check_url
+else:
+    from wagtail.core import hooks
+    from wagtail.core.whitelist import (
+        allow_without_attributes,
+        attribute_rule,
+        check_url,
+    )
 
 from .plugins import HalloFormatPlugin, HalloHeadingPlugin, HalloListPlugin, HalloPlugin
 
