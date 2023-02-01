@@ -199,6 +199,7 @@ Currently the frontend tooling is based on Node & NPM and is only used to format
 - `npm run lint` - Runs linting
 - `npm run format` - Runs Prettier formatting on most files (non-Python)
 - `npm test` - Runs tests (Jest)
+- `npm test -- --watch` - Runs tests in watch mode (Jest)
 - `npm run preflight` - Runs all the linting/formatting/jest checks and must be done before committing code
 
 ### Release checklist
