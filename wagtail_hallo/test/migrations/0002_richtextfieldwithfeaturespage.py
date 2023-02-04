@@ -12,7 +12,6 @@ else:
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("wagtailcore", "0066_collection_management_permissions"),
         ("wagtail_hallo_test", "0001_initial"),
