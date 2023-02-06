@@ -31,7 +31,7 @@
           url: window.chooserUrls.documentChooser,
           onload: DOCUMENT_CHOOSER_MODAL_ONLOAD_HANDLERS,
           responses: {
-            documentChosen: function (docData) {
+            chosen: function (docData) {
               var link;
 
               link = document.createElement('a');

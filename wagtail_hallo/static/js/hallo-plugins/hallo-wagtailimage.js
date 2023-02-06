@@ -35,7 +35,7 @@
           url: window.chooserUrls.imageChooser + '?select_format=true',
           onload: IMAGE_CHOOSER_MODAL_ONLOAD_HANDLERS,
           responses: {
-            imageChosen: function (imageData) {
+            chosen: function (imageData) {
               var elem;
 
               elem = $(imageData.html).get(0);

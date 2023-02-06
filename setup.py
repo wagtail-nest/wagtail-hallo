@@ -45,7 +45,7 @@ setup(
     ],
     install_requires=[
         "Django>=3.2,<4.2",
-        "Wagtail>=2.15,<4.1",
+        "Wagtail>=4.0",
     ],
     extras_require={
         "testing": ["dj-database-url==0.5.0", "freezegun==0.3.15"],
