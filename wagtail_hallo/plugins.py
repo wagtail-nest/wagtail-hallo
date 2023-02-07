@@ -1,5 +1,4 @@
 from django.forms import Media
-
 from wagtail.admin.staticfiles import versioned_static
 
 
