@@ -1,14 +1,6 @@
-from django.db import migrations, models
 import django.db.models.deletion
-
-from wagtail import VERSION as WAGTAIL_VERSION
-
-if WAGTAIL_VERSION >= (3, 0):
-    from wagtail import blocks
-    from wagtail import fields
-else:
-    from wagtail.core import blocks
-    from wagtail.core import fields
+from django.db import migrations, models
+from wagtail import blocks, fields
 
 
 class Migration(migrations.Migration):
@@ -48,19 +40,6 @@ class Migration(migrations.Migration):
                             ),
                         ],
                         use_json_field=True,
-                    )
-                    if WAGTAIL_VERSION >= (3, 0)
-                    else fields.StreamField(
-                        [
-                            (
-                                "heading",
-                                blocks.CharBlock(form_classname="full title"),
-                            ),
-                            (
-                                "paragraph",
-                                blocks.RichTextBlock(editor="hallo"),
-                            ),
-                        ],
                     ),
                 ),
             ],

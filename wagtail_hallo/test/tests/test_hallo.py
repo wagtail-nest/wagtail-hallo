@@ -1,22 +1,15 @@
 import unittest
-from bs4 import BeautifulSoup
 
+from bs4 import BeautifulSoup
 from django.test import TestCase
 from django.test.utils import override_settings
 from django.urls import reverse
-
-from wagtail import VERSION as WAGTAIL_VERSION
-
-if WAGTAIL_VERSION >= (3, 0):
-    from wagtail.blocks import RichTextBlock
-    from wagtail.models import Page, get_page_models
-    from wagtail.rich_text import features as feature_registry
-else:
-    from wagtail.core.blocks import RichTextBlock
-    from wagtail.core.models import Page, get_page_models
-    from wagtail.core.rich_text import features as feature_registry
+from wagtail.blocks import RichTextBlock
+from wagtail.models import Page, get_page_models
+from wagtail.rich_text import features as feature_registry
 
 from wagtail_hallo.hallo import HalloRichTextArea
+
 from .utils import TestUtils
 
 
@@ -27,9 +20,7 @@ class BaseRichTextEditHandlerTestCase(TestCase):
         cached edit handlers should be cleared before and after each test run
         to ensure that no changes leak through to other tests.
         """
-        from wagtail_hallo.test.models import (
-            HalloTestPage,
-        )
+        from wagtail_hallo.test.models import HalloTestPage
 
         rich_text_block = (
             HalloTestPage.get_edit_handler()
