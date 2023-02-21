@@ -459,7 +459,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -598,7 +598,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -627,7 +627,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -735,7 +735,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -787,7 +787,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -838,7 +838,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -913,7 +913,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -1023,7 +1023,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -1301,7 +1301,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -1672,7 +1672,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -1808,7 +1808,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -1951,7 +1951,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -2042,7 +2042,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -2521,7 +2521,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -2583,7 +2583,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -2620,7 +2620,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -2781,7 +2781,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -2825,7 +2825,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -2942,7 +2942,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -2979,7 +2979,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -3034,7 +3034,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -3163,7 +3163,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -3184,13 +3184,18 @@
         this.toolbar.show();
         jQuery(this.options.parentElement).append(this.toolbar);
         this._bindEvents();
-        // Adding .content-wrapper as a triggering element makes these work in Wagtail 4.
-        jQuery(window).add('.content-wrapper').on('resize', function (event) {
-          return _this.setPosition();
-        });
-        jQuery(window).add('.content-wrapper').on('scroll', function (event) {
-          return _this.setPosition();
-        });
+        // Adding .content-wrapper as a triggering element makes these work
+        // in Wagtail 4.
+        jQuery(window)
+          .add('.content-wrapper')
+          .on('resize', function (event) {
+            return _this.setPosition();
+          });
+        jQuery(window)
+          .add('.content-wrapper')
+          .on('scroll', function (event) {
+            return _this.setPosition();
+          });
         if (this.options.parentElement === 'body') {
           el = jQuery(this.element);
           widthToAdd = parseFloat(el.css('padding-left'));
@@ -3233,10 +3238,11 @@
           return;
         }
         this.toolbar.css('position', 'absolute');
-        // The 44 is to account for the changes to the Page Editor UI in Wagtail 4.
+        // The 44 is to account for the changes to the Page Editor UI in
+        // Wagtail 4.
         this.toolbar.css(
           'top',
-          this.element.offset().top - this.toolbar.outerHeight() + 44
+          this.element.offset().top - this.toolbar.outerHeight() + 44,
         );
         if (this.options.affix) {
           scrollTop = jQuery(window).scrollTop();
@@ -3268,7 +3274,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -3397,7 +3403,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -3583,7 +3589,7 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);
 
 (function () {
   (function (jQuery) {
@@ -3677,4 +3683,4 @@
       },
     });
   })(jQuery);
-}.call(this));
+}).call(this);

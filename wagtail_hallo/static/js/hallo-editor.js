@@ -88,7 +88,8 @@
           /* Hallo's toolbar will reposition itself on the scroll event.
         This is useful since animating the fields can cause it to be
         positioned badly initially. */
-          // Adding .content-wrapper as a triggered element makes this work in Wagtail 4.
+          // Adding .content-wrapper as a triggered element makes this work
+          // in Wagtail 4.
           $(window).add('.content-wrapper').trigger('scroll');
         });
       })
