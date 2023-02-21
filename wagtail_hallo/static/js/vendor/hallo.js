@@ -3184,10 +3184,11 @@
         this.toolbar.show();
         jQuery(this.options.parentElement).append(this.toolbar);
         this._bindEvents();
-        jQuery(window).on('resize', function (event) {
+        // Adding .content-wrapper as a triggering element makes these work in Wagtail 4.
+        jQuery(window).add('.content-wrapper').on('resize', function (event) {
           return _this.setPosition();
         });
-        jQuery(window).on('scroll', function (event) {
+        jQuery(window).add('.content-wrapper').on('scroll', function (event) {
           return _this.setPosition();
         });
         if (this.options.parentElement === 'body') {
@@ -3232,9 +3233,10 @@
           return;
         }
         this.toolbar.css('position', 'absolute');
+        // The 44 is to account for the changes to the Page Editor UI in Wagtail 4.
         this.toolbar.css(
           'top',
-          this.element.offset().top - this.toolbar.outerHeight(),
+          this.element.offset().top - this.toolbar.outerHeight() + 44
         );
         if (this.options.affix) {
           scrollTop = jQuery(window).scrollTop();
@@ -3249,7 +3251,6 @@
             this.toolbar.css('position', 'fixed');
             this.toolbar.css('top', this.options.affixTopOffset);
           }
-        } else {
         }
 
         return this.toolbar.css('left', this.element.offset().left - 2);
