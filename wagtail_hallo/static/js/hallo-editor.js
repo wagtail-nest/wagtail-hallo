@@ -88,12 +88,14 @@
           /* Hallo's toolbar will reposition itself on the scroll event.
         This is useful since animating the fields can cause it to be
         positioned badly initially. */
-          $(window).trigger('scroll');
+          // Adding .content-wrapper as a triggered element makes this work
+          // in Wagtail 4.
+          $(window).add('.content-wrapper').trigger('scroll');
         });
       })
       .on('hallodeactivated', function (event) {
         $(event.target).removeClass('expanded', 200, function () {
-          $(window).trigger('scroll');
+          $(window).add('.content-wrapper').trigger('scroll');
         });
       });
     setupLinkTooltips(editor);

@@ -201,7 +201,7 @@
   display: block;
 }
 
-/* 
+/*
   These styles correspond to the image formats defined in wagtailimages/formats.py,
   so that images displayed in the rich text field receive more or less the same
   styling that they would receive on the site front-end.
@@ -231,27 +231,27 @@
 }
 
 /* Page Editor */
-.object .halloeditor {
+.halloeditor {
   padding-top: 1em;
   padding-bottom: 1em;
 }
 
-.object .halloeditor.expanded {
-  padding-top: 5em;
+.halloeditor.expanded {
+  padding-top: 7em;
   padding-bottom: 2em;
 }
 
-.object.full .halloeditor {
+.full .halloeditor {
   padding-top: 3em;
   padding-bottom: 3em;
 }
 
-.object.full .halloeditor.expanded {
+.full .halloeditor.expanded {
   padding-top: 5em;
   padding-bottom: 5em;
 }
 
-.object.full .error .halloeditor {
+.full .error .halloeditor {
   background-color: #ffe6e6;
 }
 
@@ -273,7 +273,7 @@
   font-family: Roboto Slab, Georgia, serif;
 }
 @media screen and (min-width: breakpoint-min(sm)) {
-  .object.full .halloeditor {
+  .full .halloeditor {
     border-width: 0 1px;
   }
 }
