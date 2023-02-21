@@ -148,7 +148,7 @@ When writing the front-end code for the plugin, Wagtail’s Hallo implementation
 
 After extending the editor to support a new HTML element, you'll need to add it to the whitelist of permitted elements - Wagtail's standard behaviour is to strip out unrecognised elements, to prevent editors from inserting styles and scripts (either deliberately, or inadvertently through copy-and-paste) that the developer didn't account for.
 
-Elements can be added to the whitelist through the feature registry's `register_converter_rule(converter, feature_name, ruleset)` method. When the `hallo.js` editor is in use, the `converter` parameter should always be `'editorhtml'`.
+Elements can be added to the whitelist through the feature registry's `register_converter_rule(converter, feature_name, ruleset)` method. When the `hallo.js` editor is in use, the `converter` parameter should always be `'editorhtml'`. The `feature_name` is the name of your plugin.
 
 The following code will add the `<blockquote>` element to the whitelist whenever the `block-quote` feature is active:
 
