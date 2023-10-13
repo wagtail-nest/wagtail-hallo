@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.8', '3.9', '3.10']
+        python: ['3.8', '3.9', '3.10', '3.11', '3.12']
         django: ['3.2', '4.0', '4.1', '4.2']
         wagtail: ['2.16', '3.0', '4.0']
         include:
@@ -71,6 +71,12 @@ jobs:
           - wagtail: '4.0'
             django: '4.1'
             python: '3.10'
+          - wagtail: '4.0'
+            django: '4.2'
+            python: '3.11'
+          - wagtail: '4.0'
+            django: '4.2'
+            python: '3.12'
 
     steps:
       - uses: actions/checkout@v3
@@ -91,7 +97,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.8', '3.9', '3.10']
+        python: ['3.8', '3.9', '3.10', '3.11', '3.12']
         django: ['3.2', '4.0', '4.1', '4.2']
         wagtail: ['2.16', '3.0', '4.0']
         postgres: ['10.8']
@@ -124,6 +130,14 @@ jobs:
             django: '4.1'
             postgres: '10.8'
             python: '3.10'
+          - wagtail: '4.0'
+            django: '4.2'
+            postgres: '10.8'
+            python: '3.11'
+          - wagtail: '4.0'
+            django: '4.2'
+            postgres: '10.8'
+            python: '3.12'
 
     services:
       postgres:
