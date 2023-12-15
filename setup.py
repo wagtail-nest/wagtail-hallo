@@ -38,13 +38,14 @@ setup(
         "Framework :: Django :: 3.2",
         "Framework :: Django :: 4.1",
         "Framework :: Django :: 4.2",
+        "Framework :: Django :: 5.0",
         "Framework :: Wagtail",
         "Framework :: Wagtail :: 4",
         "Framework :: Wagtail :: 5",
     ],
     install_requires=[
-        "Django>=3.2,<5",
-        "Wagtail>=4.0,<6",
+        "Django>=3.2,<5.1",
+        "Wagtail>=4.0,<6.0",
     ],
     extras_require={
         "testing": ["dj-database-url==0.5.0", "freezegun==0.3.15"],
