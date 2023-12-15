@@ -113,7 +113,7 @@ jobs:
             postgres: '12.16'
             python: '3.11'
           - wagtail: '5.2'
-            django: '5.0'
+            django: '4.2'
             postgres: '16.0'
             python: '3.9'
           - wagtail: '5.2'
