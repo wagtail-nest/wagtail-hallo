@@ -1,10 +1,7 @@
 from django.db import migrations, models
 import django.db.models.deletion
 
-from wagtail import VERSION as WAGTAIL_VERSION
-
-from wagtail import blocks
-from wagtail import fields
+from wagtail import blocks, fields
 
 
 class Migration(migrations.Migration):
