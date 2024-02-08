@@ -94,7 +94,12 @@ class HalloRichTextArea(widgets.Textarea):
                 versioned_static("js/hallo-editor.js"),
                 versioned_static("js/hallo-telepath.js"),
             ],
-            css={"all": [versioned_static("css/hallo.css")]},
+            css={
+                "all": [
+                    versioned_static("css/hallo.css"),
+                    versioned_static("css/icons.css"),
+                ]
+            },
         )
 
         for plugin in self.plugins:

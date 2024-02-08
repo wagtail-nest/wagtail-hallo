@@ -50,15 +50,9 @@ jobs:
     strategy:
       matrix:
         python: ['3.10', '3.11']
-        django: ['3.2', '4.2']
-        wagtail: ['4.0', '4.1', '4.2', '5.0', '5.1', '5.2']
+        django: ['4.2', '5.0']
+        wagtail: ['4.1', '5.2', '6.0']
         exclude:
-          - wagtail: '4.0'
-            python: '3.11'
-          - wagtail: '4.0'
-            django: '4.2'
-          - wagtail: '4.0'
-            django: '4.2'
           - wagtail: '4.1'
             django: '4.2'
           - wagtail: '4.2'
@@ -86,16 +80,10 @@ jobs:
     strategy:
       matrix:
         python: ['3.10', '3.11']
-        django: ['3.2', '4.2']
-        wagtail: ['4.0', '4.1', '4.2', '5.0', '5.1', '5.2']
+        django: ['4.2', '5.0']
+        wagtail: ['4.1', '5.2', '6.0']
         postgres: ['12.17', '16.1']
         exclude:
-          - wagtail: '4.0'
-            python: '3.11'
-          - wagtail: '4.0'
-            django: '4.2'
-          - wagtail: '4.0'
-            django: '4.2'
           - wagtail: '4.1'
             django: '4.2'
           - wagtail: '4.2'
@@ -106,6 +94,10 @@ jobs:
             postgres: '12.17'
             python: '3.12'
           - wagtail: '5.2'
+            django: '5.0'
+            postgres: '16.1'
+            python: '3.12'
+          - wagtail: '6.0'
             django: '5.0'
             postgres: '16.1'
             python: '3.12'
