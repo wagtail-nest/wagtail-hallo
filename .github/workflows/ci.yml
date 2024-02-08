@@ -5,7 +5,6 @@ on:
     branches:
       - main
       - 'stable/**'
-
   pull_request:
 
 jobs:
@@ -79,11 +78,9 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Install Tox
-        run: |
-          python -m pip install tox
+        run: python -m pip install tox
       - name: Test
-        run: |
-          tox
+        run: tox
         env:
           TOXENV: python${{ matrix.python }}-django${{ matrix.django }}-wagtail${{ matrix.wagtail }}-sqlite
 
@@ -149,11 +146,9 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Install Tox
-        run: |
-          python -m pip install tox
+        run: python -m pip install tox
       - name: Test
-        run: |
-          tox
+        run: tox
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/wagtail_hallo
           TOXENV: python${{ matrix.python }}-django${{ matrix.django }}-wagtail${{ matrix.wagtail }}-postgres
