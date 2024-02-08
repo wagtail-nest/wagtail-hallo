@@ -45,32 +45,31 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.8', '3.9', '3.10', '3.11', '3.12']
-        django: ['3.2', '4.1']
-        wagtail: ['4.0', '4.1', '4.2', '5.0', '5.1']
+        python: ['3.8', '3.12']
+        django: ['3.2', '5.0']
+        wagtail: ['3.0', '5.2']
         include:
-          - wagtail: '3.0'
+          - python: '3.8'
             django: '3.2'
-            python: '3.8'
-          - wagtail: '3.0'
+            wagtail: '3.0'
+          - python: '3.9'
             django: '3.2'
-            python: '3.9'
-          - wagtail: '3.0'
+            wagtail: '3.0'
+          - python: '3.10'
             django: '3.2'
-            python: '3.10'
-          - wagtail: '3.0'
+            wagtail: '3.0'
+          - python: '3.11'
             django: '3.2'
-            python: '3.11'
-          - wagtail: '5.1'
-            django: '4.2'
-            python: '3.10'
-          - wagtail: '5.1'
-            django: '4.2'
-            python: '3.11'
-          - wagtail: '5.1'
-            django: '4.2'
-            python: '3.12'
-
+            wagtail: '3.0'
+          - python: '3.10'
+            django: '5.0'
+            wagtail: '5.2'
+          - python: '3.11'
+            django: '5.0'
+            wagtail: '5.2'
+          - python: '3.12'
+            django: '5.0'
+            wagtail: '5.2'
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python }}
@@ -88,44 +87,43 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.8', '3.9', '3.10', '3.11', '3.12']
-        django: ['3.2', '4.1']
-        wagtail: ['4.0', '4.1', '4.2', '5.0', '5.1', '5.2']
+        python: ['3.8', '3.12']
+        django: ['3.2', '5.0']
+        wagtail: ['3.0', '5.2']
         postgres: ['12.17', '16.1']
         include:
-          - wagtail: '3.0'
+          - python: '3.8'
             django: '3.2'
+            wagtail: '3.0'
             postgres: '12.17'
-            python: '3.8'
-          - wagtail: '3.0'
+          - python: '3.9'
             django: '3.2'
+            wagtail: '3.0'
             postgres: '12.17'
-            python: '3.9'
-          - wagtail: '3.0'
+          - python: '3.10'
             django: '3.2'
+            wagtail: '3.0'
             postgres: '12.17'
-            python: '3.10'
-          - wagtail: '3.0'
+          - python: '3.11'
             django: '3.2'
+            wagtail: '3.0'
             postgres: '12.17'
-            python: '3.11'
-          - wagtail: '5.2'
-            django: '4.2'
-            postgres: '16.1'
-            python: '3.9'
-          - wagtail: '5.2'
+          - python: '3.9'
             django: '5.0'
+            wagtail: '5.2'
             postgres: '16.1'
-            python: '3.10'
-          - wagtail: '5.2'
+          - python: '3.10'
             django: '5.0'
+            wagtail: '5.2'
             postgres: '16.1'
-            python: '3.11'
-          - wagtail: '5.2'
+          - python: '3.11'
             django: '5.0'
+            wagtail: '5.2'
             postgres: '16.1'
-            python: '3.12'
-
+          - python: '3.12'
+            django: '5.0'
+            wagtail: '5.2'
+            postgres: '16.1'
     services:
       postgres:
         image: postgres:${{ matrix.postgres }}
@@ -138,7 +136,6 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python }}
