@@ -44,7 +44,6 @@
       "$": "readonly",
       "addMessage": "readonly",
       "buildExpandingFormset": "readonly",
-      "cancelSpinner": "readonly",
       "escapeHtml": "readonly",
       "insertRichTextDeleteControl": "readonly",
       "jQuery": "readonly",
