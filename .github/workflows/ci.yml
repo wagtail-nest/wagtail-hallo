@@ -5,8 +5,11 @@ on:
     branches:
       - main
       - 'stable/**'
-
   pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
 
 jobs:
   check-client:
@@ -14,11 +17,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
       - id: npm-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('.nvmrc') }}-${{ hashFiles('**/package-lock.json') }}
@@ -40,7 +43,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Python flake8 Lint
-        uses: py-actions/flake8@v2.0.0
+        uses: py-actions/flake8@v2
 
   test-sqlite:
     runs-on: ubuntu-latest
@@ -60,15 +63,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
       - name: Install Tox
-        run: |
-          python -m pip install tox
+        run: python -m pip install tox
       - name: Test
-        run: |
-          tox
+        run: tox
         env:
           TOXENV: python${{ matrix.python }}-django${{ matrix.django }}-wagtail${{ matrix.wagtail }}-sqlite
 
@@ -106,15 +107,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
       - name: Install Tox
-        run: |
-          python -m pip install tox
+        run: python -m pip install tox
       - name: Test
-        run: |
-          tox
+        run: tox
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/wagtail_hallo
           TOXENV: python${{ matrix.python }}-django${{ matrix.django }}-wagtail${{ matrix.wagtail }}-postgres
