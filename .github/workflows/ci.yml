@@ -7,6 +7,10 @@ on:
       - 'stable/**'
   pull_request:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+
 jobs:
   check-client:
     name: 🧑‍🚀 preflight (check client)
