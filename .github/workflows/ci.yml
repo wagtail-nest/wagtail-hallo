@@ -62,6 +62,9 @@ jobs:
           - python: '3.12'
             django: '5.0'
             wagtail: '5.2'
+          - python: '3.12'
+            django: '5.0'
+            wagtail: '6.0'
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python }}
@@ -95,6 +98,10 @@ jobs:
           - python: '3.12'
             django: '5.0'
             wagtail: '5.2'
+            postgres: '16'
+          - python: '3.12'
+            django: '5.0'
+            wagtail: '6.0'
             postgres: '16'
     services:
       postgres:
