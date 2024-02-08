@@ -3,12 +3,7 @@
 from django.db import migrations, models
 import django.db.models.deletion
 
-from wagtail import VERSION as WAGTAIL_VERSION
-
-if WAGTAIL_VERSION >= (3, 0):
-    from wagtail import fields
-else:
-    from wagtail.core import fields
+from wagtail import fields
 
 
 class Migration(migrations.Migration):
