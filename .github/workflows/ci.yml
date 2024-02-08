@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Python flake8 Lint
-        uses: py-actions/flake8@v2.0.0
+        uses: py-actions/flake8@v2
 
   test-sqlite:
     runs-on: ubuntu-latest
