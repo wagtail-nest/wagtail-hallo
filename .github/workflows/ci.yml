@@ -5,20 +5,23 @@ on:
     branches:
       - main
       - 'stable/**'
-
   pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
 
 jobs:
   check-client:
     name: 🧑‍🚀 preflight (check client)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
       - id: npm-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('.nvmrc') }}-${{ hashFiles('**/package-lock.json') }}
@@ -30,7 +33,7 @@ jobs:
     name: ⚫ Black (check server)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Python black Lint
         uses: psf/black@stable
 
@@ -38,52 +41,40 @@ jobs:
     name: 🎱 flake8 (check server)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Python flake8 Lint
-        uses: py-actions/flake8@v2.0.0
+        uses: py-actions/flake8@v2
 
   test-sqlite:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.8', '3.9', '3.10']
-        django: ['3.2', '4.0']
-        wagtail: ['2.16', '3.0', '4.0']
         include:
-          - wagtail: '2.15'
+          - python: '3.8'
             django: '3.2'
-            python: '3.7'
-          - wagtail: '2.15'
+            wagtail: '3.0'
+          - python: '3.8'
             django: '3.2'
-            python: '3.8'
-          - wagtail: '2.15'
+            wagtail: '4.1'
+          - python: '3.10'
             django: '3.2'
-            python: '3.9'
-          - wagtail: '2.15'
-            django: '3.2'
-            python: '3.10'
-          - wagtail: '4.0'
-            django: '4.1'
-            python: '3.8'
-          - wagtail: '4.0'
-            django: '4.1'
-            python: '3.9'
-          - wagtail: '4.0'
-            django: '4.1'
-            python: '3.10'
-
+            wagtail: '5.2'
+          - python: '3.12'
+            django: '5.0'
+            wagtail: '5.2'
+          - python: '3.12'
+            django: '5.0'
+            wagtail: '6.1'
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
       - name: Install Tox
-        run: |
-          python -m pip install tox
+        run: pip install tox
       - name: Test
-        run: |
-          tox
+        run: tox
         env:
           TOXENV: python${{ matrix.python }}-django${{ matrix.django }}-wagtail${{ matrix.wagtail }}-sqlite
 
@@ -91,59 +82,49 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.8', '3.9', '3.10']
-        django: ['3.2', '4.0']
-        wagtail: ['2.16', '3.0', '4.0']
-        postgres: ['10.8']
         include:
-          - wagtail: '2.15'
+          - python: '3.8'
             django: '3.2'
-            postgres: '10.8'
-            python: '3.7'
-          - wagtail: '2.15'
+            wagtail: '3.0'
+            postgres: '12'
+          - python: '3.8'
             django: '3.2'
-            postgres: '10.8'
-            python: '3.8'
-          - wagtail: '2.15'
+            wagtail: '4.1'
+            postgres: '12'
+          - python: '3.10'
             django: '3.2'
-            postgres: '10.8'
-            python: '3.9'
-          - wagtail: '2.15'
-            django: '3.2'
-            postgres: '10.8'
-            python: '3.10'
-          - wagtail: '4.0'
-            django: '4.1'
-            postgres: '10.8'
-            python: '3.8'
-          - wagtail: '4.0'
-            django: '4.1'
-            postgres: '10.8'
-            python: '3.9'
-          - wagtail: '4.0'
-            django: '4.1'
-            postgres: '10.8'
-            python: '3.10'
-
+            wagtail: '5.2'
+            postgres: '12'
+          - python: '3.12'
+            django: '5.0'
+            wagtail: '5.2'
+            postgres: '16'
+          - python: '3.12'
+            django: '5.0'
+            wagtail: '6.1'
+            postgres: '16'
     services:
       postgres:
         image: postgres:${{ matrix.postgres }}
         ports:
           - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
       - name: Install Tox
-        run: |
-          python -m pip install tox
+        run: pip install tox
       - name: Test
-        run: |
-          tox
+        run: tox
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/wagtail_hallo
           TOXENV: python${{ matrix.python }}-django${{ matrix.django }}-wagtail${{ matrix.wagtail }}-postgres
