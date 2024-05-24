@@ -48,7 +48,7 @@ setup(
         "Wagtail>=4.0,<7.0",
     ],
     extras_require={
-        "testing": ["dj-database-url==0.5.0", "freezegun==0.3.15"],
+        "testing": ["html5lib==1.1"],
     },
     zip_safe=False,
 )
