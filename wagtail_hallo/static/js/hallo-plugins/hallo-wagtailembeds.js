@@ -8,6 +8,7 @@
     options: {
       uuid: '',
       editable: null,
+      embedsChooser: null,
     },
     populateToolbar: function (toolbar) {
       var button;
@@ -35,7 +36,7 @@
           .last();
 
         return ModalWorkflow({
-          url: window.chooserUrls.embedsChooser,
+          url: widget.options.embedsChooser,
           onload: EMBED_CHOOSER_MODAL_ONLOAD_HANDLERS,
           responses: {
             embedChosen: function (embedData) {
