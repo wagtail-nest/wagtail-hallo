@@ -1,9 +1,8 @@
-import json
-
 from collections import OrderedDict
 
 from django.forms import Media, widgets
 from django.utils.functional import cached_property
+from django.core.serializers.json import DjangoJSONEncoder
 
 from wagtail import VERSION as WAGTAIL_VERSION
 from wagtail.admin.rich_text.converters.editor_html import EditorHTMLConverter
@@ -76,7 +75,7 @@ class HalloRichTextArea(widgets.Textarea):
             plugin_data = OrderedDict()
             for plugin in self.plugins:
                 plugin.construct_plugins_list(plugin_data)
-        context["widget"]["plugins_json"] = json.dumps(plugin_data)
+        context["widget"]["plugins_json"] = DjangoJSONEncoder().encode(plugin_data)
 
         return context
 

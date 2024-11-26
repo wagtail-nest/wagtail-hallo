@@ -9,6 +9,11 @@
     options: {
       uuid: '',
       editable: null,
+      pageChooser: null,
+      emailLinkChooser: null,
+      phoneLinkChooser: null,
+      anchorLinkChooser: null,
+      externalLinkChooser: null,
     },
     populateToolbar(toolbar) {
       const widget = this;
@@ -37,7 +42,7 @@
         let parentPageId;
 
         // Defaults.
-        let url = window.chooserUrls.pageChooser;
+        let url = widget.options.pageChooser;
         const urlParams = {
           allow_external_link: true,
           allow_email_link: true,
@@ -56,23 +61,22 @@
           urlParams.link_text = enclosingLink.innerText;
 
           if (linkType === 'page' && parentPageId) {
-            url =
-              window.chooserUrls.pageChooser + parentPageId.toString() + '/';
+            url = widget.options.pageChooser + parentPageId.toString() + '/';
           } else if (href.startsWith('mailto:')) {
-            url = window.chooserUrls.emailLinkChooser;
+            url = widget.options.emailLinkChooser;
             href = href.replace('mailto:', '');
             urlParams.link_url = href;
           } else if (href.startsWith('tel:')) {
-            url = window.chooserUrls.phoneLinkChooser;
+            url = widget.options.phoneLinkChooser;
             href = href.replace('tel:', '');
             urlParams.link_url = href;
           } else if (href.startsWith('#')) {
-            url = window.chooserUrls.anchorLinkChooser;
+            url = widget.options.anchorLinkChooser;
             href = href.replace('#', '');
             urlParams.link_url = href;
           } else if (!linkType) {
             /* external link */
-            url = window.chooserUrls.externalLinkChooser;
+            url = widget.options.externalLinkChooser;
             urlParams.link_url = href;
           }
         } else if (!lastSelection.collapsed) {
@@ -98,19 +102,25 @@
                 // Turning a selection into a link
 
                 anchor = document.createElement('a');
-                lastSelection.surroundContents(anchor);
-
-                // unlink all previously existing links in the selection,
-                // now nested within 'a'
-                // eslint-disable-next-line func-names
-                $('a[href]', anchor).each(function () {
-                  const parent = this.parentNode;
-                  while (this.firstChild)
-                    parent.insertBefore(this.firstChild, this);
-                  parent.removeChild(this);
-                });
-
-                linkHasExistingContent = true;
+                try {
+                  lastSelection.surroundContents(anchor);
+                  linkHasExistingContent = true;
+                  // unlink all previously existing links in the selection,
+                  // now nested within 'a'
+                  // eslint-disable-next-line func-names
+                  $('a[href]', anchor).each(function () {
+                    const parent = this.parentNode;
+                    while (this.firstChild)
+                      parent.insertBefore(this.firstChild, this);
+                    parent.removeChild(this);
+                  });
+                } catch (error) {
+                  // Range.surroundContents() throws InvalidStateError if the selection
+                  // spans multiple nodes. In this case, we fall back to inserting the
+                  // link at the cursor position.
+                  lastSelection.insertNode(anchor);
+                  linkHasExistingContent = false;
+                }
               } else {
                 // Inserting a new link at the cursor position
                 anchor = document.createElement('a');
@@ -166,14 +176,14 @@
 
         enclosingLink = getEnclosingLink();
         if (enclosingLink) {
-          // eslint-disable-next-line no-undef
-          sel = rangy.getSelection();
+          sel = document.getSelection();
           range = sel.getRangeAt(0);
 
           range.setStartBefore(sel.anchorNode.parentNode);
           range.setEndAfter(sel.anchorNode.parentNode);
 
-          sel.setSingleRange(range, false);
+          sel.removeAllRanges();
+          sel.addRange(range);
 
           document.execCommand('unlink');
           widget.options.editable.element.trigger('change');

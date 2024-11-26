@@ -8,6 +8,7 @@
     options: {
       uuid: '',
       editable: null,
+      documentChooser: null,
     },
     populateToolbar: function (toolbar) {
       var button;
@@ -28,22 +29,31 @@
 
         lastSelection = widget.options.editable.getSelection();
         return ModalWorkflow({
-          url: window.chooserUrls.documentChooser,
+          url: widget.options.documentChooser,
           onload: DOCUMENT_CHOOSER_MODAL_ONLOAD_HANDLERS,
           responses: {
             chosen: function (docData) {
               var link;
+              var mustInsertLink = false;
 
               link = document.createElement('a');
               link.setAttribute('href', docData.url);
               link.setAttribute('data-id', docData.id);
               link.setAttribute('data-linktype', 'document');
-              if (
-                !lastSelection.collapsed &&
-                lastSelection.canSurroundContents()
-              ) {
-                lastSelection.surroundContents(link);
+              if (!lastSelection.collapsed) {
+                try {
+                  lastSelection.surroundContents(link);
+                } catch (error) {
+                  // Range.surroundContents() throws InvalidStateError if the selection
+                  // spans multiple nodes. In this case, we fall back to inserting the
+                  // link manually.
+                  mustInsertLink = true;
+                }
               } else {
+                mustInsertLink = true;
+              }
+
+              if (mustInsertLink) {
                 link.appendChild(document.createTextNode(docData.title));
                 lastSelection.insertNode(link);
               }

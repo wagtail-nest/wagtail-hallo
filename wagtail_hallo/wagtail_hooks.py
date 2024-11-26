@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from wagtail import VERSION as WAGTAIL_VERSION
 from wagtail.admin.rich_text.converters.editor_html import (
     LinkTypeRule,
@@ -44,6 +45,17 @@ def register_core_features(features):
                 "wagtailadmin/js/page-chooser-modal.js",
                 "js/hallo-plugins/hallo-wagtaillink.js",
             ],
+            options={
+                "pageChooser": reverse_lazy("wagtailadmin_choose_page"),
+                "externalLinkChooser": reverse_lazy(
+                    "wagtailadmin_choose_page_external_link"
+                ),
+                "emailLinkChooser": reverse_lazy("wagtailadmin_choose_page_email_link"),
+                "phoneLinkChooser": reverse_lazy("wagtailadmin_choose_page_phone_link"),
+                "anchorLinkChooser": reverse_lazy(
+                    "wagtailadmin_choose_page_anchor_link"
+                ),
+            },
         ),
     )
 
@@ -124,6 +136,7 @@ def register_core_features(features):
                 "wagtailembeds/js/embed-chooser-modal.js",
                 "js/hallo-plugins/hallo-wagtailembeds.js",
             ],
+            options={"embedsChooser": reverse_lazy("wagtailembeds:chooser")},
         ),
     )
 
@@ -137,6 +150,7 @@ def register_core_features(features):
                 "wagtailimages/js/image-chooser-modal.js",
                 "js/hallo-plugins/hallo-wagtailimage.js",
             ],
+            options={"imageChooser": reverse_lazy("wagtailimages_chooser:choose")},
         ),
     )
 
@@ -149,5 +163,6 @@ def register_core_features(features):
                 "wagtaildocs/js/document-chooser-modal.js",
                 "js/hallo-plugins/hallo-wagtaildoclink.js",
             ],
+            options={"documentChooser": reverse_lazy("wagtaildocs_chooser:choose")},
         ),
     )
