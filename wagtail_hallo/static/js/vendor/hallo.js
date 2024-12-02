@@ -3242,7 +3242,7 @@
         // Wagtail 4.
         this.toolbar.css(
           'top',
-          this.element.offset().top - this.toolbar.outerHeight(),
+          this.element.offset().top - this.toolbar.outerHeight() + 44,
         );
         if (this.options.affix) {
           scrollTop = jQuery(window).scrollTop();
