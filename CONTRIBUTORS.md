@@ -10,3 +10,4 @@ A special thanks to the 100s of developers who, over the course of 2014 to 2022 
 - Paarth Agarwal
 - Joren Hammudoglu
 - Katherine Domingo
+- Robert Rollins
