@@ -30,7 +30,6 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
@@ -44,7 +43,7 @@ setup(
         "Framework :: Wagtail :: 6",
     ],
     install_requires=[
-        "Django>=3.2,<6.0",
+        "Django>=4.2,<6.0",
         "Wagtail>=4.0,<7.0",
     ],
     extras_require={

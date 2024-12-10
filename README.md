@@ -21,7 +21,7 @@ This is the legacy rich text editor for the Wagtail CMS. Based on [Hallo.js](htt
 
 ## Supported Versions
 
-- Python 3.8, 3.9, 3.10, 3.11, 3.12
+- Python 3.9, 3.10, 3.11, 3.12
 - Django 3.2, 4.0, 4.1, 4.2, 5.0
 - Wagtail 4.0, 4.1, 4.2, 5.0, 5.1, 5.2, 6.0, 6.1
 
@@ -29,7 +29,9 @@ Please note that only Django >=4.2 are still supported versions of Django. And o
 6.3 are still supported as of December 20204. But the wagtail-hallo package should work on the wider
 range of versions mentioned above.
 
-If you need support for Wagtail 3.0 while you are upgrading, please use wagtail-hallo 0.3.0.
+If you need support for Wagtail 3.0 while you are upgrading, please use wagtail-hallo 0.2.0. For
+Wagtail 4, use wagtail-hallo 0.3.0. For Wagtail 5, use wagtail-hallo 0.4.0. For Wagtail 6.0 and 6.1,
+use wagtail-hallo 0.5.0
 
 ## Installing the Hallo Editor
 

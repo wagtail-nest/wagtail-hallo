@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased] - YYYY-MM-DD
 
+## [0.5.0] - 2024-12-10
+
 - Add support for Python 3.12, Django 5.0, Wagtail 6.1 and Psycopg 3 by _Joren Hammudoglu_
 
 ## [0.4.0] - 2024-12-09
