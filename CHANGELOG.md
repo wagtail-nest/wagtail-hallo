@@ -6,9 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased] - YYYY-MM-DD
 
+## [0.6.0] - 2024-12-10
+
+- Add support for Wagtail 6.2 and 6.3 _Robert Rollins_
+- Add replacement for Rangy which will be removed from Wagtail 6.4 _Robert Rollins_
+
 ## [0.5.0] - 2024-12-10
 
-- Add support for Python 3.12, Django 5.0, Wagtail 6.1 and Psycopg 3 by _Joren Hammudoglu_
+- Add support for Python 3.12, Django 5.0, Wagtail 6.1 and Psycopg 3 _Joren Hammudoglu_
 
 ## [0.4.0] - 2024-12-09
 
@@ -25,7 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [0.2.0] - 2024-12-02
 
 - Add Wagtail 3 classifier for PyPI _Paarth Agarwal_
-- Fix toolbar scrolling out of the editor textarea _RobertRollins_
+- Fix toolbar scrolling out of the editor textarea _Robert Rollins_
 
 ## [0.1.0] - 2022-05-05
 
