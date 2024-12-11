@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [unreleased] - YYYY-MM-DD
 
+- Add a Makefile to facilitate releases _Cynthia Kiser_
+
 ## [0.6.0] - 2024-12-10
 
 - Add support for Wagtail 6.2 and 6.3 _Robert Rollins_
