@@ -33,6 +33,9 @@ format-client:  ## Format the client code with prettier
 
 format: format-server format-client
 
+sync:
+	uv sync
+
 test-server:  ## Run the Python tests
 	python testmanage.py test
 
