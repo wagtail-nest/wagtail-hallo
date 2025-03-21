@@ -1,0 +1,157 @@
+[project]
+name = "wagtail_hallo"
+version = "0.1.0"
+description = "Wagtail Hallo - The legacy richtext editor for Wagtail."
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    "Framework :: Wagtail",
+    "Framework :: Wagtail :: 4",
+    "Framework :: Wagtail :: 5",
+    "Framework :: Wagtail :: 6",
+]
+dependencies = [
+    "Django>=4.2,<6.0",
+    "Wagtail>=4.0,<7.0",
+]
+
+[project.optional-dependencies]
+testing = [
+    "html5lib==1.1",
+]
+
+[project.urls]
+Repository = "https://github.com/wagtail-nest/wagtail-hallo"
+
+[build-system]
+requires = [
+  "setuptools >= 48",
+  "wheel >= 0.29.0",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+python-preference = "only-system"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.setuptools.package-data]
+pkgname = ["py.typed"]
+
+[tool.ruff]
+line-length = 80
+indent-width = 4
+target-version = "py311"
+src = ["wagtail_hallo"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    #### modules
+    "ANN", # flake8-annotations
+    "COM", # flake8-commas
+    "C90", # mccabe complexity
+    "DJ",  # django
+    "EXE", # flake8-executable
+    "T10", # debugger
+    "TID", # flake8-tidy-imports
+
+    #### specific rules
+    "CPY001", # Ignore missing copyright notices
+    "D100",   # ignore missing docs
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "D105",
+    "D106",
+    "D107",
+    "D200",
+    "D203",
+    "D205",
+    "D212",
+    "D400",
+    "D401",
+    "D415",
+    "DOC201", # ignore missing return in docstring
+    "DOC501", # ignore missing exception in docstring
+    "E402",   # false positives for local imports
+    "E266",   # Don't care about comments with lots of # at the start. We use them for doc fomratting.
+    "G004",   # ignore use of f-strings in logging lines
+    "N802",   # ignore use of capital letters in variable and function names (the code uses 'CSV' a lot).
+    "N806",   # ignore use of capital letters in variable and function names (the code uses 'CSV' a lot).
+    "S603",   # ignore subprocess calls that do not check return code
+    "S308",   # ignore use of mark_safe()
+    "S607",   # ignore subprocess programs that are not absolute paths
+    "TRY003", # external messages in exceptions are too verbose
+    "T201",   # ignore print statements
+    "TD002",
+    "TD003",
+    "FIX002", # too verbose descriptions of todos
+    "SIM102", # combine nested ifs
+    "UP006",  # stop bugging me about modern type hints
+    "FBT001", # stop bugging me about booleans in function signatures
+    "FBT002", # stop bugging me about booleans in function signatures
+    "N818",   # stop bugging me about not ending my exceptions with "Error"
+    "PLR1702",# Ignore "too many branches"
+    "PLR2004",# Ignore "magic numbers"
+    "PLR0912",# Too many branches in function
+    "PLR0913",# Too many arguments in function
+    "PLR0914",# Too many local vars in function
+    "PLR0915",# Too many statements in function
+    "PLR0917",# Too many arguments in function
+    "PLR6301",# Ignore ambiguous method types.
+    "PT009",  # use regular assert instead of unittest asserts
+    "SLF001", # Ignore access to attriburtes starting with a single _.
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+#
+# This is currently disabled by default, but it is planned for this
+# to be opt-out in the future.
+docstring-code-format = false
+
+# Set the line length limit used when formatting code snippets in
+# docstrings.
+#
+# This only has an effect when the `docstring-code-format` setting is
+# enabled.
+docstring-code-line-length = "dynamic"

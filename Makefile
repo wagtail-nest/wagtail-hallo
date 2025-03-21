@@ -33,6 +33,12 @@ format-client:  ## Format the client code with prettier
 
 format: format-server format-client
 
+sync:
+	uv sync
+
+compile:
+	uv pip compile pyproject.toml -o requirements.txt
+
 test-server:  ## Run the Python tests
 	python testmanage.py test
 
