@@ -1,6 +1,5 @@
-from django.urls import include, path
 from django.contrib import admin
-
+from django.urls import include, path
 from wagtail import VERSION as WAGTAIL_VERSION
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls

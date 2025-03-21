@@ -1,10 +1,9 @@
 import unittest
-from bs4 import BeautifulSoup
 
+from bs4 import BeautifulSoup
 from django.test import TestCase
 from django.test.utils import override_settings
 from django.urls import reverse
-
 from wagtail import VERSION as WAGTAIL_VERSION
 
 if WAGTAIL_VERSION >= (3, 0):
@@ -17,6 +16,7 @@ else:
     from wagtail.core.rich_text import features as feature_registry
 
 from wagtail_hallo.hallo import HalloRichTextArea
+
 from .utils import TestUtils
 
 

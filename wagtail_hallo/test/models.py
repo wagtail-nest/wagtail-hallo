@@ -1,3 +1,5 @@
+from typing import ClassVar
+
 from wagtail import VERSION as WAGTAIL_VERSION
 
 if WAGTAIL_VERSION >= (3, 0):
@@ -32,15 +34,13 @@ class HalloTestPage(Page):
         )
 
     if WAGTAIL_VERSION >= (3, 0):
-        content_panels = Page.content_panels + [
-            FieldPanel("body", classname="full"),
-            FieldPanel("body_stream"),
-        ]
+        content_panels = [*Page.content_panels,
+                          FieldPanel("body", classname="full"),
+                          FieldPanel("body_stream")]
     else:
-        content_panels = Page.content_panels + [
-            FieldPanel("body", classname="full"),
-            StreamFieldPanel("body_stream"),
-        ]
+        content_panels = [*Page.content_panels,
+                          FieldPanel("body", classname="full"),
+                          StreamFieldPanel("body_stream")]
 
 
 class RichTextFieldWithFeaturesPage(Page):
@@ -48,7 +48,7 @@ class RichTextFieldWithFeaturesPage(Page):
         editor="hallo", features=["quotation", "embed", "made-up-feature"]
     )
 
-    content_panels = [
+    content_panels: ClassVar = [
         FieldPanel("title", classname="full title"),
         FieldPanel("body"),
     ]
