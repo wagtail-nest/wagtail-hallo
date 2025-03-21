@@ -1,10 +1,11 @@
 from django.forms import Media
+
 from wagtail.admin.staticfiles import versioned_static
 
 
 class HalloPlugin:
     def __init__(self, **kwargs):
-        self.name = kwargs.get("name")
+        self.name = kwargs.get("name", None)
         self.options = kwargs.get("options", {})
         self.js = kwargs.get("js", [])
         self.css = kwargs.get("css", {})
@@ -19,9 +20,7 @@ class HalloPlugin:
         js = [versioned_static(js_file) for js_file in self.js]
         css = {}
         for media_type, css_files in self.css.items():
-            css[media_type] = [
-                versioned_static(css_file) for css_file in css_files
-            ]
+            css[media_type] = [versioned_static(css_file) for css_file in css_files]
 
         return Media(js=js, css=css)
 
@@ -70,9 +69,7 @@ class HalloListPlugin(HalloPlugin):
         super().__init__(**kwargs)
 
     def construct_plugins_list(self, plugins):
-        plugins.setdefault(
-            self.name, {"lists": {"ordered": False, "unordered": False}}
-        )
+        plugins.setdefault(self.name, {"lists": {"ordered": False, "unordered": False}})
         plugins[self.name]["lists"][self.list_type] = True
 
 
@@ -89,8 +86,7 @@ class HalloRequireParagraphsPlugin(HalloPlugin):
         )
 
 
-# Plugins which are always imported, and cannot be enabled/disabled via
-# 'features'
+# Plugins which are always imported, and cannot be enabled/disabled via 'features'
 CORE_HALLO_PLUGINS = [
     HalloPlugin(name="halloreundo", order=50),
     HalloRequireParagraphsPlugin(name="hallorequireparagraphs"),

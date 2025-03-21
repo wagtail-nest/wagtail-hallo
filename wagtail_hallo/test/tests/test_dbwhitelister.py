@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from django.test import TestCase
+
 from wagtail.admin.rich_text.converters.editor_html import EditorHTMLConverter
 
 
