@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "wagtail.images",
     "wagtail.sites",
     "wagtail.admin",
-    "wagtail"
+    "wagtail",
     "wagtail.contrib.redirects",
     "taggit",
     "django.contrib.admin",
