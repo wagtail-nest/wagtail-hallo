@@ -6,7 +6,6 @@ from setuptools import find_packages, setup
 
 from wagtail_hallo import __version__
 
-
 this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
@@ -41,10 +40,11 @@ setup(
         "Framework :: Wagtail :: 4",
         "Framework :: Wagtail :: 5",
         "Framework :: Wagtail :: 6",
+        "Framework :: Wagtail :: 7",
     ],
     install_requires=[
-        "Django>=4.2,<6.0",
-        "Wagtail>=4.0,<7.0",
+        "Django>=4.2,<7.0",
+        "Wagtail>=4.0,<8.0",
     ],
     extras_require={
         "testing": ["html5lib==1.1"],

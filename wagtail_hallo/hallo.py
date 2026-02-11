@@ -1,23 +1,20 @@
 from collections import OrderedDict
 
+from django.core.serializers.json import DjangoJSONEncoder
 from django.forms import Media, widgets
 from django.utils.functional import cached_property
-from django.core.serializers.json import DjangoJSONEncoder
-
 from wagtail import VERSION as WAGTAIL_VERSION
+from wagtail.admin.panels import FieldPanel
 from wagtail.admin.rich_text.converters.editor_html import EditorHTMLConverter
 from wagtail.admin.staticfiles import versioned_static
+from wagtail.rich_text import features
 
-if WAGTAIL_VERSION >= (3, 0):
-    from wagtail.admin.panels import FieldPanel
-    from wagtail.rich_text import features
+if WAGTAIL_VERSION >= (7, 1):
+    from wagtail.admin.telepath import register
+    from wagtail.admin.telepath.widgets import WidgetAdapter
+else:
     from wagtail.telepath import register
     from wagtail.widget_adapters import WidgetAdapter
-else:
-    from wagtail.admin.edit_handlers import RichTextFieldPanel
-    from wagtail.core.rich_text import features
-    from wagtail.core.telepath import register
-    from wagtail.core.widget_adapters import WidgetAdapter
 
 from .plugins import CORE_HALLO_PLUGINS
 
@@ -29,7 +26,7 @@ class HalloRichTextArea(widgets.Textarea):
     accepts_features = True
 
     def get_panel(self):
-        return FieldPanel if WAGTAIL_VERSION >= (3, 0) else RichTextFieldPanel
+        return FieldPanel
 
     def __init__(self, *args, **kwargs):
         self.options = kwargs.pop("options", None)
