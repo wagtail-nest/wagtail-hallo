@@ -40,10 +40,11 @@ setup(
         "Framework :: Wagtail :: 4",
         "Framework :: Wagtail :: 5",
         "Framework :: Wagtail :: 6",
+        "Framework :: Wagtail :: 7",
     ],
     install_requires=[
-        "Django>=4.2,<6.0",
-        "Wagtail>=4.0,<7.0",
+        "Django>=4.2,<7.0",
+        "Wagtail>=4.0,<8.0",
     ],
     extras_require={
         "testing": ["html5lib==1.1"],
