@@ -5,6 +5,7 @@
     "fields": {
       "title": "Root",
       "draft_title": "Root",
+      "locale": 1,
       "numchild": 2,
       "show_in_menus": false,
       "live": true,
@@ -21,6 +22,7 @@
     "fields": {
       "title": "Welcome to the Wagtail Hallo test site!",
       "draft_title": "Welcome to the Wagtail Hallo test site!",
+      "locale": 1,
       "numchild": 9,
       "show_in_menus": false,
       "live": true,
@@ -42,6 +44,7 @@
       "last_published_at": "2022-02-01T12:00:00.000Z",
       "title": "Events",
       "draft_title": "Events",
+      "locale": 1,
       "numchild": 6,
       "show_in_menus": true,
       "live": true,
@@ -66,6 +69,13 @@
       "hostname": "localhost",
       "port": 80,
       "is_default_site": true
+    }
+  },
+  {
+    "model": "wagtailcore.locale",
+    "pk": 1,
+    "fields": {
+        "language_code": "en"
     }
   },
   {
