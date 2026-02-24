@@ -140,13 +140,12 @@ function _createClass(Constructor, protoProps, staticProps) {
 }
 
 var BoundWidget = /* #__PURE__ */ (function () {
-  function BoundWidget(element, name, idForLabel, initialState) {
+  function BoundWidget(element, name, initialState) {
     _classCallCheck(this, BoundWidget);
 
     var selector = ':input[name="' + name + '"]';
     this.input = element.find(selector).addBack(selector); // find, including element itself
 
-    this.idForLabel = idForLabel;
     this.setState(initialState);
   }
 
@@ -209,11 +208,10 @@ var Widget = /* #__PURE__ */ (function () {
       key: 'render',
       value: function render(placeholder, name, id, initialState) {
         var html = this.html.replace(/__NAME__/g, name).replace(/__ID__/g, id);
-        var idForLabel = this.idPattern.replace(/__ID__/g, id);
         var dom = $(html);
         $(placeholder).replaceWith(dom); // eslint-disable-next-line new-cap
 
-        return new this.boundWidgetClass(dom, name, idForLabel, initialState);
+        return new this.boundWidgetClass(dom, name, initialState);
       },
     },
   ]);
