@@ -41,6 +41,6 @@ def get_complete_version(version):
     return version
 
 
-VERSION = (0, 7, 0)
+VERSION = (0, 7, 1)
 
 __version__ = ".".join(map(str, VERSION))
