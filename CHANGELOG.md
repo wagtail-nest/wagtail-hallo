@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.7.0] - YYYY-MM-DD
+## [0.7.1] - 2026-02-24
+
+- BUGFIX for 0.7.0; 0.7.1 is compatible with Wagtail >=6.3 _Robert Rollins_
+
+## [0.7.0] - 2026-02-20
 
 - Add a Makefile to facilitate releases _Cynthia Kiser_
 - Add support for Wagtail >=7.1; drop support for Wagtail <3.0 _Robert Rollins_
